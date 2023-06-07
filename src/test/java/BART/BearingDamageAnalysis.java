@@ -1,9 +1,10 @@
 package BART;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -55,6 +56,7 @@ public class BearingDamageAnalysis {
         List<WebElement> Accordeon = driver.findElements(By.id("Tree/tree_root_branch"));
         Assert.assertEquals(Accordeon.size(), 11);
     }
+
     WebElement ReportTitle;
 
     @Test(priority = 4)
@@ -74,32 +76,60 @@ public class BearingDamageAnalysis {
 
     @Test(priority = 5)
     public void InvestigationDetails() {
-        WebElement SkfTerNmr = driver.findElement(By.xpath("//div[@data-id='investigationDetails.terNumber']//input[@type='text']"));
-        BART.BDAPage.clickElementWithJS(driver, SkfTerNmr);
-        BART.BDAPage.sendKeysLetterByLetter(SkfTerNmr, "1111");
-        WebElement ScopeOfInv = driver.findElement(By.xpath("//div[@data-id='investigationDetails.scopeOfInvestigation']//p"));
-        BART.BDAPage.clickElementWithJS(driver, ScopeOfInv);
-        BART.BDAPage.sendKeysLetterByLetter(ScopeOfInv, "Bearing");
-        BART.BDAPage.blurElementWithJS(driver, ScopeOfInv);
-        WebElement SKFDetails = driver.findElement(By.xpath("//button[normalize-space()='SKF Details']"));
-        BART.BDAPage.clickElementWithJS(driver, SKFDetails);
-        WebElement LivePreviewEl = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='1111']"));
-        boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, LivePreviewEl);
-        Assert.assertTrue(isElementVisible);
-        WebElement LivePreviewEl2 = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Bearing')]"));
-        boolean isElementVisibleTo = BDAPage.isElementVisibleWithJS(driver, LivePreviewEl2);
-        Assert.assertTrue(isElementVisibleTo);
-    }
+          BDAPage bdaPage = new BDAPage(driver);
+            String terNumber = "1111";
+            bdaPage.enterSkfTerNumber(driver, terNumber);
+
+            String scope = "Bearing";
+            bdaPage.enterScopeOfInvestigation(driver, scope);
+
+            bdaPage.clickSKFDetails(driver);
+
+            WebElement lpTER = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='1111']"));
+            boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, lpTER);
+            Assert.assertTrue(isElementVisible);
+
+            WebElement lpScope = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Bearing')]"));
+            boolean isElementVisibleTo = BDAPage.isElementVisibleWithJS(driver, lpScope);
+            Assert.assertTrue(isElementVisibleTo);
+        }
 
     @Test(priority = 6)
-    public void SKFDetails() throws Throwable {
-        WebElement CountryInd = driver.findElement(By.xpath("(//div[contains(text(),'Select')])[2]"));
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        Thread.sleep(3000);
-        jsExecutor.executeScript("arguments[0].click();", CountryInd);
-        Actions actions = new Actions(driver);
-        actions.sendKeys(CountryInd, "Argentina").perform();
-        actions.sendKeys(Keys.ENTER).build().perform();
+    public void SKFDetailsCountry() throws Throwable {
+        BDAPage bdaPage = new BDAPage(driver);
+        String country = "Argentina";
+        bdaPage.selectCountry(driver, country);
+
+    }
+    @Test(priority = 7)
+    public void SKFDetailsCompany() throws Throwable {
+        BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.selectSKFCountry(driver);
+
+        boolean isElementVisible = bdaPage.isCountryVisible(driver);
+        Assert.assertTrue(isElementVisible);
+    }
+    @Test(priority = 8)
+    public void SKFCompanyLocation() throws Throwable {
+        BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.selectSKFCompany(driver);
+
+        boolean isCompanyVisible = bdaPage.isCompanyVisible(driver);
+        Assert.assertTrue(isCompanyVisible);
+
+        boolean isLocationVisible = bdaPage.isLocationVisible(driver);
+        Assert.assertTrue(isLocationVisible);
+    }
+    @Test(priority = 9)
+        public void Approval() throws Throwable{
+            BDAPage bdaPage = new BDAPage(driver);
+            boolean isElementVisible = bdaPage.approvalButton(driver);
+            Assert.assertTrue(isElementVisible);
+        }
+    @Test(priority = 10)
+        public void CustomerDetails(){
+        WebElement CustomerDetails = driver.findElement(By.xpath("//button[normalize-space()='Customer Details']"));
+        BART.BDAPage.clickElementWithJS(driver, CustomerDetails);
     }
 }
 
