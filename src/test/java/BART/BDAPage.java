@@ -79,18 +79,17 @@ public class BDAPage {
         BART.BDAPage.clickElementWithJS(driver, skfTerNmr);
         BART.BDAPage.sendKeysLetterByLetter(skfTerNmr, terNumber);
     }
-
     public void enterScopeOfInvestigation(WebDriver driver, String scope) {
         WebElement scopeOfInv = driver.findElement(By.xpath("//div[@data-id='investigationDetails.scopeOfInvestigation']//p"));
         BART.BDAPage.clickElementWithJS(driver, scopeOfInv);
         BART.BDAPage.sendKeysLetterByLetter(scopeOfInv, scope);
         BART.BDAPage.blurElementWithJS(driver, scopeOfInv);
     }
-
     public void clickSKFDetails(WebDriver driver) {
         WebElement SKFDetails = driver.findElement(By.xpath("//button[normalize-space()='SKF Details']"));
         BART.BDAPage.clickElementWithJS(driver, SKFDetails);
     }
+
     BDAPage(WebDriver driver) {
 
         PageFactory.initElements(driver, this);

@@ -1,10 +1,9 @@
 package BART;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -14,7 +13,7 @@ import java.util.List;
 
 public class BearingDamageAnalysis {
     WebDriver driver;
-    String url = "https://d2xob39w6dc2ow.cloudfront.net/";
+    String url = "https://dnnfsk8ppi4ki.cloudfront.net/";
 
     @BeforeClass
     public void SetUp() {
@@ -76,23 +75,19 @@ public class BearingDamageAnalysis {
 
     @Test(priority = 5)
     public void InvestigationDetails() {
-          BDAPage bdaPage = new BDAPage(driver);
-            String terNumber = "1111";
-            bdaPage.enterSkfTerNumber(driver, terNumber);
-
-            String scope = "Bearing";
-            bdaPage.enterScopeOfInvestigation(driver, scope);
-
-            bdaPage.clickSKFDetails(driver);
-
-            WebElement lpTER = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='1111']"));
-            boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, lpTER);
-            Assert.assertTrue(isElementVisible);
-
-            WebElement lpScope = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Bearing')]"));
-            boolean isElementVisibleTo = BDAPage.isElementVisibleWithJS(driver, lpScope);
-            Assert.assertTrue(isElementVisibleTo);
-        }
+        BDAPage bdaPage = new BDAPage(driver);
+        String terNumber = "1111";
+        bdaPage.enterSkfTerNumber(driver, terNumber);
+        String scope = "Bearing";
+        bdaPage.enterScopeOfInvestigation(driver, scope);
+        bdaPage.clickSKFDetails(driver);
+        WebElement lpTER = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='1111']"));
+        boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, lpTER);
+        Assert.assertTrue(isElementVisible);
+        WebElement lpScope = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Bearing')]"));
+        boolean isElementVisibleTo = BDAPage.isElementVisibleWithJS(driver, lpScope);
+        Assert.assertTrue(isElementVisibleTo);
+    }
 
     @Test(priority = 6)
     public void SKFDetailsCountry() throws Throwable {
@@ -101,35 +96,52 @@ public class BearingDamageAnalysis {
         bdaPage.selectCountry(driver, country);
 
     }
+
     @Test(priority = 7)
     public void SKFDetailsCompany() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.selectSKFCountry(driver);
-
         boolean isElementVisible = bdaPage.isCountryVisible(driver);
         Assert.assertTrue(isElementVisible);
     }
+
     @Test(priority = 8)
     public void SKFCompanyLocation() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.selectSKFCompany(driver);
-
         boolean isCompanyVisible = bdaPage.isCompanyVisible(driver);
         Assert.assertTrue(isCompanyVisible);
-
         boolean isLocationVisible = bdaPage.isLocationVisible(driver);
         Assert.assertTrue(isLocationVisible);
     }
+
     @Test(priority = 9)
-        public void Approval() throws Throwable{
-            BDAPage bdaPage = new BDAPage(driver);
-            boolean isElementVisible = bdaPage.approvalButton(driver);
-            Assert.assertTrue(isElementVisible);
-        }
+    public void Approval() throws Throwable {
+        BDAPage bdaPage = new BDAPage(driver);
+        boolean isElementVisible = bdaPage.approvalButton(driver);
+        Assert.assertTrue(isElementVisible);
+    }
+
     @Test(priority = 10)
-        public void CustomerDetails(){
+    public void CustomerDetails() throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         WebElement CustomerDetails = driver.findElement(By.xpath("//button[normalize-space()='Customer Details']"));
         BART.BDAPage.clickElementWithJS(driver, CustomerDetails);
+        WebElement Customer = driver.findElement(By.xpath("(//div[contains(text(),'Type 3 characters')])"));
+        jsExecutor.executeScript("arguments[0].click();", Customer);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Customer, "LODI SPA").perform();
+        Thread.sleep(3000);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        Thread.sleep(3000);
+        WebElement LpCompany = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'LODI SPA')]"));
+        boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, LpCompany);
+        Assert.assertTrue(isElementVisible);
+        WebElement LpCompanyAdr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'VIA DELLA')]"));
+        boolean isElementVisibleTo = BDAPage.isElementVisibleWithJS(driver, LpCompanyAdr);
+        Assert.assertTrue(isElementVisibleTo);
+        WebElement LpCompanyCntr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Italy')]"));
+        boolean isElementVisibleTo2 = BDAPage.isElementVisibleWithJS(driver, LpCompanyCntr);
+        Assert.assertTrue(isElementVisibleTo2);
     }
 }
-
