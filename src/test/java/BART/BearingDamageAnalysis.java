@@ -1,5 +1,4 @@
 package BART;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -7,10 +6,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.util.List;
-
-
 public class BearingDamageAnalysis {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net/";
@@ -23,13 +19,11 @@ public class BearingDamageAnalysis {
         driver.manage().window().maximize();
         driver.get(url);
     }
-
     //@AfterClass
     // public void QuitBrowser() {
 
     // driver.quit();
     // }
-
     @Test(priority = 1)
     public void ValidLogin() throws Throwable {
         BART.LoginPage loginPage = new BART.LoginPage(driver);
@@ -94,7 +88,6 @@ public class BearingDamageAnalysis {
         BDAPage bdaPage = new BDAPage(driver);
         String country = "Argentina";
         bdaPage.selectCountry(driver, country);
-
     }
 
     @Test(priority = 7)
@@ -143,5 +136,19 @@ public class BearingDamageAnalysis {
         WebElement LpCompanyCntr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Italy')]"));
         boolean isElementVisibleTo2 = BDAPage.isElementVisibleWithJS(driver, LpCompanyCntr);
         Assert.assertTrue(isElementVisibleTo2);
+        jsExecutor.executeScript("window.scrollBy(0, 800)");
+        WebElement CustomerSiteName = driver.findElement(By.xpath("//div[@data-id='customerDetails.site']//input[@type='text']"));
+        jsExecutor.executeScript("arguments[0].click();", CustomerSiteName);
+        actions.sendKeys(CustomerSiteName, "www.lodispa.com").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        Thread.sleep(3000);
     }
-}
+    @Test(priority = 11)
+    public void AssetDetails() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        WebElement AssetDetails = driver.findElement(By.xpath("//button[normalize-space()='Asset Details']"));
+        jsExecutor.executeScript("arguments[0].click();", AssetDetails);
+        }
+    }
+//button[normalize-space()='Machine / Asset Details']    //button[normalize-space()='Asset type / Functional Area / System']
+//div[@data-id='customerDetails.site']//input[@type='text']
