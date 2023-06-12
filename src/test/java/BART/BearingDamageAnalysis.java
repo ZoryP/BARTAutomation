@@ -1,4 +1,5 @@
 package BART;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -6,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.util.List;
 public class BearingDamageAnalysis {
     WebDriver driver;
@@ -116,7 +118,7 @@ public class BearingDamageAnalysis {
     }
 
     @Test(priority = 10)
-    public void CustomerDetails() throws Throwable {
+    public void CustomerDetails1() throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         WebElement CustomerDetails = driver.findElement(By.xpath("//button[normalize-space()='Customer Details']"));
         BART.BDAPage.clickElementWithJS(driver, CustomerDetails);
@@ -130,25 +132,87 @@ public class BearingDamageAnalysis {
         WebElement LpCompany = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'LODI SPA')]"));
         boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, LpCompany);
         Assert.assertTrue(isElementVisible);
+    }
+
+    @Test(priority = 11)
+    public void CustomerDetails2() {
         WebElement LpCompanyAdr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'VIA DELLA')]"));
-        boolean isElementVisibleTo = BDAPage.isElementVisibleWithJS(driver, LpCompanyAdr);
-        Assert.assertTrue(isElementVisibleTo);
         WebElement LpCompanyCntr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Italy')]"));
-        boolean isElementVisibleTo2 = BDAPage.isElementVisibleWithJS(driver, LpCompanyCntr);
-        Assert.assertTrue(isElementVisibleTo2);
+        LpCompanyAdr.isDisplayed();
+        LpCompanyCntr.isDisplayed();
+    }
+
+    @Test(priority = 12)
+    public void CustomerDetails3() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollBy(0, 800)");
         WebElement CustomerSiteName = driver.findElement(By.xpath("//div[@data-id='customerDetails.site']//input[@type='text']"));
         jsExecutor.executeScript("arguments[0].click();", CustomerSiteName);
+        Actions actions = new Actions(driver);
         actions.sendKeys(CustomerSiteName, "www.lodispa.com").perform();
         actions.sendKeys(Keys.ENTER).build().perform();
-        Thread.sleep(3000);
+        BART.BDAPage.blurElementWithJS(driver, CustomerSiteName);
+        WebElement LpCustomerSiteName = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'www.lodispa.com')]"));
+        LpCustomerSiteName.isDisplayed();
     }
-    @Test(priority = 11)
+
+    @Test(priority = 13)
     public void AssetDetails() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         WebElement AssetDetails = driver.findElement(By.xpath("//button[normalize-space()='Asset Details']"));
         jsExecutor.executeScript("arguments[0].click();", AssetDetails);
-        }
+        WebElement AssetType = driver.findElement(By.xpath("//button[normalize-space()='Asset type / Functional Area / System'] "));
+        WebElement Machine = driver.findElement(By.xpath(" //button[normalize-space()='Machine / Asset Details']"));
+        AssetType.isDisplayed();
+        Machine.isDisplayed();
     }
-//button[normalize-space()='Machine / Asset Details']    //button[normalize-space()='Asset type / Functional Area / System']
-//div[@data-id='customerDetails.site']//input[@type='text']
+
+    @Test(priority = 14)
+    public void AssetType() throws Throwable {
+        BDAPage bdaPage = new BDAPage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        bdaPage.AssetType.click();
+        WebElement FunctionalArea = driver.findElement(By.xpath("//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.machineOrAssetCode']//div[contains(@class,'css-1hwfws3')]"));
+        jsExecutor.executeScript("arguments[0].click();", FunctionalArea);
+        Actions actions = new Actions(driver);
+        Thread.sleep(2000);
+        actions.sendKeys(FunctionalArea, "Air handling unit").perform();
+        Thread.sleep(3000);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BART.BDAPage.blurElementWithJS(driver, FunctionalArea);
+        WebElement LpFunctionalArea = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Air handling unit, Air conditioner (AC)')]"));
+        LpFunctionalArea.isDisplayed();
+    }
+
+    @Test(priority = 15)
+    public void WhereAsset() {
+        BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.FunctionalAreaNameWhereAssetIsUsed.click();
+        bdaPage.FunctionalAreaNameWhereAssetIsUsed.sendKeys("Operations");
+        BART.BDAPage.blurElementWithJS(driver, bdaPage.FunctionalAreaNameWhereAssetIsUsed);
+        bdaPage.SystemName.click();
+        bdaPage.SystemName.sendKeys("Operation 1");
+        BART.BDAPage.blurElementWithJS(driver, bdaPage.SystemName);
+        WebElement LpFunctionalAreaNameWhereAssetIsUsed = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Operations')]"));
+        WebElement LpSystemName = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Operation 1')]"));
+        LpFunctionalAreaNameWhereAssetIsUsed.isDisplayed();
+        LpSystemName.isDisplayed();
+    }
+    @Test(priority = 16)
+    public void Bearing1() {
+        BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.BearingInvestigations.click();
+        bdaPage.Bearing1.click();
+        bdaPage.BearingTypeSection.click();
+        BDAPage.clickSKFOther(driver);
+        BDAPage.enterSKFOtherValue(driver, "SKF");
+        BDAPage.clickSKFSerialNumber(driver);
+        BDAPage.enterSKFSerialNumberValue(driver, "PEER");
+        WebElement LpSerialNumber = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader']//span[contains(text(),'PEER / SKF')]"));
+        LpSerialNumber.isDisplayed();
+    }
+    @Test(priority = 17)
+    public void ComponentParts(){
+        BDAPage bdaPage = new BDAPage(driver);
+    }
+}

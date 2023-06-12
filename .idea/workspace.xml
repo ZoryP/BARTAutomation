@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add refactor2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -149,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686236691587</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="add refactor2">
+      <created>1686299838162</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1686299838162</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
