@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add refactor2">
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add refactor3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
@@ -157,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686299838162</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add refactor3">
+      <created>1686577963394</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1686577963394</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,6 +183,7 @@
     <MESSAGE value="delete" />
     <MESSAGE value="add refactor" />
     <MESSAGE value="add refactor2" />
-    <option name="LAST_COMMIT_MESSAGE" value="add refactor2" />
+    <MESSAGE value="add refactor3" />
+    <option name="LAST_COMMIT_MESSAGE" value="add refactor3" />
   </component>
 </project>

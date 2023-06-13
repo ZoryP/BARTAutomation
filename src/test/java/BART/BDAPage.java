@@ -8,10 +8,17 @@ import org.openqa.selenium.support.PageFactory;
 
 public class BDAPage {
 
+    @FindBy(xpath = "//span[normalize-space()='Upload figures']")
+    WebElement Upload;
+
+    @FindBy(xpath = "//span[normalize-space()='Close']")
+    WebElement Close;
     @FindBy(xpath = "//button[normalize-space()='Asset type / Functional Area / System'] ")
     WebElement AssetType;
     @FindBy(xpath = "//button[normalize-space()='Bearing Investigations']")
     WebElement BearingInvestigations;
+    @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[6]/div/div[2]/div[2]/div/div/div[2]/div[8]/div[2]/div[3]/div/div[2]/div/div[1]/div/div/div[4]/div/div[2]/div[2]/label")
+    WebElement UploadImg;
     @FindBy(xpath = "//button[normalize-space()='Bearing 1']")
     WebElement Bearing1;
     @FindBy(xpath = "//button[normalize-space()='Bearing Type']")
@@ -141,6 +148,62 @@ public class BDAPage {
         Actions actions = new Actions(driver);
         actions.sendKeys(skfSerialNumberInput, value).perform();
         actions.sendKeys(Keys.ENTER).build().perform();
+    }
+    public static void clickAnalysisButton(WebDriver driver) {
+        WebElement analysisButton = driver.findElement(By.xpath("//button[normalize-space()='Analysis']"));
+        analysisButton.click();
+    }
+
+    public static void selectForAFA(WebDriver driver) {
+        WebElement selectForAFA = driver.findElement(By.xpath("//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[6]/div/div[2]/div[2]/div/div/div[2]/div[10]/div[2]/div/div[3]/div/div[4]/div/div[2]/div[1]/figure[1]"));
+        selectForAFA.click();
+    }
+
+    public static boolean isAFABtnEnabled(WebDriver driver) {
+        WebElement afaButton = driver.findElement(By.xpath("(//span[@class='button__text' and contains(., 'Augmented Failure Analysis')])[1]"));
+        afaButton.click();
+        return afaButton.isEnabled();
+    }
+
+    public static boolean isAFAModalDisplayed(WebDriver driver) throws Throwable{
+        Thread.sleep(7000);
+        WebElement afaModal = driver.findElement(By.xpath("//div[@class='react-modal__header ai-modal__header']"));
+        return afaModal.isDisplayed();
+    }
+    public static void clickFailureMode(WebDriver driver) {
+        WebElement failureMode = driver.findElement(By.xpath("//label[@for='failure0']"));
+        failureMode.click();
+    }
+
+    public static void clickDoneButton(WebDriver driver) {
+        WebElement doneButton = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Done')]"));
+        doneButton.click();
+    }
+
+    public static boolean isThankYouMessageDisplayed(WebDriver driver) {
+        WebElement thankYouMsg = driver.findElement(By.xpath("//div[@class='react-modal__body update-modal__body' and contains(., 'Thank you for using the Augmented Failure Analysis')]"));
+        return thankYouMsg.isDisplayed();
+    }
+
+    public static void clickCloseAFAButton(WebDriver driver) {
+        WebElement closeAFA = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Close')]"));
+        closeAFA.click();
+    }
+
+    public static boolean isLPAFADisplayed(WebDriver driver) {
+        WebElement lpAFA = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+        return lpAFA.isDisplayed();
+    }
+    public static void clickCauseElement(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollBy(0, 300)");
+        WebElement cause = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[6]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[10]/div[2]/div[1]/div[3]/div[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]"));
+        jsExecutor.executeScript("arguments[0].click();", cause);
+    }
+
+    public static boolean isLpCauseDisplayed(WebDriver driver) {
+        WebElement lpCause = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Presence of water')]"));
+        return lpCause.isDisplayed();
     }
 
     BDAPage(WebDriver driver) {

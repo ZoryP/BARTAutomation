@@ -7,8 +7,11 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.util.List;
+
 public class BearingDamageAnalysis {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net/";
@@ -65,8 +68,7 @@ public class BearingDamageAnalysis {
         WebElement InvestigationDetails = driver.findElement(By.xpath("//button[normalize-space()='Investigation Details']"));
         BART.BDAPage.clickElementWithJS(driver, InvestigationDetails);
         WebElement LivePreviewEl = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='test']"));
-        boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, LivePreviewEl);
-        Assert.assertTrue(isElementVisible);
+        LivePreviewEl.isDisplayed();
     }
 
     @Test(priority = 5)
@@ -78,11 +80,9 @@ public class BearingDamageAnalysis {
         bdaPage.enterScopeOfInvestigation(driver, scope);
         bdaPage.clickSKFDetails(driver);
         WebElement lpTER = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='1111']"));
-        boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, lpTER);
-        Assert.assertTrue(isElementVisible);
         WebElement lpScope = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Bearing')]"));
-        boolean isElementVisibleTo = BDAPage.isElementVisibleWithJS(driver, lpScope);
-        Assert.assertTrue(isElementVisibleTo);
+        lpTER.isDisplayed();
+        lpScope.isDisplayed();
     }
 
     @Test(priority = 6)
@@ -130,8 +130,7 @@ public class BearingDamageAnalysis {
         actions.sendKeys(Keys.ENTER).build().perform();
         Thread.sleep(3000);
         WebElement LpCompany = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'LODI SPA')]"));
-        boolean isElementVisible = BDAPage.isElementVisibleWithJS(driver, LpCompany);
-        Assert.assertTrue(isElementVisible);
+        LpCompany.isDisplayed();
     }
 
     @Test(priority = 11)
@@ -198,6 +197,7 @@ public class BearingDamageAnalysis {
         LpFunctionalAreaNameWhereAssetIsUsed.isDisplayed();
         LpSystemName.isDisplayed();
     }
+
     @Test(priority = 16)
     public void Bearing1() {
         BDAPage bdaPage = new BDAPage(driver);
@@ -211,8 +211,165 @@ public class BearingDamageAnalysis {
         WebElement LpSerialNumber = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader']//span[contains(text(),'PEER / SKF')]"));
         LpSerialNumber.isDisplayed();
     }
+
     @Test(priority = 17)
-    public void ComponentParts(){
+    public void ComponentParts() {
+        WebElement ComponentParts = driver.findElement(By.xpath("//button[normalize-space()='Component Parts Investigation']"));
+        ComponentParts.click();
+        WebElement RollingElements = driver.findElement(By.xpath("//button[normalize-space()='Rolling Elements']"));
+        RollingElements.click();
+        List<WebElement> ComponentSize = driver.findElements(By.cssSelector(".accordion-menu-container"));
+        Assert.assertEquals(ComponentSize.size(), 9);
+    }
+
+    @Test(priority = 18)
+    public void UploadImage() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.UploadImg.click();
+        WebElement ModalElement = driver.findElement(By.xpath("//div[@class='dropzone-inputLabel']"));
+        ModalElement.isDisplayed();
+        WebElement fileInput = driver.findElement(By.xpath("//div[@role='presentation']"));
+        fileInput.click();
+        String[] filePaths = {
+                "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\2 - Copy.jpg\"",
+                "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\4.jpg\"",
+                "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\R - Copy - Copy.gif\""
+        };
+        Thread.sleep(2000);
+        Robot robot = new Robot();
+        for (String filePath : filePaths) {
+            StringSelection stringSelection = new StringSelection(filePath);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(2000);
+        }
+    }
+
+    @Test(priority = 19)
+    public void Upload() throws Throwable {
+        BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.Upload.click();
+        Thread.sleep(3000);
+        bdaPage.Close.click();
+        Thread.sleep(3000);
+        List<WebElement> LpImageContainer = driver.findElements(By.className("live-preview-images-item__media-container"));
+        Assert.assertEquals(LpImageContainer.size(), 2);
+    }
+
+    @Test(priority = 20)
+    public void Analysis() throws Throwable {
+        BDAPage.clickAnalysisButton(driver);
+        Thread.sleep(2000);
+        BDAPage.selectForAFA(driver);
+        Assert.assertTrue(BDAPage.isAFABtnEnabled(driver));
+        Assert.assertTrue(BDAPage.isAFAModalDisplayed(driver));
+    }
+
+    @Test(priority = 21)
+    public void DoneAFA() throws Throwable {
+        BDAPage.clickFailureMode(driver);
+        BDAPage.clickDoneButton(driver);
+        Thread.sleep(4000);
+        Assert.assertTrue(BDAPage.isThankYouMessageDisplayed(driver));
+        BDAPage.clickCloseAFAButton(driver);
+        Thread.sleep(3000);
+        Assert.assertTrue(BDAPage.isLPAFADisplayed(driver));
+    }
+
+    @Test(priority = 22)
+    public void Cause() throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        BDAPage.clickCauseElement(driver);
+        Thread.sleep(2000);
+        jsExecutor.executeScript("window.scrollBy(0, 300)");
+        WebElement cause = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[6]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[10]/div[2]/div[1]/div[3]/div[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]"));
+        jsExecutor.executeScript("arguments[0].click();", cause);
+        Actions actions = new Actions(driver);
+        Thread.sleep(2000);
+        actions.sendKeys(cause, "Presence of water").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        Thread.sleep(2000);
+        Assert.assertTrue(BDAPage.isLpCauseDisplayed(driver));
+    }
+
+    @Test(priority = 23)
+    public void CreateNewBrng() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        WebElement AddNew = driver.findElement(By.xpath("//button[@id='addBearingButton']"));
+        AddNew.click();
+        WebElement AddNewEdit = driver.findElement(By.xpath("//button[normalize-space()='Bearing 2']"));
+        AddNewEdit.click();
+        WebElement LpAddNew = driver.findElement(By.xpath("//span[@class='first' and contains(., 'Bearing 2')]"));
+        LpAddNew.click();
+    }
+
+    @Test(priority = 24)
+    public void ThreeDots() throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        WebElement ThreeDots = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[1]"));
+        ThreeDots.click();
+        Thread.sleep(3000);
+        List<WebElement> AllActions = driver.findElements(By.className("navigation__action"));
+        Assert.assertEquals(AllActions.size(), 4);
+    }
+
+    @Test(priority = 25)
+    public void Duplicate() throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        Thread.sleep(2000);
+        WebElement Duplicate = driver.findElement(By.xpath("//a[normalize-space()='Duplicate']"));
+        jsExecutor.executeScript("arguments[0].click();", Duplicate);
+        Thread.sleep(2000);
+        WebElement DuplicatedBearing = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader' and contains(., 'Bearing 3')]"));
+        DuplicatedBearing.isDisplayed();
+        List<WebElement> lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+        Assert.assertEquals(lpBearings.size(), 2);
+    }
+
+    @Test(priority = 26)
+    public void DeleteBearings() throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        Thread.sleep(2000);
+        WebElement ThreeDotsThird = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[2]"));
+        ThreeDotsThird.click();
+        Thread.sleep(2000);
+        WebElement Delete = driver.findElement(By.xpath("//a[normalize-space()='Delete']"));
+        jsExecutor.executeScript("arguments[0].click();", Delete);
+        Thread.sleep(3000);
+        WebElement YesDelete = driver.findElement(By.xpath("//button[@class='button react-modal__action-button button--background-gray']"));
+        YesDelete.click();
+        WebElement ThreeDotsSecond = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[2]"));
+        ThreeDotsSecond.click();
+        Thread.sleep(2000);
+        WebElement Delete2 = driver.findElement(By.xpath("//a[normalize-space()='Delete']"));
+        jsExecutor.executeScript("arguments[0].click();", Delete2);
+        Thread.sleep(3000);
+        WebElement YesDelete2 = driver.findElement(By.xpath("//button[@class='button react-modal__action-button button--background-gray']"));
+        YesDelete2.click();
+        List<WebElement> lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+        Assert.assertEquals(lpBearings.size(), 1);
+    }
+    @Test(priority = 27)
+    public void ConclusionAndRecommendations() throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        Thread.sleep(2000);
+        WebElement Conclusions = driver.findElement(By.xpath("//button[normalize-space()='Conclusions and recommendations']"));
+        Conclusions.click();
+        WebElement Recommendations = driver.findElement(By.xpath("//div[@data-id='summary.recommendations']//div[@class='se-wrapper-inner se-wrapper-wysiwyg sun-editor-editable']"));
+        jsExecutor.executeScript("arguments[0].click();", Recommendations);
+        Actions actions = new Actions(driver);
+        Thread.sleep(2000);
+        actions.sendKeys(Recommendations, "TEST").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
     }
 }
+
+
+
