@@ -5,6 +5,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 
 public class BDAPage {
 
@@ -205,9 +207,46 @@ public class BDAPage {
         WebElement lpCause = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Presence of water')]"));
         return lpCause.isDisplayed();
     }
-
+    public void clickAddNewButton(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        WebElement addNewButton = driver.findElement(By.id("addBearingButton"));
+        addNewButton.click();
+    }
+    public void clickAddNewEditButton(WebDriver driver) {
+        WebElement addNewEditButton = driver.findElement(By.xpath("//button[normalize-space()='Bearing 2']"));
+        addNewEditButton.click();
+    }
+    public void clickLpAddNew(WebDriver driver) {
+        WebElement lpAddNew = driver.findElement(By.xpath("//span[@class='first' and contains(., 'Bearing 2')]"));
+        lpAddNew.click();
+    }
+    public void clickThreeDots(WebDriver driver){
+        WebElement ThreeDots = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[1]"));
+        ThreeDots.click();
+    }
+    public List<WebElement> lpBearings;
+    public void duplicate(WebDriver driver)throws Throwable{
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        Thread.sleep(2000);
+        WebElement Duplicate = driver.findElement(By.xpath("//a[normalize-space()='Duplicate']"));
+        jsExecutor.executeScript("arguments[0].click();", Duplicate);
+        Thread.sleep(2000);
+        WebElement DuplicatedBearing = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader' and contains(., 'Bearing 3')]"));
+        DuplicatedBearing.isDisplayed();
+        lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+    }
+    public void cause(WebDriver driver)throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        WebElement cause = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[6]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[10]/div[2]/div[1]/div[3]/div[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]"));
+        jsExecutor.executeScript("arguments[0].click();", cause);
+        Actions actions = new Actions(driver);
+        Thread.sleep(2000);
+        actions.sendKeys(cause, "Presence of water").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        Thread.sleep(2000);
+    }
     BDAPage(WebDriver driver) {
-
         PageFactory.initElements(driver, this);
     }
 }
