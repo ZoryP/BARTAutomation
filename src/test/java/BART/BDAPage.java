@@ -225,7 +225,7 @@ public class BDAPage {
         WebElement ThreeDots = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[1]"));
         ThreeDots.click();
     }
-    public List<WebElement> lpBearings;
+    public List<WebElement> lpBearingsSize2;
     public void duplicate(WebDriver driver)throws Throwable{
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         Thread.sleep(2000);
@@ -234,7 +234,7 @@ public class BDAPage {
         Thread.sleep(2000);
         WebElement DuplicatedBearing = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader' and contains(., 'Bearing 3')]"));
         DuplicatedBearing.isDisplayed();
-        lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+        lpBearingsSize2 = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
     }
     public void cause(WebDriver driver)throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -245,6 +245,62 @@ public class BDAPage {
         actions.sendKeys(cause, "Presence of water").perform();
         actions.sendKeys(Keys.ENTER).build().perform();
         Thread.sleep(2000);
+    }
+    public void deleteFirstBearing(WebDriver driver) throws Throwable{
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        Thread.sleep(2000);
+        WebElement ThreeDotsThird = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[2]"));
+        ThreeDotsThird.click();
+        Thread.sleep(2000);
+        WebElement Delete = driver.findElement(By.xpath("//a[normalize-space()='Delete']"));
+        jsExecutor.executeScript("arguments[0].click();", Delete);
+        Thread.sleep(3000);
+        WebElement YesDelete = driver.findElement(By.xpath("//button[@class='button react-modal__action-button button--background-gray']"));
+        YesDelete.click();
+    }
+    public List<WebElement> lpBearings;
+    public void deleteSecondBearing(WebDriver driver) throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        WebElement ThreeDotsSecond = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[2]"));
+        ThreeDotsSecond.click();
+        Thread.sleep(2000);
+        WebElement Delete2 = driver.findElement(By.xpath("//a[normalize-space()='Delete']"));
+        jsExecutor.executeScript("arguments[0].click();", Delete2);
+        Thread.sleep(3000);
+        WebElement YesDelete2 = driver.findElement(By.xpath("//button[@class='button react-modal__action-button button--background-gray']"));
+        YesDelete2.click();
+        lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+    }
+    public WebElement lpRecommendations;
+    public void conclusionsAndRec(WebDriver driver)throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        Thread.sleep(2000);
+        WebElement Conclusions = driver.findElement(By.xpath("//button[normalize-space()='Conclusions and recommendations']"));
+        Conclusions.click();
+        WebElement Recommendations = driver.findElement(By.xpath("//div[@data-id='summary.recommendations']//div[@class='se-wrapper-inner se-wrapper-wysiwyg sun-editor-editable']"));
+        jsExecutor.executeScript("arguments[0].click();", Recommendations);
+        Actions actions = new Actions(driver);
+        Thread.sleep(2000);
+        actions.sendKeys(Recommendations, "TEST").perform();
+        BDAPage.blurElementWithJS(driver, Recommendations);
+        WebElement Save = driver.findElement(By.xpath("//*[name()='polygon' and @id='Fill-6']"));
+        Save.click();
+        Thread.sleep(3000);
+        lpRecommendations = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'TEST')]"));
+    }
+    public void submit (WebDriver driver) throws Throwable{
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        driver.navigate().refresh();
+        Thread.sleep(3000);
+        WebElement Submit = driver.findElement(By.id("buttonSubmit"));
+        String script = "var event = document.createEvent('MouseEvent');"
+                + "event.initEvent('mouseover', true, true);"
+                + "arguments[0].dispatchEvent(event);";
+        jsExecutor.executeScript(script, Submit);
+        Thread.sleep(3000);
+        Submit.click();
+
     }
     BDAPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
