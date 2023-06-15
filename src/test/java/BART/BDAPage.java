@@ -302,6 +302,19 @@ public class BDAPage {
         Submit.click();
 
     }
+    public boolean isApproveVisible(WebDriver driver) {
+        WebElement elementApprove = driver.findElement(By.id("Icons/icon_approve"));
+        return elementApprove.isDisplayed();
+    }
+    public boolean isApproveWithEditsVisible(WebDriver driver) {
+        WebElement elementApprovewithEdits = driver.findElement(By.id("Icons/icon_approve_edit"));
+        return elementApprovewithEdits.isDisplayed();
+    }
+    public boolean isRejectVisible(WebDriver driver) {
+        WebElement elementReject = driver.findElement(By.id("buttonReject"));
+        return elementReject.isDisplayed();
+
+    }
     BDAPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
