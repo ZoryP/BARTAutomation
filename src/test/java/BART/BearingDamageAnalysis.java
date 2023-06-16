@@ -369,7 +369,7 @@ public class BearingDamageAnalysis {
     }
 
     @Test(priority = 31)
-    public void IconToolbarSubmit()  {
+    public void IconToolbarSubmit() {
         BDAPage bdaPage = new BDAPage(driver);
         List<WebElement> IconToolbar = driver.findElements(By.className("button-bar__group"));
         Assert.assertEquals(IconToolbar.size(), 3);
@@ -377,8 +377,28 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(bdaPage.isApproveWithEditsVisible(driver));
         Assert.assertTrue(bdaPage.isRejectVisible(driver));
     }
+
+    @Test(priority = 32)
+    public void Approve() throws Throwable {
+        WebElement ApproveReport = driver.findElement(By.id("Icons/icon_approve"));
+        ApproveReport.click();
+        WebElement VerifyAfa = driver.findElement(By.xpath("//div[@class='react-modal__body update-modal__body' and contains(., 'Have you verified the Failure Mode results for each bearing?')]"));
+        VerifyAfa.isDisplayed();
+        WebElement YesApprove = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Yes')]"));
+        YesApprove.click();
+        WebElement ApproveMessage = driver.findElement(By.xpath("//div[@class='react-modal__text' and contains(., 'Are you sure you want to approve the report?')]"));
+        ApproveMessage.isDisplayed();
+        WebElement ApproveAndOpenEmail = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Approve and open Email')]"));
+        ApproveAndOpenEmail.click();
+        Thread.sleep(4000);
+    }
+    @Test(priority = 33)
+    public void VerifyApprove() {
+        WebElement StatusApprove = driver.findElement(By.xpath("//div[@class='live-preview-status-confidential__status' and contains(., 'Approved')]"));
+        StatusApprove.isDisplayed();
+        WebElement EditButton = driver.findElement(By.id("Icons/icon_edit"));
+        EditButton.isDisplayed();
+        WebElement DistributePDF = driver.findElement(By.id("buttonDistributePdf "));
+        DistributePDF.isDisplayed();
+    }
 }
-
-
-
-
