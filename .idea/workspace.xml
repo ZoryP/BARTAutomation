@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add22">
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add222">
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +35,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="JavaAutoRunManager">
+    <enabled-run-configurations>
+      <run-configuration type="TestNG" name="BearingDamageAnalysis" />
+    </enabled-run-configurations>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -50,11 +60,13 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/BART/src/test/java&quot;
+    &quot;last_directory_selection&quot;: &quot;C:/BART/src/test/java&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="BART" />
       <recent name="ProductionEnvironment" />
       <recent name="Production" />
     </key>
@@ -198,7 +210,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686826514583</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add222">
+      <created>1686915086231</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1686915086231</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -223,6 +242,7 @@
     <MESSAGE value="add" />
     <MESSAGE value="add2" />
     <MESSAGE value="add22" />
-    <option name="LAST_COMMIT_MESSAGE" value="add22" />
+    <MESSAGE value="add222" />
+    <option name="LAST_COMMIT_MESSAGE" value="add222" />
   </component>
 </project>

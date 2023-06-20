@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="EntryPointsManager">
-    <list size="2">
-      <item index="0" class="java.lang.String" itemvalue="org.junit.AfterClass" />
-      <item index="1" class="java.lang.String" itemvalue="org.junit.BeforeClass" />
-    </list>
-  </component>
-  <component name="ExternalStorageConfigurationManager" enabled="true" />
-  <component name="MavenProjectsManager">
-    <option name="originalFiles">
-      <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-      </list>
+  <component name="CiFilterState">
+    <option name="selectedSeverities">
+      <map>
+        <entry key="Critical" value="true" />
+        <entry key="High" value="true" />
+        <entry key="Medium" value="true" />
+        <entry key="Low" value="true" />
+        <entry key="Information" value="true" />
+        <entry key="Unknown" value="true" />
+        <entry key="Pending" value="true" />
+        <entry key="Normal" value="true" />
+      </map>
+    </option>
+    <option name="selectedLicences">
+      <map />
+    </option>
+    <option name="selectedScopes">
+      <map />
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_12" default="true" project-jdk-name="12" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" default="true">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

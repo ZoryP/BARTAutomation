@@ -125,6 +125,7 @@ public class BDAPage {
         WebElement SKFDetails = driver.findElement(By.xpath("//button[normalize-space()='SKF Details']"));
         BART.BDAPage.clickElementWithJS(driver, SKFDetails);
     }
+
     public static void clickSKFOther(WebDriver driver) {
         WebElement skfOther = driver.findElement(By.xpath("//div[@class='accordion']//div[@class='accordion__content accordion__content--is-open']//div[@class='accordion__content-form']//div[@class='componentContainer']//div//div[@class='componentContainer']//div//div[contains(@class,'css-1hwfws3')]"));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -151,6 +152,7 @@ public class BDAPage {
         actions.sendKeys(skfSerialNumberInput, value).perform();
         actions.sendKeys(Keys.ENTER).build().perform();
     }
+
     public static void clickAnalysisButton(WebDriver driver) {
         WebElement analysisButton = driver.findElement(By.xpath("//button[normalize-space()='Analysis']"));
         analysisButton.click();
@@ -167,11 +169,12 @@ public class BDAPage {
         return afaButton.isEnabled();
     }
 
-    public static boolean isAFAModalDisplayed(WebDriver driver) throws Throwable{
+    public static boolean isAFAModalDisplayed(WebDriver driver) throws Throwable {
         Thread.sleep(7000);
         WebElement afaModal = driver.findElement(By.xpath("//div[@class='react-modal__header ai-modal__header']"));
         return afaModal.isDisplayed();
     }
+
     public static void clickFailureMode(WebDriver driver) {
         WebElement failureMode = driver.findElement(By.xpath("//label[@for='failure0']"));
         failureMode.click();
@@ -196,6 +199,7 @@ public class BDAPage {
         WebElement lpAFA = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
         return lpAFA.isDisplayed();
     }
+
     public static void clickCauseElement(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollBy(0, 300)");
@@ -207,26 +211,32 @@ public class BDAPage {
         WebElement lpCause = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Presence of water')]"));
         return lpCause.isDisplayed();
     }
+
     public void clickAddNewButton(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 0)");
         WebElement addNewButton = driver.findElement(By.id("addBearingButton"));
         addNewButton.click();
     }
+
     public void clickAddNewEditButton(WebDriver driver) {
         WebElement addNewEditButton = driver.findElement(By.xpath("//button[normalize-space()='Bearing 2']"));
         addNewEditButton.click();
     }
+
     public void clickLpAddNew(WebDriver driver) {
         WebElement lpAddNew = driver.findElement(By.xpath("//span[@class='first' and contains(., 'Bearing 2')]"));
         lpAddNew.click();
     }
-    public void clickThreeDots(WebDriver driver){
+
+    public void clickThreeDots(WebDriver driver) {
         WebElement ThreeDots = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[1]"));
         ThreeDots.click();
     }
+
     public List<WebElement> lpBearingsSize2;
-    public void duplicate(WebDriver driver)throws Throwable{
+
+    public void duplicate(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         Thread.sleep(2000);
         WebElement Duplicate = driver.findElement(By.xpath("//a[normalize-space()='Duplicate']"));
@@ -236,7 +246,8 @@ public class BDAPage {
         DuplicatedBearing.isDisplayed();
         lpBearingsSize2 = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
     }
-    public void cause(WebDriver driver)throws Throwable {
+
+    public void cause(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         WebElement cause = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[6]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[10]/div[2]/div[1]/div[3]/div[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]"));
         jsExecutor.executeScript("arguments[0].click();", cause);
@@ -246,7 +257,8 @@ public class BDAPage {
         actions.sendKeys(Keys.ENTER).build().perform();
         Thread.sleep(2000);
     }
-    public void deleteFirstBearing(WebDriver driver) throws Throwable{
+
+    public void deleteFirstBearing(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         Thread.sleep(2000);
         WebElement ThreeDotsThird = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[2]"));
@@ -258,7 +270,9 @@ public class BDAPage {
         WebElement YesDelete = driver.findElement(By.xpath("//button[@class='button react-modal__action-button button--background-gray']"));
         YesDelete.click();
     }
+
     public List<WebElement> lpBearings;
+
     public void deleteSecondBearing(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         WebElement ThreeDotsSecond = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[2]"));
@@ -271,8 +285,10 @@ public class BDAPage {
         YesDelete2.click();
         lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
     }
+
     public WebElement lpRecommendations;
-    public void conclusionsAndRec(WebDriver driver)throws Throwable {
+
+    public void conclusionsAndRec(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         Thread.sleep(2000);
         WebElement Conclusions = driver.findElement(By.xpath("//button[normalize-space()='Conclusions and recommendations']"));
@@ -288,7 +304,8 @@ public class BDAPage {
         Thread.sleep(3000);
         lpRecommendations = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'TEST')]"));
     }
-    public void submit (WebDriver driver) throws Throwable{
+
+    public void submit(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 0)");
         driver.navigate().refresh();
@@ -302,19 +319,71 @@ public class BDAPage {
         Submit.click();
 
     }
+
     public boolean isApproveVisible(WebDriver driver) {
         WebElement elementApprove = driver.findElement(By.id("Icons/icon_approve"));
         return elementApprove.isDisplayed();
     }
+
     public boolean isApproveWithEditsVisible(WebDriver driver) {
         WebElement elementApprovewithEdits = driver.findElement(By.id("Icons/icon_approve_edit"));
         return elementApprovewithEdits.isDisplayed();
     }
+
     public boolean isRejectVisible(WebDriver driver) {
         WebElement elementReject = driver.findElement(By.id("buttonReject"));
         return elementReject.isDisplayed();
 
     }
+
+    public void approve(WebDriver driver) {
+        WebElement ApproveReport = driver.findElement(By.id("Icons/icon_approve"));
+        ApproveReport.click();
+        WebElement VerifyAfa = driver.findElement(By.xpath("//div[@class='react-modal__body update-modal__body' and contains(., 'Have you verified the Failure Mode results for each bearing?')]"));
+        VerifyAfa.isDisplayed();
+        WebElement YesApprove = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Yes')]"));
+        YesApprove.click();
+        WebElement ApproveMessage = driver.findElement(By.xpath("//div[@class='react-modal__text' and contains(., 'Are you sure you want to approve the report?')]"));
+        ApproveMessage.isDisplayed();
+        WebElement ApproveAndOpenEmail = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Approve and open Email')]"));
+        ApproveAndOpenEmail.click();
+    }
+
+    public void approveAndEdit(WebDriver driver) throws Throwable {
+        Thread.sleep(13000);
+        WebElement StatusApprove = driver.findElement(By.xpath("//div[@class='live-preview-status-confidential__status' and contains(., 'Approved')]"));
+        StatusApprove.isDisplayed();
+        WebElement EditButton = driver.findElement(By.id("Icons/icon_edit"));
+        EditButton.isDisplayed();
+        WebElement DistributePDF = driver.findElement(By.id("buttonDistributePdf"));
+        DistributePDF.isDisplayed();
+    }
+
+    public void editReport(WebDriver driver) throws Throwable {
+        WebElement EditButton = driver.findElement(By.id("Icons/icon_edit"));
+        EditButton.click();
+        WebElement ConfirmMessage = driver.findElement(By.xpath("//div[@class='react-modal__text' and contains(., 'Are you sure you want to EDIT this APPROVED report? Make sure you save the original report as a PDF to a folder before editing.')]"));
+        ConfirmMessage.isDisplayed();
+        WebElement DownloadPDF = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Download PDF and continue editing')]"));
+        DownloadPDF.click();
+        Thread.sleep(4000);
+        WebElement RevisionNumber = driver.findElement(By.xpath("//h4[@class='live-preview__report-revision-number' and contains(., '01')]"));
+        RevisionNumber.isDisplayed();
+        WebElement StatusDraft = driver.findElement(By.xpath("//div[@class='live-preview-status-confidential__status' and contains(., 'Draft')]"));
+        StatusDraft.isDisplayed();
+    }
+    public void deleteReport(WebDriver driver) throws Throwable {
+        WebElement Delete = driver.findElement(By.id("buttonDelete"));
+        Delete.click();
+        Thread.sleep(3000);
+        WebElement ConfirmMessage = driver.findElement(By.xpath("//div[@class='icon-message__text' and contains(., 'Do you want to delete report')]"));
+        ConfirmMessage.isDisplayed();
+        WebElement Confirm = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Yes')]"));
+        Confirm.click();
+        Thread.sleep(3000);
+        WebElement DeleteMessage = driver.findElement(By.xpath("//div[@class='form-container' and contains(., 'This report is deleted. Please contact a BART administrator to restore deleted report.')]"));
+        DeleteMessage.isDisplayed();
+}
     BDAPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
