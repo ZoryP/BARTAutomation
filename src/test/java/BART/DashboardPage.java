@@ -43,6 +43,13 @@ public class DashboardPage {
     @FindBy(id = "create__bda__button")
     WebElement BDAReport;
 
+    @FindBy(xpath = "//a[@class='welcome-information__help-link'][normalize-space()='Open user guide']")
+    WebElement UserGuide;
+
+    @FindBy(xpath = "//a[@class='welcome-information__help-link'][normalize-space()='Ask questions on Yammer']")
+    WebElement Yammer;
+
+
     DashboardPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);

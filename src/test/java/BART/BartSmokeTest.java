@@ -34,6 +34,7 @@ public class BartSmokeTest {
 
         driver.quit();
     }
+
     @AfterMethod
     public void CloseBrowser(ITestResult result) throws IOException {
         if (ITestResult.FAILURE == result.getStatus()) {
@@ -71,30 +72,45 @@ public class BartSmokeTest {
     }
 
     @Test(priority = 4)
-    public void ValidLogin () throws Throwable {
+    public void ValidLogin() throws Throwable {
         BART.LoginPage loginPage = new BART.LoginPage(driver);
         loginPage.clearFields();
-        loginPage.login("testuser1.bart@gmail.com","bartTest1");
+        loginPage.login("testuser1.bart@gmail.com", "bartTest1");
         loginPage.enterBtn.click();
         Thread.sleep(4000);
         loginPage.WelcomeMassage.isDisplayed();
     }
 
     @Test(priority = 5)
-    public void Header() throws Throwable {
-        BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
-        Thread.sleep(2000);
-        bartPageDev.CreateNewReport.isDisplayed();
-        bartPageDev.MyReports.isDisplayed();
-        bartPageDev.AllReports.isDisplayed();
-        bartPageDev.Analytics.isDisplayed();
-        bartPageDev.FindNAM.isDisplayed();
-        bartPageDev.Share.isDisplayed();
-        bartPageDev.Settings.isDisplayed();
-        bartPageDev.SignOut.isDisplayed();
+    public void Dashboard() {
+        DashboardPage dashboardPage = new DashboardPage(driver);
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/dashboard";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
+        dashboardPage.Yammer.isDisplayed();
+        dashboardPage.UserGuide.isDisplayed();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollBy(0, 500)");
+        List<WebElement> RecentReports = driver.findElements(By.cssSelector(".table__header-cell"));
+        Assert.assertEquals(RecentReports.size(), 7);
+
     }
 
     @Test(priority = 6)
+    public void Header() throws Throwable {
+        BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
+        Thread.sleep(2000);
+        bartPageDev.CreateNewReport.isEnabled();
+        bartPageDev.MyReports.isEnabled();
+        bartPageDev.AllReports.isEnabled();
+        bartPageDev.Analytics.isEnabled();
+        bartPageDev.FindNAM.isEnabled();
+        bartPageDev.Share.isEnabled();
+        bartPageDev.Settings.isEnabled();
+        bartPageDev.SignOut.isDisplayed();
+    }
+
+    @Test(priority = 7)
     public void Settings() {
         BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
         bartPageDev.Settings.click();
@@ -104,17 +120,19 @@ public class BartSmokeTest {
         Assert.assertEquals(LanguageMenu.size(), 19);
     }
 
-    @Test(priority = 7)
-    public void CreateNewReport()  {
+    @Test(priority = 8)
+    public void CreateNewReport() {
         BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
         bartPageDev.CreateNewReport.click();
         List<WebElement> ReportsMenu = driver.findElements(By.cssSelector(".navigation__sub-link"));
         Assert.assertEquals(ReportsMenu.size(), 5);
     }
 
-    @Test(priority = 8)
+    @Test(priority = 9)
     public void OpenReport() throws Throwable {
         BART.DashboardPage dashboardPage = new BART.DashboardPage(driver);
+        dashboardPage.MyReports.click();
+        Thread.sleep(3000);
         WebElement row = driver.findElement(By.xpath("//*[@class='LinesEllipsis  ' and contains(text(),'test')]"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].click();", row);
@@ -127,7 +145,22 @@ public class BartSmokeTest {
         dashboardPage.Close.click();
     }
 
-    @Test(priority = 9)
+    @Test(priority = 10)
+    public void AllReports() {
+        BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
+        bartPageDev.AllReports.click();
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/all-reports";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
+    }
+
+    @Test(priority = 11)
+    public void SearchBarAllReports() {
+        List<WebElement> SearchbarAll = driver.findElements(By.cssSelector(".filter-group__toggler"));
+        Assert.assertEquals(SearchbarAll.size(), 11);
+    }
+
+    @Test(priority = 12)
     public void MyReports() {
         BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
         bartPageDev.MyReports.click();
@@ -135,8 +168,13 @@ public class BartSmokeTest {
         String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/my-reports";
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
+    @Test(priority = 13)
+    public void SearchBarMyReports(){
+        List<WebElement> SearchbarMy = driver.findElements(By.cssSelector(".filter-group__toggler"));
+        Assert.assertEquals(SearchbarMy.size(), 11);
+}
 
-    @Test(priority = 10)
+    @Test(priority = 14)
     public void DuplicateReport() throws Throwable {
         WebElement elements = driver.findElement(By.xpath("//*[@class='LinesEllipsis  ' and contains(text(),'test')]"));
         JavascriptExecutor js = (JavascriptExecutor) driver;
