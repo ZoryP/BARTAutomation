@@ -1,22 +1,23 @@
 package BART;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 
-public class BartSmokeTest {
+public class LoginDashboardTests{
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net/";
 
@@ -158,6 +159,8 @@ public class BartSmokeTest {
     public void SearchBarAllReports() {
         List<WebElement> SearchbarAll = driver.findElements(By.cssSelector(".filter-group__toggler"));
         Assert.assertEquals(SearchbarAll.size(), 11);
+        List<WebElement> ResultsAll = driver.findElements(By.cssSelector(".table__header-cell"));
+        Assert.assertEquals(ResultsAll.size(), 7);
     }
 
     @Test(priority = 12)
@@ -172,20 +175,13 @@ public class BartSmokeTest {
     public void SearchBarMyReports(){
         List<WebElement> SearchbarMy = driver.findElements(By.cssSelector(".filter-group__toggler"));
         Assert.assertEquals(SearchbarMy.size(), 11);
+        List<WebElement> ResultsAll = driver.findElements(By.cssSelector(".table__header-cell"));
+        Assert.assertEquals(ResultsAll.size(), 7);
 }
 
     @Test(priority = 14)
     public void DuplicateReport() throws Throwable {
-        WebElement elements = driver.findElement(By.xpath("//*[@class='LinesEllipsis  ' and contains(text(),'test')]"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", elements);
-        WebElement targetElement = driver.findElement(By.xpath("//tr[@class='table__body-row table__body-row--is-active']//span[@class='button__text'][normalize-space()='Duplicate']"));
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", targetElement);
-        Thread.sleep(20000);
-        Actions actions = new Actions(driver);
-        actions.keyDown(Keys.CONTROL).sendKeys(Keys.F5).keyUp(Keys.CONTROL).build().perform();
-        List<WebElement> duplicatedReport = driver.findElements(By.xpath("//*[@class='LinesEllipsis  ' and contains(text(),'test')]"));
-        Assert.assertTrue(duplicatedReport.size() > 0);
+        BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
+        bartPageDev.duplicateReport(driver);
     }
 }

@@ -52,6 +52,23 @@ public class BearingDamageAnalysis {
     }
 
     @Test(priority = 3)
+    public void CheckSettings() {
+        WebElement Settings = driver.findElement(By.id("buttonSettings"));
+        Settings.click();
+        List<WebElement> SettingsSize = driver.findElements(By.cssSelector(".settings-menu__action"));
+        Assert.assertEquals(SettingsSize.size(), 6);
+    }
+
+    @Test(priority = 4)
+    public void CheckContainerSettings() throws Throwable {
+        BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.checkContainer(driver);
+        Thread.sleep(2000);
+        WebElement Settings = driver.findElement(By.id("buttonSettings"));
+        Settings.click();
+    }
+
+    @Test(priority = 5)
     public void CheckAccodeonBDA() {
         List<WebElement> Accordeon = driver.findElements(By.id("Tree/tree_root_branch"));
         Assert.assertEquals(Accordeon.size(), 11);
@@ -59,7 +76,7 @@ public class BearingDamageAnalysis {
 
     WebElement ReportTitle;
 
-    @Test(priority = 4)
+    @Test(priority = 6)
     public void CheckReportDetails() {
         WebElement ReportDetails = driver.findElement(By.xpath("//button[normalize-space()='Report Details']"));
         BART.BDAPage.clickElementWithJS(driver, ReportDetails);
@@ -73,7 +90,7 @@ public class BearingDamageAnalysis {
         LivePreviewEl.isDisplayed();
     }
 
-    @Test(priority = 5)
+    @Test(priority = 7)
     public void CheckInvestigationDetails() {
         BDAPage bdaPage = new BDAPage(driver);
         String terNumber = "1";
@@ -87,14 +104,14 @@ public class BearingDamageAnalysis {
         lpScope.isDisplayed();
     }
 
-    @Test(priority = 6)
+    @Test(priority = 8)
     public void CheckSKFDetailsCountry() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         String country = "Argentina";
         bdaPage.selectCountry(driver, country);
     }
 
-    @Test(priority = 7)
+    @Test(priority = 9)
     public void CheckSKFDetailsCompany() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.selectSKFCountry(driver);
@@ -102,7 +119,7 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(isElementVisible);
     }
 
-    @Test(priority = 8)
+    @Test(priority = 10)
     public void CheckSKFCompanyLocation() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.selectSKFCompany(driver);
@@ -112,14 +129,14 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(isLocationVisible);
     }
 
-    @Test(priority = 9)
+    @Test(priority = 11)
     public void RequiredApproval() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         boolean isElementVisible = bdaPage.approvalButton(driver);
         Assert.assertTrue(isElementVisible);
     }
 
-    @Test(priority = 10)
+    @Test(priority = 12)
     public void CheckCustomer() throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         WebElement CustomerDetails = driver.findElement(By.xpath("//button[normalize-space()='Customer Details']"));
@@ -135,7 +152,7 @@ public class BearingDamageAnalysis {
         LpCompany.isDisplayed();
     }
 
-    @Test(priority = 11)
+    @Test(priority = 13)
     public void CheckCustomerDetails() {
         WebElement LpCompanyAdr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'VIA DELLA')]"));
         WebElement LpCompanyCntr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Italy')]"));
@@ -143,7 +160,7 @@ public class BearingDamageAnalysis {
         LpCompanyCntr.isDisplayed();
     }
 
-    @Test(priority = 12)
+    @Test(priority = 14)
     public void CheckCustomerSiteName() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollBy(0, 800)");
@@ -157,7 +174,7 @@ public class BearingDamageAnalysis {
         LpCustomerSiteName.isDisplayed();
     }
 
-    @Test(priority = 13)
+    @Test(priority = 15)
     public void CheckAssetDetailsSection() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         WebElement AssetDetails = driver.findElement(By.xpath("//button[normalize-space()='Asset Details']"));
@@ -168,7 +185,7 @@ public class BearingDamageAnalysis {
         Machine.isDisplayed();
     }
 
-    @Test(priority = 14)
+    @Test(priority = 16)
     public void CheckAssetType() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -185,7 +202,7 @@ public class BearingDamageAnalysis {
         LpFunctionalArea.isDisplayed();
     }
 
-    @Test(priority = 15)
+    @Test(priority = 17)
     public void CheckAssetDetails() {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.FunctionalAreaNameWhereAssetIsUsed.click();
@@ -200,7 +217,7 @@ public class BearingDamageAnalysis {
         LpSystemName.isDisplayed();
     }
 
-    @Test(priority = 16)
+    @Test(priority = 18)
     public void CheckFirstBearing() {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.BearingInvestigations.click();
@@ -214,7 +231,7 @@ public class BearingDamageAnalysis {
         LpSerialNumber.isDisplayed();
     }
 
-    @Test(priority = 17)
+    @Test(priority = 19)
     public void CheckBearingType() throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 0)");
@@ -225,10 +242,10 @@ public class BearingDamageAnalysis {
         actions.sendKeys(SKFCustomerDescription, "TEST").perform();
         Thread.sleep(2000);
         BDAPage.blurElementWithJS(driver, SKFCustomerDescription);
-        //assert
 
     }
-    @Test(priority = 18)
+
+    @Test(priority = 20)
     public void CheckComponentParts() {
         WebElement ComponentParts = driver.findElement(By.xpath("//button[normalize-space()='Component Parts Investigation']"));
         ComponentParts.click();
@@ -238,7 +255,7 @@ public class BearingDamageAnalysis {
         Assert.assertEquals(ComponentSize.size(), 9);
     }
 
-    @Test(priority = 19)
+    @Test(priority = 21)
     public void CheckUploadImages() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.UploadImg.click();
@@ -266,7 +283,8 @@ public class BearingDamageAnalysis {
             Thread.sleep(6000);
         }
     }
-    @Test(priority = 20)
+
+    @Test(priority = 22)
     public void AssertImages() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.Upload.click();
@@ -276,7 +294,8 @@ public class BearingDamageAnalysis {
         List<WebElement> LpImageContainer = driver.findElements(By.className("live-preview-images-item__media-container"));
         Assert.assertEquals(LpImageContainer.size(), 2);
     }
-    @Test(priority = 21)
+
+    @Test(priority = 23)
     public void CheckAnalysis() throws Throwable {
         BDAPage.clickAnalysisButton(driver);
         Thread.sleep(2000);
@@ -284,7 +303,8 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(BDAPage.isAFABtnEnabled(driver));
         Assert.assertTrue(BDAPage.isAFAModalDisplayed(driver));
     }
-    @Test(priority = 22)
+
+    @Test(priority = 24)
     public void DoneAFA() throws Throwable {
         BDAPage.clickFailureMode(driver);
         BDAPage.clickDoneButton(driver);
@@ -294,7 +314,8 @@ public class BearingDamageAnalysis {
         Thread.sleep(3000);
         Assert.assertTrue(BDAPage.isLPAFADisplayed(driver));
     }
-    @Test(priority = 23)
+
+    @Test(priority = 25)
     public void CheckCause() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -304,14 +325,16 @@ public class BearingDamageAnalysis {
         bdaPage.cause(driver);
         Assert.assertTrue(BDAPage.isLpCauseDisplayed(driver));
     }
-    @Test(priority = 24)
+
+    @Test(priority = 26)
     public void CreateNewBearing() {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.clickAddNewButton(driver);
         bdaPage.clickAddNewEditButton(driver);
         bdaPage.clickLpAddNew(driver);
     }
-    @Test(priority = 25)
+
+    @Test(priority = 27)
     public void CheckThreeDotsMenu() throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         BDAPage bdaPage = new BDAPage(driver);
@@ -321,32 +344,35 @@ public class BearingDamageAnalysis {
         List<WebElement> AllActions = driver.findElements(By.className("navigation__action"));
         Assert.assertEquals(AllActions.size(), 4);
     }
-    @Test(priority = 26)
+
+    @Test(priority = 28)
     public void DuplicateBearing() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.duplicate(driver);
         Assert.assertEquals(bdaPage.lpBearingsSize2.size(), 2);
     }
-    @Test(priority = 27)
+
+    @Test(priority = 29)
     public void DeleteFirstBearing() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.deleteFirstBearing(driver);
     }
 
-    @Test(priority = 28)
+    @Test(priority = 30)
     public void DeleteSecondBearing() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.deleteSecondBearing(driver);
         Assert.assertEquals(bdaPage.lpBearings.size(), 1);
     }
 
-    @Test(priority = 29)
+    @Test(priority = 31)
     public void CheckConclusionAndRecommendations() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.conclusionsAndRec(driver);
         bdaPage.lpRecommendations.isDisplayed();
     }
-    @Test(priority = 30)
+
+    @Test(priority = 32)
     public void Submit() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.submit(driver);
@@ -359,7 +385,8 @@ public class BearingDamageAnalysis {
         WebElement StatusSubmitted = driver.findElement(By.xpath("//div[@class='live-preview-status-confidential__status' and contains(., 'Submitted')]"));
         StatusSubmitted.isDisplayed();
     }
-    @Test(priority = 31)
+
+    @Test(priority = 33)
     public void CheckIconToolbarSubmit() {
         BDAPage bdaPage = new BDAPage(driver);
         List<WebElement> IconToolbar = driver.findElements(By.className("button-bar__group"));
@@ -368,27 +395,45 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(bdaPage.isApproveWithEditsVisible(driver));
         Assert.assertTrue(bdaPage.isRejectVisible(driver));
     }
-    @Test(priority = 32)
+
+    @Test(priority = 34)
     public void Approve() {
-       BDAPage bdaPage = new BDAPage(driver);
-       bdaPage.approve(driver);
+        BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.approve(driver);
     }
 
-    @Test(priority = 33)
+    @Test(priority = 35)
     public void ApproveAndEdit() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.approveAndEdit(driver);
     }
 
-    @Test(priority = 34)
+    @Test(priority = 36)
     public void EditReport() throws Throwable {
-     BDAPage bdaPage = new BDAPage(driver);
-     bdaPage.editReport(driver);
+        BDAPage bdaPage = new BDAPage(driver);
+        bdaPage.editReport(driver);
     }
 
-    @Test(priority = 35)
+    @Test(priority = 37)
     public void DeleteReport() throws Throwable {
         BDAPage bdaPage = new BDAPage(driver);
         bdaPage.deleteReport(driver);
+    }
+
+    @Test(priority = 38)
+    public void CloseReport() {
+        WebElement CloseBtn = driver.findElement(By.id("buttonClose"));
+        CloseBtn.click();
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://d2xob39w6dc2ow.cloudfront.net/my-reports";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
+    }
+    @Test(priority = 39)
+    public void SignOut() {
+        WebElement SignOut = driver.findElement(By.xpath("//*[@class='user-bar__sign-out' and contains(., 'Sign out')]"));
+        SignOut.click();
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://d2xob39w6dc2ow.cloudfront.net/login";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
 }

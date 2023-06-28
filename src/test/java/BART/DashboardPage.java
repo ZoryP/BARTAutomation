@@ -1,8 +1,12 @@
 package BART;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
+
+import java.util.List;
 
 public class DashboardPage {
     WebDriver driver;
@@ -49,6 +53,19 @@ public class DashboardPage {
     @FindBy(xpath = "//a[@class='welcome-information__help-link'][normalize-space()='Ask questions on Yammer']")
     WebElement Yammer;
 
+    public void duplicateReport (WebDriver driver) throws Throwable {
+        WebElement elements = driver.findElement(By.xpath("//*[@class='LinesEllipsis  ' and contains(text(),'test')]"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", elements);
+        WebElement targetElement = driver.findElement(By.xpath("//tr[@class='table__body-row table__body-row--is-active']//span[@class='button__text'][normalize-space()='Duplicate']"));
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", targetElement);
+        Thread.sleep(20000);
+        Actions actions = new Actions(driver);
+        actions.keyDown(Keys.CONTROL).sendKeys(Keys.F5).keyUp(Keys.CONTROL).build().perform();
+        List<WebElement> duplicatedReport = driver.findElements(By.xpath("//*[@class='LinesEllipsis  ' and contains(text(),'test')]"));
+        Assert.assertTrue(duplicatedReport.size() > 0);
+    }
 
     DashboardPage(WebDriver driver) {
         this.driver = driver;
