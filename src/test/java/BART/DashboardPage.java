@@ -38,14 +38,19 @@ public class DashboardPage {
     @FindBy(css = ".button-bar")
     WebElement IconToolbar;
 
-    @FindBy(css = ".live-preview__header")
+    @FindBy(xpath = "//h3[@class='live-preview__header' and contains(., 'Bearing Damage Analysis Report')]")
     WebElement BearingDamageAnalysisReport;
 
+    @FindBy(xpath = "//h3[@class='live-preview__header' and contains(., 'Bearing Inspection - NAM')]")
+    WebElement BearingInspectionNAMReport;
     @FindBy(id = "buttonClose")
     WebElement Close;
 
     @FindBy(id = "create__bda__button")
     WebElement BDAReport;
+
+    @FindBy(id = "create__nam__button")
+    WebElement NamReport;
 
     @FindBy(xpath = "//a[@class='welcome-information__help-link'][normalize-space()='Open user guide']")
     WebElement UserGuide;

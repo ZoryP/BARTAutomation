@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add">
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add1">
       <change afterPath="$PROJECT_DIR$/Screenshots/Dashboard2023-06-27T12_08_00.560420300.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Screenshots/Dashboard2023-06-27T12_10_02.691062700.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Screenshots/Dashboard2023-06-27T12_11_18.926560900.png" afterDir="false" />
@@ -26,11 +26,12 @@
       <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_20_49.900048500.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_22_14.384618600.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_24_58.259201800.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BartSmokeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BASEPageReports.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +90,7 @@
       <recent name="Production" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BearingDamageAnalysis">
+  <component name="RunManager" selected="TestNG.BearingInspectionNAM">
     <configuration name="AccessTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="BART" />
       <extension name="coverage">
@@ -141,8 +142,44 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BearingInspectionNAM" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="BART" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BART.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="BART" />
+      <option name="MAIN_CLASS_NAME" value="BART.BearingInspectionNAM" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginDashboardTests" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="BART" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BART.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="BART" />
+      <option name="MAIN_CLASS_NAME" value="BART.LoginDashboardTests" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.BearingInspectionNAM" />
+        <item itemvalue="TestNG.LoginDashboardTests" />
         <item itemvalue="TestNG.BearingDamageAnalysis" />
         <item itemvalue="TestNG.BartSmokeTest" />
         <item itemvalue="TestNG.AccessTest" />
@@ -249,7 +286,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687858819878</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="add1">
+      <created>1687951066034</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1687951066034</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -276,6 +320,7 @@
     <MESSAGE value="add222" />
     <MESSAGE value="add2223" />
     <MESSAGE value="add" />
-    <option name="LAST_COMMIT_MESSAGE" value="add" />
+    <MESSAGE value="add1" />
+    <option name="LAST_COMMIT_MESSAGE" value="add1" />
   </component>
 </project>

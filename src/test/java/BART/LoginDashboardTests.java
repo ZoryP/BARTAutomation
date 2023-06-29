@@ -147,9 +147,10 @@ public class LoginDashboardTests{
     }
 
     @Test(priority = 10)
-    public void AllReports() {
+    public void AllReports() throws Throwable{
         BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
         bartPageDev.AllReports.click();
+        Thread.sleep(2000);
         String currentUrl = driver.getCurrentUrl();
         String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/all-reports";
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
@@ -162,7 +163,6 @@ public class LoginDashboardTests{
         List<WebElement> ResultsAll = driver.findElements(By.cssSelector(".table__header-cell"));
         Assert.assertEquals(ResultsAll.size(), 7);
     }
-
     @Test(priority = 12)
     public void MyReports() {
         BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
