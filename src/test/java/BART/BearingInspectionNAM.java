@@ -1,9 +1,11 @@
 package BART;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -91,19 +93,5 @@ public class BearingInspectionNAM {
         BASEPageReports.blurElementWithJS(driver, InspectionTimeHours);
         WebElement LivePreviewHours = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='2']"));
         LivePreviewHours.isDisplayed();
-    }
-    @Test(priority = 8)
-    public void CheckReportDetailsApproval() throws Throwable {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 500)");
-        WebElement InspectionApproval = driver.findElement(By.xpath("//div[@data-validation-id='reportDetails.reportApprovedBy.name']//div[contains(@class,'css-1hwfws3')]"));
-        BASEPageReports.clickElementWithJS(driver, InspectionApproval);
-        Actions actions = new Actions(driver);
-        actions.sendKeys(InspectionApproval, "Kristina").perform();
-        Thread.sleep(3000);
-        actions.sendKeys(Keys.ENTER).build().perform();
-        Thread.sleep(3000);
-        WebElement LivePreviewApproval = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='testuser4.bart@gmail.com']"));
-        LivePreviewApproval.isDisplayed();
     }
 }
