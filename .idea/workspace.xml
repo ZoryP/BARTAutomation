@@ -4,34 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add1">
-      <change afterPath="$PROJECT_DIR$/Screenshots/Dashboard2023-06-27T12_08_00.560420300.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/Dashboard2023-06-27T12_10_02.691062700.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/Dashboard2023-06-27T12_11_18.926560900.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/Dashboard2023-06-27T12_12_49.278802800.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/Dashboard2023-06-27T12_17_32.617182100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/DuplicateReport2023-06-27T12_08_04.666219700.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/DuplicateReport2023-06-27T12_10_06.510895400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/DuplicateReport2023-06-27T12_11_22.822144700.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/DuplicateReport2023-06-27T12_12_53.412347600.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/DuplicateReport2023-06-27T12_17_36.603964400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/DuplicateReport2023-06-27T12_20_50.630030300.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/DuplicateReport2023-06-27T12_22_16.144930500.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/DuplicateReport2023-06-27T12_24_59.393924100.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_08_03.810636600.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_10_05.744451800.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_11_22.085678900.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_12_52.536045400.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_17_35.821190600.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_20_49.900048500.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_22_14.384618600.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-06-27T12_24_58.259201800.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" afterDir="false" />
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="add2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDAPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BASEPageReports.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,23 +66,6 @@
     </key>
   </component>
   <component name="RunManager" selected="TestNG.BearingInspectionNAM">
-    <configuration name="AccessTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="BART" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="BART.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="ProductionEnvironment" />
-      <option name="MAIN_CLASS_NAME" value="BART.AccessTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="BartSmokeTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="BART" />
       <extension name="coverage">
@@ -159,6 +117,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BearingInspectionNAM.CheckInspectionDate" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="BART" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BART.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="BART" />
+      <option name="MAIN_CLASS_NAME" value="BART.BearingInspectionNAM" />
+      <option name="METHOD_NAME" value="CheckInspectionDate" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="LoginDashboardTests" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="BART" />
       <extension name="coverage">
@@ -179,10 +155,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.BearingInspectionNAM" />
-        <item itemvalue="TestNG.LoginDashboardTests" />
+        <item itemvalue="TestNG.BearingInspectionNAM.CheckInspectionDate" />
         <item itemvalue="TestNG.BearingDamageAnalysis" />
+        <item itemvalue="TestNG.LoginDashboardTests" />
         <item itemvalue="TestNG.BartSmokeTest" />
-        <item itemvalue="TestNG.AccessTest" />
       </list>
     </recent_temporary>
   </component>
@@ -293,7 +269,21 @@
       <option name="project" value="LOCAL" />
       <updated>1687951066034</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add2">
+      <created>1688035802303</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1688035802303</updated>
+    </task>
+    <task id="LOCAL-00016" summary="add2">
+      <created>1688390086986</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1688390086986</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -315,12 +305,17 @@
     <MESSAGE value="add refactor3" />
     <MESSAGE value="add refactor4" />
     <MESSAGE value="add ref" />
-    <MESSAGE value="add2" />
     <MESSAGE value="add22" />
     <MESSAGE value="add222" />
     <MESSAGE value="add2223" />
     <MESSAGE value="add" />
     <MESSAGE value="add1" />
-    <option name="LAST_COMMIT_MESSAGE" value="add1" />
+    <MESSAGE value="add2" />
+    <option name="LAST_COMMIT_MESSAGE" value="add2" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/BART$BearingInspectionNAM_CheckInspectionDate.ic" NAME="BearingInspectionNAM.CheckInspectionDate Coverage Results" MODIFIED="1688717806198" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>BART.*</FILTER>
+    </SUITE>
   </component>
 </project>

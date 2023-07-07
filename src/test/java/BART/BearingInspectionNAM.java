@@ -1,11 +1,9 @@
 package BART;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -36,7 +34,7 @@ public class BearingInspectionNAM {
     }
 
     @Test(priority = 2)
-    public void CreateBda() throws Throwable {
+    public void CreateNAM() throws Throwable {
         BART.DashboardPage dashboard = new BART.DashboardPage(driver);
         dashboard.CreateNewReport.click();
         dashboard.NamReport.click();
@@ -63,35 +61,62 @@ public class BearingInspectionNAM {
     }
 
     @Test(priority = 5)
-    public void CheckcontainerNAM() {
+    public void CheckEditTreeNAM() {
         List<WebElement> Accordeon = driver.findElements(By.id("Tree/tree_root_branch"));
         Assert.assertEquals(Accordeon.size(), 7);
     }
 
-    WebElement ReportTitle;
-    WebElement InspectionTimeTimeHours;
 
     @Test(priority = 6)
-    public void CheckReportDetailsTitle() {
+    public void CheckReportInspectionTime() {
         WebElement ReportDetails = driver.findElement(By.xpath("//button[normalize-space()='Report Details']"));
         BASEPageReports.clickElementWithJS(driver, ReportDetails);
-        ReportTitle = driver.findElement(By.xpath("//div[@data-id='reportDetails.reportTitle']//input[@type='text']"));
-        BASEPageReports.clickElementWithJS(driver, ReportTitle);
-        BASEPageReports.sendKeysLetterByLetter(ReportTitle, "test NAM");
-        BASEPageReports.blurElementWithJS(driver, ReportTitle);
-        WebElement LivePreviewTitle = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='test NAM']"));
-        LivePreviewTitle.isDisplayed();
-    }
-
-    @Test(priority = 7)
-    public void CheckReportDetailsTime() {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 600)");
         WebElement InspectionTimeHours = driver.findElement(By.xpath("//div[@data-id='reportDetails.inspectionTime']//input[@type='number']"));
         BASEPageReports.clickElementWithJS(driver, InspectionTimeHours);
         BASEPageReports.sendKeysLetterByLetter(InspectionTimeHours, "2");
         BASEPageReports.blurElementWithJS(driver, InspectionTimeHours);
-        WebElement LivePreviewHours = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='2']"));
-        LivePreviewHours.isDisplayed();
+        WebElement LivePreviewInspectionHours = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='2']"));
+        LivePreviewInspectionHours.isDisplayed();
+    }
+
+    @Test(priority = 7)
+    public void CheckReportInspectionsHours() {
+        WebElement TravelTimeHours = driver.findElement(By.xpath("//div[@data-id='reportDetails.travelTime']//input[@type='number']"));
+        BASEPageReports.clickElementWithJS(driver, TravelTimeHours);
+        BASEPageReports.sendKeysLetterByLetter(TravelTimeHours, "4");
+        BASEPageReports.blurElementWithJS(driver, TravelTimeHours);
+        WebElement LivePreviewTravelHours = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='4']"));
+        LivePreviewTravelHours.isDisplayed();
+    }
+
+    @Test(priority = 8)
+    public void CheckNumberOfBearings() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 300)");
+        WebElement NumberOfBearings = driver.findElement(By.xpath("//div[@data-id='reportDetails.numberOfBearingsInvestigated']//input[@type='text']"));
+        BASEPageReports.clickElementWithJS(driver, NumberOfBearings);
+        BASEPageReports.sendKeysLetterByLetter(NumberOfBearings, "6");
+        BASEPageReports.blurElementWithJS(driver, NumberOfBearings);
+
+    }
+    @Test(priority = 9)
+    public void CheckInspectionDate() throws Throwable {
+        WebElement InspectionDate = driver.findElement(By.xpath("//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div/div[5]/div/div[2]/div/div[1]/div/input"));
+        InspectionDate.click();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 500)");
+        Thread.sleep(2000);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(InspectionDate, Keys.DOWN);
+        Thread.sleep(2000);
+        actions.sendKeys(InspectionDate, Keys.ENTER).perform();
+        List<WebElement> Accordeon = driver.findElements(By.xpath("//div[contains(@class, 'valueWithSpace')]/span"));
+        Assert.assertEquals(Accordeon.size(), 2);
+    }
+    @Test(priority = 10)
+    public void CheckReportApproveBy() {
+
     }
 }
