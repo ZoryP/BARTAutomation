@@ -1,12 +1,14 @@
 package BART;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
@@ -14,7 +16,9 @@ import java.util.List;
 
 public class BearingDamageAnalysis {
     WebDriver driver;
-    String url = "https://d2xob39w6dc2ow.cloudfront.net";
+    String url = "https://dnnfsk8ppi4ki.cloudfront.net";
+
+    FluentWait<WebDriver> wait;
 
     @BeforeClass
     public void SetUp() {
@@ -24,10 +28,11 @@ public class BearingDamageAnalysis {
         driver.manage().window().maximize();
         driver.get(url);
     }
-    @AfterClass
-    public void QuitBrowser() {
-    driver.quit();
-    }
+
+    //    @AfterClass
+//    public void QuitBrowser() {
+//    driver.quit();
+//    }
     @Test(priority = 1)
     public void ValidLogin() throws Throwable {
         BART.LoginPage loginPage = new BART.LoginPage(driver);
@@ -37,6 +42,7 @@ public class BearingDamageAnalysis {
         Thread.sleep(4000);
         loginPage.WelcomeMassage.isDisplayed();
     }
+
     @Test(priority = 2)
     public void CreateBda() throws Throwable {
         BART.DashboardPage dashboard = new BART.DashboardPage(driver);
@@ -54,19 +60,22 @@ public class BearingDamageAnalysis {
         List<WebElement> SettingsSize = driver.findElements(By.cssSelector(".settings-menu__action"));
         Assert.assertEquals(SettingsSize.size(), 6);
     }
+
     @Test(priority = 4)
     public void CheckContainerSettings() throws Throwable {
         BASEPageReports basePageReports = new BASEPageReports(driver);
         basePageReports.checkContainerBDA(driver);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         WebElement Settings = driver.findElement(By.id("buttonSettings"));
         Settings.click();
     }
+
     @Test(priority = 5)
     public void CheckAccodeonBDA() {
         List<WebElement> Accordeon = driver.findElements(By.id("Tree/tree_root_branch"));
         Assert.assertEquals(Accordeon.size(), 11);
     }
+
     WebElement ReportTitle;
 
     @Test(priority = 6)
@@ -258,7 +267,7 @@ public class BearingDamageAnalysis {
         WebElement fileInput = driver.findElement(By.xpath("//div[@role='presentation']"));
         fileInput.click();
         String[] filePaths = {
-                "\"C:\\Users\\ZornicaPetkova\\Desktop\\2 - Copy (2).jpg\"",
+                "\"C:\\Users\\ZornicaPetkova\\Desktop\\istockphoto-1498223365-1024x1024.jpg\"",
                 "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\R - Copy - Copy.gif\"",
                 "\"C:\\Users\\ZornicaPetkova\\Desktop\\3 - Copy.jpg\""
         };
@@ -356,6 +365,8 @@ public class BearingDamageAnalysis {
         BASEPageReports basePageReports = new BASEPageReports(driver);
         basePageReports.deleteSecondBearing(driver);
         Assert.assertEquals(basePageReports.lpBearings.size(), 1);
+        WebElement Save = driver.findElement(By.id("buttonReload"));
+        Save.click();
     }
 
     @Test(priority = 31)
@@ -418,7 +429,7 @@ public class BearingDamageAnalysis {
         WebElement CloseBtn = driver.findElement(By.id("buttonClose"));
         CloseBtn.click();
         String currentUrl = driver.getCurrentUrl();
-        String expectedUrl = "https://d2xob39w6dc2ow.cloudfront.net/my-reports";
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/my-reports";
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
     @Test(priority = 39)
@@ -426,7 +437,7 @@ public class BearingDamageAnalysis {
         WebElement SignOut = driver.findElement(By.xpath("//*[@class='user-bar__sign-out' and contains(., 'Sign out')]"));
         SignOut.click();
         String currentUrl = driver.getCurrentUrl();
-        String expectedUrl = "https://d2xob39w6dc2ow.cloudfront.net/login";
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/login";
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
 }

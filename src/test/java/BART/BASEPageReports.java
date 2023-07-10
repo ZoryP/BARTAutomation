@@ -4,7 +4,9 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.FluentWait;
 
+import java.time.Duration;
 import java.util.List;
 
 
@@ -220,7 +222,7 @@ public class BASEPageReports {
     }
 
     public static boolean isLPAFADisplayed(WebDriver driver) {
-        WebElement lpAFA = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+        WebElement lpAFA = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Abrasive wear (5.2.2) based on Augmented Failure Analysis')]"));
         return lpAFA.isDisplayed();
     }
 
@@ -262,13 +264,13 @@ public class BASEPageReports {
 
     public void duplicate(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         WebElement Duplicate = driver.findElement(By.xpath("//a[normalize-space()='Duplicate']"));
         jsExecutor.executeScript("arguments[0].click();", Duplicate);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         WebElement DuplicatedBearing = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader' and contains(., 'Bearing 3')]"));
         DuplicatedBearing.isDisplayed();
-        lpBearingsSize2 = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+        lpBearingsSize2 = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Abrasive wear (5.2.2) based on Augmented Failure Analysis')]"));
     }
 
     public void cause(WebDriver driver) throws Throwable {
@@ -307,31 +309,30 @@ public class BASEPageReports {
         Thread.sleep(3000);
         WebElement YesDelete2 = driver.findElement(By.xpath("//button[@class='button react-modal__action-button button--background-gray']"));
         YesDelete2.click();
-        lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+        lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Abrasive wear (5.2.2) based on Augmented Failure Analysis')]"));
     }
 
     public WebElement lpRecommendations;
 
     public void conclusionsAndRec(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         WebElement Conclusions = driver.findElement(By.xpath("//button[normalize-space()='Conclusions and recommendations']"));
         Conclusions.click();
         WebElement Recommendations = driver.findElement(By.xpath("//div[@data-id='summary.recommendations']//div[@class='se-wrapper-inner se-wrapper-wysiwyg sun-editor-editable']"));
         jsExecutor.executeScript("arguments[0].click();", Recommendations);
         Actions actions = new Actions(driver);
-        Thread.sleep(2000);
         actions.sendKeys(Recommendations, "TEST").perform();
         BASEPageReports.blurElementWithJS(driver, Recommendations);
-        WebElement Save = driver.findElement(By.xpath("//*[name()='polygon' and @id='Fill-6']"));
-        Save.click();
         Thread.sleep(3000);
         lpRecommendations = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'TEST')]"));
     }
 
     public void submit(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        WebElement Save = driver.findElement(By.xpath("//*[name()='polygon' and @id='Fill-6']"));
+        Save.click();
+        Thread.sleep(3000);
         driver.navigate().refresh();
         Thread.sleep(3000);
         WebElement Submit = driver.findElement(By.id("buttonSubmit"));
@@ -410,5 +411,9 @@ public class BASEPageReports {
 }
     BASEPageReports(WebDriver driver) {
         PageFactory.initElements(driver, this);
+              FluentWait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(40))
+                .pollingEvery(Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class);
     }
 }

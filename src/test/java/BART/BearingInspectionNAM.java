@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -13,6 +14,8 @@ import java.util.List;
 public class BearingInspectionNAM {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net/";
+
+    FluentWait<WebDriver> wait;
 
     @BeforeClass
     public void SetUp() {
@@ -55,7 +58,7 @@ public class BearingInspectionNAM {
     public void CheckContainerSettings() throws Throwable {
         BASEPageReports basePageReports = new BASEPageReports(driver);
         basePageReports.checkContainerNAM(driver);
-        Thread.sleep(2000);
+        Thread.sleep(3000);
         WebElement Settings = driver.findElement(By.id("buttonSettings"));
         Settings.click();
     }
@@ -104,7 +107,6 @@ public class BearingInspectionNAM {
     @Test(priority = 9)
     public void CheckInspectionDate() throws Throwable {
         WebElement InspectionDate = driver.findElement(By.xpath("//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div/div[5]/div/div[2]/div/div[1]/div/input"));
-        InspectionDate.click();
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 500)");
         Thread.sleep(2000);
@@ -116,7 +118,15 @@ public class BearingInspectionNAM {
         Assert.assertEquals(Accordeon.size(), 2);
     }
     @Test(priority = 10)
-    public void CheckReportApproveBy() {
-
+    public void CheckReportApproveBy() throws Throwable {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 300)");
+        WebElement Approver = driver.findElement(By.xpath("(//div[contains(text(),'Select')])[1]"));
+        jsExecutor.executeScript("arguments[0].click();", Approver);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Approver, "Yavor Gledachev").perform();
+        Thread.sleep(3000);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        //ASSERT
     }
 }
