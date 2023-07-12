@@ -1,22 +1,25 @@
 package BART;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class BearingInspectionNAM {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net/";
-
     FluentWait<WebDriver> wait;
-
     @BeforeClass
     public void SetUp() {
         ChromeOptions options = new ChromeOptions();
@@ -24,109 +27,99 @@ public class BearingInspectionNAM {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(url);
+        wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(40))
+                .pollingEvery(Duration.ofSeconds(3))
+                .ignoring(NoSuchElementException.class);
     }
-
     @Test(priority = 1)
-    public void ValidLogin() throws Throwable {
+    public void ValidLogin() {
         BART.LoginPage loginPage = new BART.LoginPage(driver);
         loginPage.clearFields();
         loginPage.login("testuser1.bart@gmail.com", "bartTest1");
         loginPage.enterBtn.click();
-        Thread.sleep(4000);
-        loginPage.WelcomeMassage.isDisplayed();
+        wait.until(ExpectedConditions.visibilityOfAllElements(loginPage.WelcomeMassage));
+        Assert.assertTrue(loginPage.WelcomeMassage.isDisplayed());
     }
-
     @Test(priority = 2)
-    public void CreateNAM() throws Throwable {
+    public void CreateNAM() {
         BART.DashboardPage dashboard = new BART.DashboardPage(driver);
         dashboard.CreateNewReport.click();
         dashboard.NamReport.click();
-        Thread.sleep(3000);
-        dashboard.BearingInspectionNAMReport.isDisplayed();
-        dashboard.IconToolbar.isDisplayed();
+        wait.until(ExpectedConditions.visibilityOfAllElements(dashboard.BearingInspectionNAMReport, dashboard.IconToolbar));
+        Assert.assertTrue(dashboard.BearingInspectionNAMReport.isDisplayed());
+        Assert.assertTrue(dashboard.IconToolbar.isDisplayed());
     }
-
     @Test(priority = 3)
     public void CheckSettings() {
-        WebElement Settings = driver.findElement(By.id("buttonSettings"));
-        Settings.click();
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.SettingsContainerNAM.click();
         List<WebElement> SettingsSize = driver.findElements(By.cssSelector(".settings-menu__action"));
-        Assert.assertEquals(SettingsSize.size(), 4);
+        int expectedSize = 4;
+        Assert.assertEquals(SettingsSize.size(), expectedSize);
     }
-
     @Test(priority = 4)
-    public void CheckContainerSettings() throws Throwable {
-        BASEPageReports basePageReports = new BASEPageReports(driver);
-        basePageReports.checkContainerNAM(driver);
-        Thread.sleep(3000);
-        WebElement Settings = driver.findElement(By.id("buttonSettings"));
-        Settings.click();
+    public void CheckContainerSettings() throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.checkContainerNAM(driver);
+        TimeUnit.SECONDS.sleep(3);
+        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.SettingsNAM)).click();
     }
-
     @Test(priority = 5)
     public void CheckEditTreeNAM() {
         List<WebElement> Accordeon = driver.findElements(By.id("Tree/tree_root_branch"));
         Assert.assertEquals(Accordeon.size(), 7);
     }
-
-
     @Test(priority = 6)
     public void CheckReportInspectionTime() {
-        WebElement ReportDetails = driver.findElement(By.xpath("//button[normalize-space()='Report Details']"));
-        BASEPageReports.clickElementWithJS(driver, ReportDetails);
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 600)");
-        WebElement InspectionTimeHours = driver.findElement(By.xpath("//div[@data-id='reportDetails.inspectionTime']//input[@type='number']"));
-        BASEPageReports.clickElementWithJS(driver, InspectionTimeHours);
-        BASEPageReports.sendKeysLetterByLetter(InspectionTimeHours, "2");
-        BASEPageReports.blurElementWithJS(driver, InspectionTimeHours);
-        WebElement LivePreviewInspectionHours = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='2']"));
-        LivePreviewInspectionHours.isDisplayed();
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setInspectionTimeHoursNAM(driver);
+        Assert.assertTrue(namBasePage.LpInspectionTimeHoursNAM.isDisplayed());
     }
-
     @Test(priority = 7)
     public void CheckReportInspectionsHours() {
-        WebElement TravelTimeHours = driver.findElement(By.xpath("//div[@data-id='reportDetails.travelTime']//input[@type='number']"));
-        BASEPageReports.clickElementWithJS(driver, TravelTimeHours);
-        BASEPageReports.sendKeysLetterByLetter(TravelTimeHours, "4");
-        BASEPageReports.blurElementWithJS(driver, TravelTimeHours);
-        WebElement LivePreviewTravelHours = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='4']"));
-        LivePreviewTravelHours.isDisplayed();
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setTravelTimeHoursNAM(driver);
+        Assert.assertTrue(namBasePage.LpTravelTimeHoursNAM.isDisplayed());
     }
-
     @Test(priority = 8)
     public void CheckNumberOfBearings() {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 300)");
-        WebElement NumberOfBearings = driver.findElement(By.xpath("//div[@data-id='reportDetails.numberOfBearingsInvestigated']//input[@type='text']"));
-        BASEPageReports.clickElementWithJS(driver, NumberOfBearings);
-        BASEPageReports.sendKeysLetterByLetter(NumberOfBearings, "6");
-        BASEPageReports.blurElementWithJS(driver, NumberOfBearings);
-
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setNumberOfBearingsNAM(driver);
+        //ASSERT
     }
     @Test(priority = 9)
     public void CheckInspectionDate() throws Throwable {
-        WebElement InspectionDate = driver.findElement(By.xpath("//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div/div[5]/div/div[2]/div/div[1]/div/input"));
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 500)");
-        Thread.sleep(2000);
-        Actions actions = new Actions(driver);
-        actions.sendKeys(InspectionDate, Keys.DOWN);
-        Thread.sleep(2000);
-        actions.sendKeys(InspectionDate, Keys.ENTER).perform();
-        List<WebElement> Accordeon = driver.findElements(By.xpath("//div[contains(@class, 'valueWithSpace')]/span"));
-        Assert.assertEquals(Accordeon.size(), 2);
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setInspectionDate(driver);
+        List<WebElement> LpInspectionDate = driver.findElements(By.xpath("//div[contains(@class, 'valueWithSpace')]/span"));
+        Assert.assertEquals(LpInspectionDate.size(), 2);
     }
     @Test(priority = 10)
     public void CheckReportApproveBy() throws Throwable {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 300)");
-        WebElement Approver = driver.findElement(By.xpath("(//div[contains(text(),'Select')])[1]"));
-        jsExecutor.executeScript("arguments[0].click();", Approver);
-        Actions actions = new Actions(driver);
-        actions.sendKeys(Approver, "Yavor Gledachev").perform();
-        Thread.sleep(3000);
-        actions.sendKeys(Keys.ENTER).build().perform();
-        //ASSERT
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setApprovedBy(driver);
+        Assert.assertTrue(namBasePage.LpApprovedBy.isDisplayed());
+    }
+    @Test(priority = 11)
+    public void CheckInspectionDetails() throws Throwable {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.InspectionDetails.click();
+        namBasePage.EndUserField.click();
+        namBasePage.setEndUser(driver);
+        WebElement LpEndUser = driver.findElement(By.xpath("(//div[contains(@class, 'live-preview-key-value')]/div)[24]"));
+        String expectedEndUser = "Contact\n" + "Paul Grey, Stacy Taylor, Tim Tolley, Matt Strand\n" + " 434-299-7337\n" + " matthew.strand@gapac.com\n" +
+               " stacy.taylor@gapac.com\n" +
+               " dmvanval@gapac.com\n" +
+               " christopher.ey@gapac.com\n" +
+               " trtolley@gapac.com\n" +
+               " fgbranch@gapac.com";
+        Assert.assertEquals(LpEndUser.getText(),expectedEndUser);
+        WebElement LpDistributor = driver.findElement(By.xpath("(//div[contains(@class, 'live-preview-key-value')]/div)[28]"));
+        String expectedDistributor = "Contact\n" +
+                "Jim Rebok\n" +
+                " 540-362-7695\n" +
+                " jim.rebok@motion-ind.com";
+        Assert.assertEquals(LpDistributor.getText(),expectedDistributor);
     }
 }

@@ -58,6 +58,8 @@ public class DashboardPage {
     @FindBy(xpath = "//a[@class='welcome-information__help-link'][normalize-space()='Ask questions on Yammer']")
     WebElement Yammer;
 
+
+
     public void duplicateReport (WebDriver driver) throws Throwable {
         WebElement elements = driver.findElement(By.xpath("//*[@class='LinesEllipsis  ' and contains(text(),'test')]"));
         JavascriptExecutor js = (JavascriptExecutor) driver;

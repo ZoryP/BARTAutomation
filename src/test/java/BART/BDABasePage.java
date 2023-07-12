@@ -10,7 +10,7 @@ import java.time.Duration;
 import java.util.List;
 
 
-public class BASEPageReports {
+public class BDABasePage {
 
     @FindBy(xpath = "//span[normalize-space()='Upload figures']")
     WebElement Upload;
@@ -31,11 +31,6 @@ public class BASEPageReports {
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.systemNameWhereAssetIsUsed']//input[@type='text']")
     WebElement SystemName;
 
-
-    public static void clickElementWithJS(WebDriver driver, WebElement element) {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("arguments[0].click();", element);
-    }
     public void checkContainerBDA (WebDriver driver){
         WebElement Confidential = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Is the report confidential?')]"));
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));
@@ -50,33 +45,7 @@ public class BASEPageReports {
         AutoScroll.isEnabled();
         ConcAndRecommendations.isEnabled();
     }
-    public void checkContainerNAM(WebDriver driver) {
-        WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));
-        WebElement PageBreak = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Insert page break for each bearing in the report?')]"));
-        WebElement AutoScroll = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Disable autoscroll?')]"));
-        WebElement Summary = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Show SUMMARY only at end of report?')]"));
-        FigureNumbering.isEnabled();
-        PageBreak.isEnabled();
-        AutoScroll.isEnabled();
-        Summary.isEnabled();
-    }
 
-    public static void blurElementWithJS(WebDriver driver, WebElement element) {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("arguments[0].blur();", element);
-    }
-
-    public static void sendKeysLetterByLetter(WebElement el, String keys) {
-        el.click();
-        for (int i = 0; i < keys.length(); i++) {
-            el.sendKeys(String.valueOf(keys.charAt(i)));
-        }
-    }
-
-    public static boolean isElementVisibleWithJS(WebDriver driver, WebElement element) {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        return (boolean) jsExecutor.executeScript("return arguments[0].offsetWidth > 0 && arguments[0].offsetHeight > 0;", element);
-    }
 
     public boolean approvalButton(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -85,7 +54,7 @@ public class BASEPageReports {
         WebElement approveNo = driver.findElement(By.xpath("//label[@for='skfDetails.reportNeedsApproval.needsApproval.no']"));
         jsExecutor.executeScript("arguments[0].click();", approveNo);
         WebElement livePreviewEl6 = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'testuser1.bart@gmail.com')]"));
-        return BASEPageReports.isElementVisibleWithJS(driver, livePreviewEl6);
+        return BasePage.isElementVisibleWithJS(driver, livePreviewEl6);
     }
 
     public void selectSKFCompany(WebDriver driver) throws InterruptedException {
@@ -101,12 +70,12 @@ public class BASEPageReports {
 
     public boolean isCompanyVisible(WebDriver driver) {
         WebElement LpCompany = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'SKF ARGENTINA S.A.')]"));
-        return BASEPageReports.isElementVisibleWithJS(driver, LpCompany);
+        return BasePage.isElementVisibleWithJS(driver, LpCompany);
     }
 
     public boolean isLocationVisible(WebDriver driver) {
         WebElement LpLocation = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'SKF Solution Factory')]"));
-        return BASEPageReports.isElementVisibleWithJS(driver, LpLocation);
+        return BasePage.isElementVisibleWithJS(driver, LpLocation);
     }
 
     public void selectSKFCountry(WebDriver driver) throws InterruptedException {
@@ -121,7 +90,7 @@ public class BASEPageReports {
 
     public boolean isCountryVisible(WebDriver driver) {
         WebElement LpCountry = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Argentina')]"));
-        return BASEPageReports.isElementVisibleWithJS(driver, LpCountry);
+        return BasePage.isElementVisibleWithJS(driver, LpCountry);
     }
 
     public void selectCountry(WebDriver driver, String country) throws InterruptedException {
@@ -136,20 +105,20 @@ public class BASEPageReports {
 
     public void enterSkfTerNumber(WebDriver driver, String terNumber) {
         WebElement skfTerNmr = driver.findElement(By.xpath("//div[@data-id='investigationDetails.terNumber']//input[@type='text']"));
-        BASEPageReports.clickElementWithJS(driver, skfTerNmr);
-        BASEPageReports.sendKeysLetterByLetter(skfTerNmr, terNumber);
+        BasePage.clickElementWithJS(driver, skfTerNmr);
+        BasePage.sendKeysLetterByLetter(skfTerNmr, terNumber);
     }
 
     public void enterScopeOfInvestigation(WebDriver driver, String scope) {
         WebElement scopeOfInv = driver.findElement(By.xpath("//div[@data-id='investigationDetails.scopeOfInvestigation']//p"));
-        BASEPageReports.clickElementWithJS(driver, scopeOfInv);
-        BASEPageReports.sendKeysLetterByLetter(scopeOfInv, scope);
-        BASEPageReports.blurElementWithJS(driver, scopeOfInv);
+        BasePage.clickElementWithJS(driver, scopeOfInv);
+        BasePage.sendKeysLetterByLetter(scopeOfInv, scope);
+        BasePage.blurElementWithJS(driver, scopeOfInv);
     }
 
     public void clickSKFDetails(WebDriver driver) {
         WebElement SKFDetails = driver.findElement(By.xpath("//button[normalize-space()='SKF Details']"));
-        BASEPageReports.clickElementWithJS(driver, SKFDetails);
+        BasePage.clickElementWithJS(driver, SKFDetails);
     }
 
     public static void clickSKFOther(WebDriver driver) {
@@ -222,7 +191,7 @@ public class BASEPageReports {
     }
 
     public static boolean isLPAFADisplayed(WebDriver driver) {
-        WebElement lpAFA = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Abrasive wear (5.2.2) based on Augmented Failure Analysis')]"));
+        WebElement lpAFA = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
         return lpAFA.isDisplayed();
     }
 
@@ -270,7 +239,7 @@ public class BASEPageReports {
         Thread.sleep(3000);
         WebElement DuplicatedBearing = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader' and contains(., 'Bearing 3')]"));
         DuplicatedBearing.isDisplayed();
-        lpBearingsSize2 = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Abrasive wear (5.2.2) based on Augmented Failure Analysis')]"));
+        lpBearingsSize2 = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
     }
 
     public void cause(WebDriver driver) throws Throwable {
@@ -309,7 +278,7 @@ public class BASEPageReports {
         Thread.sleep(3000);
         WebElement YesDelete2 = driver.findElement(By.xpath("//button[@class='button react-modal__action-button button--background-gray']"));
         YesDelete2.click();
-        lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Abrasive wear (5.2.2) based on Augmented Failure Analysis')]"));
+        lpBearings = driver.findElements(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
     }
 
     public WebElement lpRecommendations;
@@ -323,7 +292,7 @@ public class BASEPageReports {
         jsExecutor.executeScript("arguments[0].click();", Recommendations);
         Actions actions = new Actions(driver);
         actions.sendKeys(Recommendations, "TEST").perform();
-        BASEPageReports.blurElementWithJS(driver, Recommendations);
+        BasePage.blurElementWithJS(driver, Recommendations);
         Thread.sleep(3000);
         lpRecommendations = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'TEST')]"));
     }
@@ -409,7 +378,8 @@ public class BASEPageReports {
         WebElement DeleteMessage = driver.findElement(By.xpath("//div[@class='form-container' and contains(., 'This report is deleted. Please contact a BART administrator to restore deleted report.')]"));
         DeleteMessage.isDisplayed();
 }
-    BASEPageReports(WebDriver driver) {
+
+    BDABasePage(WebDriver driver) {
         PageFactory.initElements(driver, this);
               FluentWait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(40))

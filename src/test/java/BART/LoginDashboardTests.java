@@ -28,6 +28,7 @@ public class LoginDashboardTests{
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.get(url);
+
     }
 
     @AfterClass
@@ -108,7 +109,7 @@ public class LoginDashboardTests{
         bartPageDev.FindNAM.isEnabled();
         bartPageDev.Share.isEnabled();
         bartPageDev.Settings.isEnabled();
-        bartPageDev.SignOut.isDisplayed();
+        bartPageDev.SignOut.isEnabled();
     }
 
     @Test(priority = 7)

@@ -1,8 +1,12 @@
 package BART;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.FluentWait;
+
+import java.time.Duration;
 
 public class LoginPage {
     WebDriver driver;
@@ -19,12 +23,11 @@ public class LoginPage {
     @FindBy(xpath = "//div[@class='welcome-information__page-title']")
     WebElement WelcomeMassage;
 
-    public void login(String email, String password) throws Throwable {
+    public void login(String email, String password)  {
         this.email.click();
         this.email.sendKeys(email);
         this.password.click();
         this.password.sendKeys(password);
-        Thread.sleep(2000);
     }
     public void clearFields() {
         email.clear();
@@ -33,5 +36,9 @@ public class LoginPage {
     LoginPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+        FluentWait<WebDriver> wait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(40))
+                .pollingEvery(Duration.ofSeconds(5))
+                .ignoring(NoSuchElementException.class);
     }
 }
