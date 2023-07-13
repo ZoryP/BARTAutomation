@@ -25,6 +25,14 @@ public class NAMBasePage {
 
     @FindBy(css = "div[data-validation-id='reportDetails.reportApprovedBy.name'] div[class=' css-1hwfws3']")
     WebElement ApprovedByBtn;
+
+    @FindBy(xpath = "//div[@data-validation-id='skfDetails.endUser.vendor']//div[contains(@class,'css-1hwfws3')]")
+    WebElement Vendor;
+    @FindBy(xpath = "//div[@data-id='skfDetails.vendorJobNumber']//input[@type='text']")
+    WebElement VendorJobNumber;
+
+    @FindBy(xpath = "(//div[@class=' css-1wa3eu0-placeholder' and contains(., 'Select or free text')])[1]")
+    WebElement DistributionList;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='2']")
     WebElement LpInspectionTimeHoursNAM;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='4']")
