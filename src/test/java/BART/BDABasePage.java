@@ -10,16 +10,13 @@ import java.time.Duration;
 import java.util.List;
 
 
-public class BDABasePage {
+public class BDABasePage extends BasePage {
 
     @FindBy(xpath = "//span[normalize-space()='Upload figures']")
     WebElement Upload;
     @FindBy(xpath = "//span[normalize-space()='Close']")
     WebElement Close;
-    @FindBy(xpath = "//button[normalize-space()='Asset type / Functional Area / System'] ")
-    WebElement AssetType;
-    @FindBy(xpath = "//button[normalize-space()='Bearing Investigations']")
-    WebElement BearingInvestigations;
+
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[6]/div/div[2]/div[2]/div/div/div[2]/div[8]/div[2]/div[3]/div/div[2]/div/div[1]/div/div/div[4]/div/div[2]/div[2]/label")
     WebElement UploadImg;
     @FindBy(xpath = "//button[normalize-space()='Bearing 1']")
@@ -45,7 +42,6 @@ public class BDABasePage {
         AutoScroll.isEnabled();
         ConcAndRecommendations.isEnabled();
     }
-
 
     public boolean approvalButton(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -380,6 +376,7 @@ public class BDABasePage {
 }
 
     BDABasePage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
               FluentWait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(40))

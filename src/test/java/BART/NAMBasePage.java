@@ -1,15 +1,25 @@
+
 package BART;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.testng.Assert;
+
 import java.time.Duration;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class NAMBasePage {
+public class NAMBasePage extends BasePage{
+
+    @FindBy(id = "Tree/tree_root_branch")
+    List<WebElement> AccordeonNam;
+    @FindBy(css = ".settings-menu__action")
+    List<WebElement> SettingsSizeNam;
     @FindBy(xpath = "//button[normalize-space()='Inspection Details']")
     WebElement InspectionDetails;
+
     @FindBy(xpath = "//div[contains(text(),'end users')]")
     WebElement EndUserField;
     @FindBy(xpath = "//button[normalize-space()='Report Details']")
@@ -30,6 +40,10 @@ public class NAMBasePage {
     WebElement Vendor;
     @FindBy(xpath = "//div[@data-id='skfDetails.vendorJobNumber']//input[@type='text']")
     WebElement VendorJobNumber;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., '4252 53246')]")
+    List<WebElement> SettingsSize;
+    @FindBy(xpath = "//div[contains(@class, 'valueWithSpace')]/span")
+    List<WebElement> LpInspectionDate;
 
     @FindBy(xpath = "(//div[@class=' css-1wa3eu0-placeholder' and contains(., 'Select or free text')])[1]")
     WebElement DistributionList;
@@ -40,6 +54,11 @@ public class NAMBasePage {
 
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'yavor.gledachev@skf.com')]")
     WebElement LpApprovedBy;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Keith.E.Meyers@skf.com')]")
+    WebElement LpDistributionList;
+
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Georgia Pacific, Big Island - Job 4252 53246')]")
+    WebElement LpReportTitle;
     @FindBy(id = "buttonSettings")
     WebElement SettingsNAM;
     @FindBy(id = "buttonSettings")
@@ -90,6 +109,49 @@ public class NAMBasePage {
         TimeUnit.SECONDS.sleep(4);
         actions.sendKeys(Keys.ENTER).build().perform();
     }
+    public void assertEndUser(WebDriver driver){
+        WebElement LpEndUser = driver.findElement(By.xpath("(//div[contains(@class, 'live-preview-key-value')]/div)[24]"));
+        String expectedEndUser = "Contact\n" + "Paul Grey, Stacy Taylor, Tim Tolley, Matt Strand\n" + " 434-299-7337\n" + " matthew.strand@gapac.com\n" + " stacy.taylor@gapac.com\n" + " dmvanval@gapac.com\n" + " christopher.ey@gapac.com\n" + " trtolley@gapac.com\n" +
+                " fgbranch@gapac.com";
+        Assert.assertEquals(LpEndUser.getText(), expectedEndUser);
+        WebElement LpDistributor = driver.findElement(By.xpath("(//div[contains(@class, 'live-preview-key-value')]/div)[28]"));
+        String expectedDistributor = "Contact\n" + "Jim Rebok\n" + " 540-362-7695\n" +
+                " jim.rebok@motion-ind.com";
+        Assert.assertEquals(LpDistributor.getText(), expectedDistributor);
+    }
+    public void setVendor(WebDriver driver)throws InterruptedException {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 600)");
+        BasePage.clickElementWithJS(driver, Vendor);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Vendor, "Valmet");
+        TimeUnit.SECONDS.sleep(3);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, Vendor);
+    }
+    public void setMachineAsset(WebDriver driver)throws InterruptedException{
+        BasePage basePage = new BasePage(driver);
+        BasePage.clickElementWithJS(driver, basePage.MachineAssetType);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(basePage.MachineAssetType, "Automatic");
+        TimeUnit.SECONDS.sleep(3);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, basePage.MachineAssetType);
+    }
+    public void assertVendor(WebDriver driver){
+        WebElement LpVendor = driver.findElement(By.xpath("(//div[contains(@class, 'live-preview-key-value')]/div)[33]"));
+        String expectedVendor = "Contact\n" + "Renee Martin\n" + " 803-293-2140\n" + " suanne.sheppard@valmet.com\n" + " barry.jackson@valmet.com\n" + " cheryll.delmundo@valmet.com\n" + " ricky.boyd@valmet.com\n" +
+                " renee.martin@valmet.com";
+        Assert.assertEquals(LpVendor.getText(), expectedVendor);
+    }
+    public void assertDistributionList(WebDriver driver)throws InterruptedException{
+        BasePage.clickElementWithJS(driver, DistributionList);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(DistributionList, "Keith.E.Meyers@skf.com");
+        TimeUnit.SECONDS.sleep(3);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver,DistributionList);
+    }
     public void checkContainerNAM(WebDriver driver) {
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));
         WebElement PageBreak = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Insert page break for each bearing in the report?')]"));
@@ -101,6 +163,7 @@ public class NAMBasePage {
         Summary.isEnabled();
     }
     NAMBasePage(WebDriver driver) {
+        super(driver);
         PageFactory.initElements(driver, this);
         FluentWait<WebDriver> wait = new FluentWait<>(driver)
                 .withTimeout(Duration.ofSeconds(40))

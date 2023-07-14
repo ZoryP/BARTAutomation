@@ -194,17 +194,16 @@ public class BearingDamageAnalysis {
 
     @Test(priority = 16)
     public void CheckAssetType() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
+        BasePage basePage = new BasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        basePageReports.AssetType.click();
-        WebElement FunctionalArea = driver.findElement(By.xpath("//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.machineOrAssetCode']//div[contains(@class,'css-1hwfws3')]"));
-        jsExecutor.executeScript("arguments[0].click();", FunctionalArea);
+        basePage.AssetType.click();
+        jsExecutor.executeScript("arguments[0].click();", basePage.MachineAssetType);
         Actions actions = new Actions(driver);
         Thread.sleep(2000);
-        actions.sendKeys(FunctionalArea, "Air handling unit").perform();
+        actions.sendKeys(basePage.MachineAssetType, "Air handling unit").perform();
         Thread.sleep(3000);
         actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver, FunctionalArea);
+        BasePage.blurElementWithJS(driver, basePage.MachineAssetType);
         WebElement LpFunctionalArea = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Air handling unit, Air conditioner (AC)')]"));
         LpFunctionalArea.isDisplayed();
     }
@@ -226,10 +225,11 @@ public class BearingDamageAnalysis {
 
     @Test(priority = 18)
     public void CheckFirstBearing() {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.BearingInvestigations.click();
-        basePageReports.Bearing1.click();
-        basePageReports.BearingTypeSection.click();
+        BasePage basePage = new BasePage(driver);
+        basePage.BearingInvestigations.click();
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.Bearing1.click();
+        bdaBasePage.BearingTypeSection.click();
         BDABasePage.clickSKFOther(driver);
         BDABasePage.enterSKFOtherValue(driver, "SKF");
         BDABasePage.clickSKFSerialNumber(driver);
