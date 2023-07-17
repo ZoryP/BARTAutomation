@@ -16,13 +16,8 @@ public class BDABasePage extends BasePage {
     WebElement Upload;
     @FindBy(xpath = "//span[normalize-space()='Close']")
     WebElement Close;
-
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[6]/div/div[2]/div[2]/div/div/div[2]/div[8]/div[2]/div[3]/div/div[2]/div/div[1]/div/div/div[4]/div/div[2]/div[2]/label")
     WebElement UploadImg;
-    @FindBy(xpath = "//button[normalize-space()='Bearing 1']")
-    WebElement Bearing1;
-    @FindBy(xpath = "//button[normalize-space()='Bearing Type']")
-    WebElement BearingTypeSection;
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.functionalAreaName']//input[@type='text']")
     WebElement FunctionalAreaNameWhereAssetIsUsed;
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.systemNameWhereAssetIsUsed']//input[@type='text']")
@@ -110,38 +105,6 @@ public class BDABasePage extends BasePage {
         BasePage.clickElementWithJS(driver, scopeOfInv);
         BasePage.sendKeysLetterByLetter(scopeOfInv, scope);
         BasePage.blurElementWithJS(driver, scopeOfInv);
-    }
-
-    public void clickSKFDetails(WebDriver driver) {
-        WebElement SKFDetails = driver.findElement(By.xpath("//button[normalize-space()='SKF Details']"));
-        BasePage.clickElementWithJS(driver, SKFDetails);
-    }
-
-    public static void clickSKFOther(WebDriver driver) {
-        WebElement skfOther = driver.findElement(By.xpath("//div[@class='accordion']//div[@class='accordion__content accordion__content--is-open']//div[@class='accordion__content-form']//div[@class='componentContainer']//div//div[@class='componentContainer']//div//div[contains(@class,'css-1hwfws3')]"));
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("arguments[0].click();", skfOther);
-    }
-
-    public static void enterSKFOtherValue(WebDriver driver, String value) {
-        WebElement skfOtherInput = driver.findElement(By.xpath("//div[@class='accordion']//div[@class='accordion__content accordion__content--is-open']//div[@class='accordion__content-form']//div[@class='componentContainer']//div//div[@class='componentContainer']//div//div[contains(@class,'css-1hwfws3')]"));
-        Actions actions = new Actions(driver);
-        actions.sendKeys(skfOtherInput, value).perform();
-        actions.sendKeys(Keys.ENTER).build().perform();
-
-    }
-
-    public static void clickSKFSerialNumber(WebDriver driver) {
-        WebElement skfSerialNumber = driver.findElement(By.xpath("//div[@class='accordion']//div[@class='accordion__content accordion__content--is-open']//div[@class='accordion__content-form']//div[@class='componentContainer']//div//div[@class='componentContainer']//div//div[contains(@class,'css-1wa3eu0-placeholder')][normalize-space()='Select or free text']"));
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("arguments[0].click();", skfSerialNumber);
-    }
-
-    public static void enterSKFSerialNumberValue(WebDriver driver, String value) {
-        WebElement skfSerialNumberInput = driver.findElement(By.xpath("//div[@class='accordion']//div[@class='accordion__content accordion__content--is-open']//div[@class='accordion__content-form']//div[@class='componentContainer']//div//div[@class='componentContainer']//div//div[contains(@class,'css-1wa3eu0-placeholder')][normalize-space()='Select or free text']"));
-        Actions actions = new Actions(driver);
-        actions.sendKeys(skfSerialNumberInput, value).perform();
-        actions.sendKeys(Keys.ENTER).build().perform();
     }
 
     public static void clickAnalysisButton(WebDriver driver) {
@@ -295,8 +258,7 @@ public class BDABasePage extends BasePage {
 
     public void submit(WebDriver driver) throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        WebElement Save = driver.findElement(By.xpath("//*[name()='polygon' and @id='Fill-6']"));
-        Save.click();
+        SaveButton.click();
         Thread.sleep(3000);
         driver.navigate().refresh();
         Thread.sleep(3000);

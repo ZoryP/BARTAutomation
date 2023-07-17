@@ -1,5 +1,6 @@
 
 package BART;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -24,6 +25,11 @@ public class NAMBasePage extends BasePage{
     WebElement EndUserField;
     @FindBy(xpath = "//button[normalize-space()='Report Details']")
     WebElement ReportDetailsSection;
+    @FindBy(xpath = "//button [text ()='Manufacturing']")
+    WebElement Manufacturing;
+
+    @FindBy(xpath = "//button [text ()='Operating Data']")
+    WebElement OperatingData;
     @FindBy(xpath = "//div[@data-id='reportDetails.inspectionTime']//input[@type='number']")
     WebElement InspectionTimeHoursNAM;
     @FindBy(xpath = "//div[@data-id='reportDetails.travelTime']//input[@type='number']")
@@ -47,6 +53,25 @@ public class NAMBasePage extends BasePage{
 
     @FindBy(xpath = "(//div[@class=' css-1wa3eu0-placeholder' and contains(., 'Select or free text')])[1]")
     WebElement DistributionList;
+    @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
+    WebElement Country;
+    @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
+    WebElement Location;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[1]")
+    WebElement SegmentFunctionalAreaSystemName;
+    @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[4]/div/div[2]/div[2]/div/div/div[2]/div[2]/div[2]/div/div[2]/div/div[2]/div/div/div/div[1]/div[1]")
+    WebElement ManufacturingDateCode;
+    @FindBy(xpath = "//*[@data-id='bearingInvestigations.bearingInvestigation[0].manufacturing.remanId1']")
+    WebElement RemanId;
+    @FindBy(xpath = "//*[@data-id='bearingInvestigations.bearingInvestigation[0].manufacturing.dateCode1']")
+    WebElement DateCode;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[2]")
+    WebElement PositionOfBearing;
+    @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
+    WebElement LubricationType;
+
+    @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
+    WebElement RingRotation;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='2']")
     WebElement LpInspectionTimeHoursNAM;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='4']")
@@ -56,14 +81,29 @@ public class NAMBasePage extends BasePage{
     WebElement LpApprovedBy;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Keith.E.Meyers@skf.com')]")
     WebElement LpDistributionList;
-
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Georgia Pacific, Big Island - Job 4252 53246')]")
     WebElement LpReportTitle;
+
+    @FindBy(xpath = "//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader' and contains(., 'Wrapping machine, Automatic')]")
+    WebElement LpMachineAsset;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Driveline')]")
+    WebElement LpFunctionalArea;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Continuous caster')]")
+    List<WebElement> LpSystemName;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Bulgaria')]")
+    WebElement LpCountry;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Sofia - Tzar Osvoboditel Blvd')]")
+    WebElement LpLocation;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'W (2000)')]")
+    WebElement LpManufacturing;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., '433 33')]")
+    WebElement LpRemanId;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'S-32')]")
+    WebElement LpDateCode;
     @FindBy(id = "buttonSettings")
     WebElement SettingsNAM;
     @FindBy(id = "buttonSettings")
     WebElement SettingsContainerNAM;
-
     public void setInspectionTimeHoursNAM(WebDriver driver){
         BasePage.clickElementWithJS(driver, ReportDetailsSection);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -151,6 +191,53 @@ public class NAMBasePage extends BasePage{
         TimeUnit.SECONDS.sleep(3);
         actions.sendKeys(Keys.ENTER).build().perform();
         BasePage.blurElementWithJS(driver,DistributionList);
+    }
+    public void setRandomValue(WebDriver driver) throws InterruptedException{
+        Actions actions = new Actions(driver);
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).build().perform();
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 600)");
+    }
+    public void setCountry(WebDriver driver) throws InterruptedException{
+        BasePage.clickElementWithJS(driver, Country);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Country, "Bulgaria");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, Country);
+    }
+    public void setLocation(WebDriver driver) throws InterruptedException {
+        BasePage.clickElementWithJS(driver, Location);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Location, "Sofia");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, Location);
+    }
+    public void setManufacturingDateCode(WebDriver driver) throws InterruptedException{
+        Actions actions = new Actions(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("arguments[0].click();", ManufacturingDateCode);
+        actions.sendKeys(ManufacturingDateCode, "2000").perform();
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+    }
+    public void setRemanIdAndDateCode(WebDriver driver) throws InterruptedException{
+        BasePage.clickElementWithJS(driver, RemanId);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(RemanId, "433 33");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, RemanId);
+        BasePage.clickElementWithJS(driver, DateCode);
+        actions.sendKeys(DateCode, "S-32");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, DateCode);
+        SaveButton.click();
     }
     public void checkContainerNAM(WebDriver driver) {
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));

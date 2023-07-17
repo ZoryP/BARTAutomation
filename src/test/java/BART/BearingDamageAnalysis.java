@@ -228,14 +228,13 @@ public class BearingDamageAnalysis {
         BasePage basePage = new BasePage(driver);
         basePage.BearingInvestigations.click();
         BDABasePage bdaBasePage = new BDABasePage(driver);
-        bdaBasePage.Bearing1.click();
+        basePage.Bearing1.click();
         bdaBasePage.BearingTypeSection.click();
-        BDABasePage.clickSKFOther(driver);
-        BDABasePage.enterSKFOtherValue(driver, "SKF");
-        BDABasePage.clickSKFSerialNumber(driver);
-        BDABasePage.enterSKFSerialNumberValue(driver, "PEER");
-        WebElement LpSerialNumber = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader']//span[contains(text(),'PEER / SKF')]"));
-        LpSerialNumber.isDisplayed();
+        basePage.clickSKFOther(driver);
+        basePage.enterSKFOtherValue(driver, "SKF");
+        basePage.clickSKFSerialNumber(driver);
+        basePage.enterSKFSerialNumberValue(driver, "PEER");
+        Assert.assertTrue(basePage.LpSkfOther.isDisplayed());
     }
 
     @Test(priority = 19)
