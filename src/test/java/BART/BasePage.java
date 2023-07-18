@@ -17,6 +17,11 @@ public class BasePage {
     WebElement BearingInvestigations;
     @FindBy(xpath = "//button[normalize-space()='Bearing 1']")
     WebElement Bearing1;
+    @FindBy(xpath = "//button [text ()='Component Parts Investigation']")
+    WebElement Components;
+    @FindBy(xpath = "//button [text ()='Outer Ring']")
+    WebElement OuterRing;
+
     @FindBy(xpath = "//button[normalize-space()='Bearing Type']")
     WebElement BearingTypeSection;
 

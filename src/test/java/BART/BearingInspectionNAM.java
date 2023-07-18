@@ -227,16 +227,26 @@ public class BearingInspectionNAM {
         namBasePage.PositionOfBearing.click();
         namBasePage.setRandomValue(driver);
     }
+
     @Test(priority = 25)
     public void CheckLubricationType() throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.LubricationType.click();
         namBasePage.setRandomValue(driver);
+        Assert.assertTrue(namBasePage.LpPositionOfBearing.isDisplayed());
     }
-    @Test(priority = 24)
+    @Test(priority = 26)
     public void CheckRingRotation() throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.RingRotation.click();
         namBasePage.setRandomValue(driver);
+        Assert.assertTrue(namBasePage.LpLubricationType.isDisplayed());
+        Assert.assertTrue(namBasePage.LpRingRotation.isDisplayed());
+    }
+    @Test(priority = 27)
+    public void CheckComponents() throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.addMoreSides(driver);
+        namBasePage.setAddObservations(driver);
     }
 }

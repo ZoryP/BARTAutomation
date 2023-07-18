@@ -72,6 +72,16 @@ public class NAMBasePage extends BasePage{
 
     @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
     WebElement RingRotation;
+    @FindBy(xpath = "(//*[@id='icon_ellipsis'])[2]")
+    WebElement ThreeDots;
+    @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Outer Diameter')]")
+    WebElement AddOuterDiameter;
+    @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Side face - marked side')]")
+    WebElement AddMarkedSide;
+    @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Side face - opposite side')]")
+    WebElement AddOppositeSide;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[2]")
+    WebElement AddObservations;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='2']")
     WebElement LpInspectionTimeHoursNAM;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='4']")
@@ -100,6 +110,12 @@ public class NAMBasePage extends BasePage{
     WebElement LpRemanId;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'S-32')]")
     WebElement LpDateCode;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Tending']")
+    WebElement LpPositionOfBearing;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Not known']")
+    WebElement LpLubricationType;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Synchronous inner/outer ring rotation']")
+    WebElement LpRingRotation;
     @FindBy(id = "buttonSettings")
     WebElement SettingsNAM;
     @FindBy(id = "buttonSettings")
@@ -238,6 +254,53 @@ public class NAMBasePage extends BasePage{
         actions.sendKeys(Keys.ENTER).build().perform();
         BasePage.blurElementWithJS(driver, DateCode);
         SaveButton.click();
+    }
+    public void addMoreSides (WebDriver driver) throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.Components.click();
+        namBasePage.OuterRing.click();
+        TimeUnit.SECONDS.sleep(1);
+        namBasePage.ThreeDots.click();
+        namBasePage.AddOuterDiameter.click();
+        TimeUnit.SECONDS.sleep(1);
+        namBasePage.ThreeDots.click();
+        namBasePage.AddMarkedSide.click();
+        TimeUnit.SECONDS.sleep(1);
+        namBasePage.ThreeDots.click();
+        namBasePage.AddOppositeSide.click();
+    }
+    public void setAddObservations(WebDriver driver) throws InterruptedException{
+        BasePage.clickElementWithJS(driver, AddObservations);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(AddObservations, "Surface");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.sendKeys("Abrasive");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.sendKeys("Discoloration");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, AddObservations);
+
+        actions.sendKeys(AddObservations, "Brinelling");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, AddObservations);
+
+        actions.sendKeys(AddObservations, "Flutting");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, AddObservations);
+
+        actions.sendKeys(AddObservations, "Moisture");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.sendKeys("Forced");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, AddObservations);
+
     }
     public void checkContainerNAM(WebDriver driver) {
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));

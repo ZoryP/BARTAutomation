@@ -6,9 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="importantadd2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" afterDir="false" />
     </list>
@@ -323,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1689332601598</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="importantadd2">
+      <created>1689612229379</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1689612229379</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
