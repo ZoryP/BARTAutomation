@@ -21,7 +21,8 @@ public class BasePage {
     WebElement Components;
     @FindBy(xpath = "//button [text ()='Outer Ring']")
     WebElement OuterRing;
-
+    @FindBy(xpath = "//button [text ()='Inner Ring']")
+    WebElement InnerRing;
     @FindBy(xpath = "//button[normalize-space()='Bearing Type']")
     WebElement BearingTypeSection;
 

@@ -235,6 +235,7 @@ public class BearingInspectionNAM {
         namBasePage.setRandomValue(driver);
         Assert.assertTrue(namBasePage.LpPositionOfBearing.isDisplayed());
     }
+
     @Test(priority = 26)
     public void CheckRingRotation() throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -243,10 +244,33 @@ public class BearingInspectionNAM {
         Assert.assertTrue(namBasePage.LpLubricationType.isDisplayed());
         Assert.assertTrue(namBasePage.LpRingRotation.isDisplayed());
     }
+
     @Test(priority = 27)
-    public void CheckComponents() throws InterruptedException {
+    public void CheckOuterRing() throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.addMoreSides(driver);
-        namBasePage.setAddObservations(driver);
+        namBasePage.setObservationsOuterRing(driver);
+        Assert.assertTrue(namBasePage.areAllElementsDisplayed(), "Not all elements are displayed!");
+    }
+
+    @Test(priority = 28)
+    public void CheckSeverity() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setSeverityOuterRing(driver);
+        Assert.assertEquals(namBasePage.LpSeverity.size(),4);
+    }
+    @Test(priority = 29)
+    public void CheckInnerRing() throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.InnerRing.click();
+        namBasePage.setInnerRing(driver);
+        Assert.assertEquals(namBasePage.LpSeverity.size(),5);
+    }
+    @Test(priority = 30)
+    public void InsertFigure()throws InterruptedException{
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 500)");
+        namBasePage.InsertFigure.click();
     }
 }

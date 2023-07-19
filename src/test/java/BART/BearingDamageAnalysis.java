@@ -271,7 +271,7 @@ public class BearingDamageAnalysis {
         WebElement fileInput = driver.findElement(By.xpath("//div[@role='presentation']"));
         fileInput.click();
         String[] filePaths = {
-                "\"C:\\Users\\ZornicaPetkova\\Desktop\\istockphoto-1498223365-1024x1024.jpg\"",
+                "\"C:\\Users\\ZornicaPetkova\\Desktop\\NAM.jpg\"",
                 "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\R - Copy - Copy.gif\"",
                 "\"C:\\Users\\ZornicaPetkova\\Desktop\\3 - Copy.jpg\""
         };

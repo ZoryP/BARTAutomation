@@ -81,7 +81,25 @@ public class NAMBasePage extends BasePage{
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Side face - opposite side')]")
     WebElement AddOppositeSide;
     @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[2]")
-    WebElement AddObservations;
+    WebElement AddObservationsOuterRing;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[3]")
+    WebElement AddObservationsInnerRing;
+    @FindBy(xpath = "(//*[@id=\"Vector\"])[4]")
+    WebElement SeverityRacewayOuterRing;
+
+    @FindBy(xpath = "(//*[@id=\"Vector\"])[23]")
+    WebElement SeverityRacewayInnerRing;
+    @FindBy(xpath = "(//*[@id=\"Vector\"])[6]")
+    WebElement SeverityOuterDiameter;
+    @FindBy(xpath = "(//*[@id=\"Vector\"])[10]")
+    WebElement SeverityMarked;
+    @FindBy(xpath = "(//*[@id=\"Vector\"])[15]")
+    WebElement SeverityOpposite;
+
+    @FindBy(xpath = "(//div[contains(@class, 'image-selector__overlay')])[7]")
+    WebElement InsertFigure;
+    @FindBy(className = "severity__header")
+    List<WebElement> LpSeverity;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='2']")
     WebElement LpInspectionTimeHoursNAM;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='4']")
@@ -116,6 +134,14 @@ public class NAMBasePage extends BasePage{
     WebElement LpLubricationType;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Synchronous inner/outer ring rotation']")
     WebElement LpRingRotation;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Surface in good condition, Abrasive wear (frosting, smoothing, glazing), Discoloration']")
+    WebElement LpRaceway;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Brinelling']")
+    WebElement LpOuterDiameter;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Flutting (washboarding)']")
+    WebElement LpMarkedSide;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Moisture corrosion, Forced fracture']")
+    WebElement LpOppositeSide;
     @FindBy(id = "buttonSettings")
     WebElement SettingsNAM;
     @FindBy(id = "buttonSettings")
@@ -269,10 +295,10 @@ public class NAMBasePage extends BasePage{
         namBasePage.ThreeDots.click();
         namBasePage.AddOppositeSide.click();
     }
-    public void setAddObservations(WebDriver driver) throws InterruptedException{
-        BasePage.clickElementWithJS(driver, AddObservations);
+    public void setObservationsOuterRing(WebDriver driver) throws InterruptedException{
+        BasePage.clickElementWithJS(driver, AddObservationsOuterRing);
         Actions actions = new Actions(driver);
-        actions.sendKeys(AddObservations, "Surface");
+        actions.sendKeys(AddObservationsOuterRing, "Surface");
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
         actions.sendKeys("Abrasive");
@@ -281,26 +307,48 @@ public class NAMBasePage extends BasePage{
         actions.sendKeys("Discoloration");
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver, AddObservations);
+        BasePage.blurElementWithJS(driver, AddObservationsOuterRing);
 
-        actions.sendKeys(AddObservations, "Brinelling");
+        actions.sendKeys(AddObservationsOuterRing, "Brinelling");
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver, AddObservations);
+        BasePage.blurElementWithJS(driver, AddObservationsOuterRing);
 
-        actions.sendKeys(AddObservations, "Flutting");
+        actions.sendKeys(AddObservationsOuterRing, "Flutting");
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver, AddObservations);
+        BasePage.blurElementWithJS(driver, AddObservationsOuterRing);
 
-        actions.sendKeys(AddObservations, "Moisture");
+        actions.sendKeys(AddObservationsOuterRing, "Moisture");
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
         actions.sendKeys("Forced");
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver, AddObservations);
-
+        BasePage.blurElementWithJS(driver, AddObservationsOuterRing);
+    }
+    public void setInnerRing(WebDriver driver) throws InterruptedException {
+        BasePage.clickElementWithJS(driver, AddObservationsInnerRing);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(AddObservationsInnerRing, "Chatter");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.sendKeys("Washboarding");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, AddObservationsInnerRing);
+        SeverityRacewayInnerRing.click();
+    }
+    public void setSeverityOuterRing(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 200)");
+        SeverityRacewayOuterRing.click();
+        jsExecutor.executeScript("window.scrollTo(0, 400)");
+        SeverityOuterDiameter.click();
+        jsExecutor.executeScript("window.scrollTo(0, 600)");
+        SeverityMarked.click();
+        jsExecutor.executeScript("window.scrollTo(0, 800)");
+        SeverityOpposite.click();
     }
     public void checkContainerNAM(WebDriver driver) {
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));
@@ -311,6 +359,13 @@ public class NAMBasePage extends BasePage{
         PageBreak.isEnabled();
         AutoScroll.isEnabled();
         Summary.isEnabled();
+    }
+    public boolean areAllElementsDisplayed() {
+        return LpOppositeSide.isDisplayed()
+                && LpRaceway.isDisplayed()
+                && LpOuterDiameter.isDisplayed()
+                && LpMarkedSide.isDisplayed();
+
     }
     NAMBasePage(WebDriver driver) {
         super(driver);
