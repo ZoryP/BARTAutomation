@@ -263,13 +263,11 @@ public class BearingDamageAnalysis {
 
     @Test(priority = 21)
     public void CheckUploadImages() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.UploadImg.click();
-        WebElement ModalElement = driver.findElement(By.xpath("//div[@class='dropzone-inputLabel']"));
-        ModalElement.isDisplayed();
+        BDABasePage basePage = new BDABasePage(driver);
+        basePage.UploadImg.click();
+        Assert.assertTrue(basePage.ModalDialogForImages.isDisplayed());
         Thread.sleep(4000);
-        WebElement fileInput = driver.findElement(By.xpath("//div[@role='presentation']"));
-        fileInput.click();
+        basePage.FileInput.click();
         String[] filePaths = {
                 "\"C:\\Users\\ZornicaPetkova\\Desktop\\NAM.jpg\"",
                 "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\R - Copy - Copy.gif\"",
@@ -291,14 +289,11 @@ public class BearingDamageAnalysis {
     }
 
     @Test(priority = 22)
-    public void AssertImages() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.Upload.click();
-        Thread.sleep(3000);
-        basePageReports.Close.click();
-        Thread.sleep(2000);
-        List<WebElement> LpImageContainer = driver.findElements(By.className("live-preview-images-item__media-container"));
-        Assert.assertEquals(LpImageContainer.size(), 2);
+    public void AssertImages() {
+        BDABasePage basePage = new BDABasePage(driver);
+        wait.until(ExpectedConditions.elementToBeClickable(basePage.Upload)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(basePage.Close)).click();
+        Assert.assertEquals(basePage.LpImageContainer.size(), 2);
     }
 
     @Test(priority = 23)

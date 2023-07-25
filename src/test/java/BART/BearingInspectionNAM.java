@@ -11,6 +11,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -53,7 +54,7 @@ public class BearingInspectionNAM {
     }
 
     @Test(priority = 3)
-    public void CheckSettings() {
+    public void Settings() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.SettingsContainerNAM.click();
         int expectedSize = 4;
@@ -257,20 +258,39 @@ public class BearingInspectionNAM {
     public void CheckSeverity() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.setSeverityOuterRing(driver);
-        Assert.assertEquals(namBasePage.LpSeverity.size(),4);
+        Assert.assertEquals(namBasePage.LpSeverity.size(), 4);
     }
+
     @Test(priority = 29)
     public void CheckInnerRing() throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.InnerRing.click();
         namBasePage.setInnerRing(driver);
-        Assert.assertEquals(namBasePage.LpSeverity.size(),5);
+        Assert.assertEquals(namBasePage.LpSeverity.size(), 5);
     }
+
     @Test(priority = 30)
-    public void InsertFigure()throws InterruptedException{
+    public void InsertImages() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 500)");
         namBasePage.InsertFigure.click();
+        Assert.assertTrue(namBasePage.ModalDialogForImages.isDisplayed());
+    }
+
+    @Test(priority = 31)
+    public void InsertFigure() throws InterruptedException, AWTException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.FileInput.click();
+        namBasePage.uploadImages(driver);
+        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.Upload)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.Close)).click();
+        Assert.assertEquals(namBasePage.LpImageContainer.size(), 2);
+    }
+    @Test(priority = 32)
+    public void EditFigure() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.EditFirstImage.click();
+        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.FigureNumber)).click();
     }
 }

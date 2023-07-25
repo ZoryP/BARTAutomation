@@ -12,10 +12,6 @@ import java.util.List;
 
 public class BDABasePage extends BasePage {
 
-    @FindBy(xpath = "//span[normalize-space()='Upload figures']")
-    WebElement Upload;
-    @FindBy(xpath = "//span[normalize-space()='Close']")
-    WebElement Close;
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[6]/div/div[2]/div[2]/div/div/div[2]/div[8]/div[2]/div[3]/div/div[2]/div/div[1]/div/div/div[4]/div/div[2]/div[2]/label")
     WebElement UploadImg;
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.functionalAreaName']//input[@type='text']")

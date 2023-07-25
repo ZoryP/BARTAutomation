@@ -4,6 +4,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
+import java.util.List;
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 public class BasePage {
@@ -30,6 +34,18 @@ public class BasePage {
     WebElement LpSkfOther;
     @FindBy(xpath = "//*[name()='polygon' and @id='Fill-6']")
     WebElement SaveButton;
+
+    @FindBy(css = ".live-preview-images-item__media-container")
+    List<WebElement> LpImageContainer;
+    @FindBy(className = "react-modal__header upload-modal__header")
+    WebElement ModalDialogForImages;
+    @FindBy(css = ".dropzone-inputLabel")
+    WebElement FileInput;
+    @FindBy(xpath = "//span[@class='button__text' and contains(., 'Upload figures')]")
+    WebElement Upload;
+    @FindBy(xpath = "//span[@class='button__text' and contains(., 'Close')]")
+    WebElement Close;
+
 
     public static void clickElementWithJS(WebDriver driver, WebElement element) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -75,6 +91,26 @@ public class BasePage {
         el.click();
         for (int i = 0; i < keys.length(); i++) {
             el.sendKeys(String.valueOf(keys.charAt(i)));
+        }
+    }
+    public void uploadImages(WebDriver driver) throws InterruptedException, AWTException {
+        String[] filePaths = {
+                "\"C:\\Users\\ZornicaPetkova\\Desktop\\istockphoto-1498223365-1024x1024.jpg\"",
+                "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\R - Copy - Copy.gif\"",
+                "\"C:\\Users\\ZornicaPetkova\\Desktop\\3 - Copy.jpg\""
+        };
+        Thread.sleep(4000);
+        Robot robot = new Robot();
+        for (String filePath : filePaths) {
+            StringSelection stringSelection = new StringSelection(filePath);
+            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
+            robot.keyPress(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_V);
+            robot.keyRelease(KeyEvent.VK_CONTROL);
+            robot.keyPress(KeyEvent.VK_ENTER);
+            robot.keyRelease(KeyEvent.VK_ENTER);
+            Thread.sleep(6000);
         }
     }
     BasePage(WebDriver driver) {

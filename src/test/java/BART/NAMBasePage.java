@@ -98,6 +98,11 @@ public class NAMBasePage extends BasePage{
 
     @FindBy(xpath = "(//div[contains(@class, 'image-selector__overlay')])[7]")
     WebElement InsertFigure;
+    @FindBy(xpath = "(//div[contains(@class, 'image-selector__item')])[1]")
+    WebElement EditFirstImage;
+    @FindBy(xpath = "//input[@id='image_number']")
+    WebElement FigureNumber;
+
     @FindBy(className = "severity__header")
     List<WebElement> LpSeverity;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='2']")
@@ -146,6 +151,7 @@ public class NAMBasePage extends BasePage{
     WebElement SettingsNAM;
     @FindBy(id = "buttonSettings")
     WebElement SettingsContainerNAM;
+
     public void setInspectionTimeHoursNAM(WebDriver driver){
         BasePage.clickElementWithJS(driver, ReportDetailsSection);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
