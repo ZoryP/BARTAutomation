@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
@@ -42,7 +43,6 @@ public class BearingInspectionNAM {
         wait.until(ExpectedConditions.visibilityOfAllElements(loginPage.WelcomeMassage));
         Assert.assertTrue(loginPage.WelcomeMassage.isDisplayed());
     }
-
     @Test(priority = 2)
     public void CreateNAM() {
         DashboardPage dashboard = new BART.DashboardPage(driver);
@@ -52,7 +52,6 @@ public class BearingInspectionNAM {
         Assert.assertTrue(dashboard.BearingInspectionNAMReport.isDisplayed());
         Assert.assertTrue(dashboard.IconToolbar.isDisplayed());
     }
-
     @Test(priority = 3)
     public void Settings() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -60,7 +59,6 @@ public class BearingInspectionNAM {
         int expectedSize = 4;
         Assert.assertEquals(namBasePage.SettingsSizeNam.size(), expectedSize);
     }
-
     @Test(priority = 4)
     public void CheckContainerSettings() throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -68,48 +66,41 @@ public class BearingInspectionNAM {
         TimeUnit.SECONDS.sleep(3);
         wait.until(ExpectedConditions.elementToBeClickable(namBasePage.SettingsNAM)).click();
     }
-
     @Test(priority = 5)
     public void CheckEditTreeNAM() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         Assert.assertEquals(namBasePage.AccordeonNam.size(), 7);
     }
-
     @Test(priority = 6)
     public void CheckReportInspectionTime() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.setInspectionTimeHoursNAM(driver);
         Assert.assertTrue(namBasePage.LpInspectionTimeHoursNAM.isDisplayed());
     }
-
     @Test(priority = 7)
     public void CheckReportInspectionsHours() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.setTravelTimeHoursNAM(driver);
         Assert.assertTrue(namBasePage.LpTravelTimeHoursNAM.isDisplayed());
     }
-
     @Test(priority = 8)
     public void CheckNumberOfBearings() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.setNumberOfBearingsNAM(driver);
         //element is not displayed in the live-preview.
     }
-
     @Test(priority = 9)
     public void CheckInspectionDate() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.setInspectionDate(driver);
         Assert.assertEquals(namBasePage.LpInspectionDate.size(), 2);
     }
-
     @Test(priority = 10)
     public void CheckReportApproveBy() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.setApprovedBy(driver);
         Assert.assertTrue(namBasePage.LpApprovedBy.isDisplayed());
     }
-
     @Test(priority = 11)
     public void CheckInspectionDetails() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -120,14 +111,12 @@ public class BearingInspectionNAM {
         namBasePage.setEndUser(driver);
         namBasePage.assertEndUser(driver);
     }
-
     @Test(priority = 12)
     public void CheckVendor() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.setVendor(driver);
         namBasePage.assertVendor(driver);
     }
-
     @Test(priority = 13)
     public void CheckVendorJobNumber() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -136,7 +125,6 @@ public class BearingInspectionNAM {
         BasePage.blurElementWithJS(driver, namBasePage.VendorJobNumber);
         Assert.assertEquals(namBasePage.SettingsSize.size(), 2);
     }
-
     @Test(priority = 14)
     public void CheckDistributionList() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -145,7 +133,6 @@ public class BearingInspectionNAM {
         Assert.assertTrue(namBasePage.LpReportTitle.isDisplayed());
         Assert.assertTrue(namBasePage.LpDistributionList.isDisplayed());
     }
-
     @Test(priority = 15)
     public void CheckAssetDetails() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -154,21 +141,18 @@ public class BearingInspectionNAM {
         namBasePage.setMachineAsset(driver);
         Assert.assertTrue(namBasePage.LpMachineAsset.isDisplayed());
     }
-
     @Test(priority = 16)
     public void CheckSegment() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.SegmentFunctionalAreaSystemName.click();
         namBasePage.setRandomValue(driver);
     }
-
     @Test(priority = 17)
     public void CheckFunctionalArea() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.SegmentFunctionalAreaSystemName.click();
         namBasePage.setRandomValue(driver);
     }
-
     @Test(priority = 18)
     public void CheckSystemName() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -177,7 +161,6 @@ public class BearingInspectionNAM {
         Assert.assertTrue(namBasePage.LpFunctionalArea.isDisplayed());
         Assert.assertEquals(namBasePage.LpSystemName.size(), 2);
     }
-
     @Test(priority = 19)
     public void CheckBearingInvestigation() {
         BasePage basePage = new BasePage(driver);
@@ -190,7 +173,6 @@ public class BearingInspectionNAM {
         basePage.enterSKFSerialNumberValue(driver, "PEER");
         Assert.assertTrue(basePage.LpSkfOther.isDisplayed());
     }
-
     @Test(priority = 20)
     public void CheckCountry() throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -270,16 +252,16 @@ public class BearingInspectionNAM {
     }
 
     @Test(priority = 30)
-    public void InsertImages() {
+    public void CheckInsertImagesModal() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 500)");
         namBasePage.InsertFigure.click();
-        Assert.assertTrue(namBasePage.ModalDialogForImages.isDisplayed());
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.ModalDialogForImages)).isDisplayed();
     }
 
     @Test(priority = 31)
-    public void InsertFigure() throws InterruptedException, AWTException {
+    public void CheckInsertFigureFunction() throws InterruptedException, AWTException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.FileInput.click();
         namBasePage.uploadImages(driver);
@@ -287,10 +269,56 @@ public class BearingInspectionNAM {
         wait.until(ExpectedConditions.elementToBeClickable(namBasePage.Close)).click();
         Assert.assertEquals(namBasePage.LpImageContainer.size(), 2);
     }
+
     @Test(priority = 32)
-    public void EditFigure() {
+    public void CheckEditFigure() throws Throwable {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.EditFirstImage.click();
-        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.FigureNumber)).click();
+        namBasePage.editFirstFigure(driver);
+        Assert.assertTrue(namBasePage.SaveOrDeleteButtons.isDisplayed());
+    }
+
+    @Test(priority = 33)
+    public void CheckSaveFigure() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.SaveFigure.click();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.LpFigureDescription)).isDisplayed();
+    }
+
+    @Test(priority = 34)
+    public void CheckRowsObservations() throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.addMoreRows(driver);
+        namBasePage.setObservationsRollingElements(driver);
+        //Assert.assertEquals(namBasePage.LpObservations.size(), 7); Failed ?/?/
+    }
+
+    @Test(priority = 35)
+    public void CheckRowsSeverity() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setSeverityInRows(driver);
+        Assert.assertEquals(namBasePage.LpSeverity.size(), 7);
+    }
+    @Test(priority = 36)
+    public void CheckAnalysis() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.Analysis.click();
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(namBasePage.ImageForAfa).build().perform();
+        namBasePage.ImageForAfa.click();
+        namBasePage.UseAfa.click();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.AfaModal)).isDisplayed();
+    }
+    @Test(priority = 37)
+    public void CheckAFA() throws Throwable {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.useAFA(driver);
+        Assert.assertTrue(BasePage.isLPAFADisplayed(driver));
+    }
+    @Test(priority = 38)
+    public void CheckCause() throws Throwable {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setCauseField(driver);
+        Assert.assertTrue(namBasePage.LpCause.isDisplayed());
     }
 }

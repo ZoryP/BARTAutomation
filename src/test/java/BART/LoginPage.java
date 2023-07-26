@@ -10,11 +10,11 @@ import java.time.Duration;
 
 public class LoginPage {
     WebDriver driver;
-    @FindBy(id = "email")
+    @FindBy(css = "#email")
     WebElement email;
-    @FindBy(id = "password")
+    @FindBy(css = "#password")
     WebElement password;
-    @FindBy(className = "button__text")
+    @FindBy(css = ".button__text")
     WebElement enterBtn;
     @FindBy(xpath = "//div[@class='login__errors']")
     WebElement ErrorLoginMassage;

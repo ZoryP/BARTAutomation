@@ -25,11 +25,16 @@ public class BasePage {
     WebElement Components;
     @FindBy(xpath = "//button [text ()='Outer Ring']")
     WebElement OuterRing;
+    @FindBy(xpath = "//button [text ()='Rolling Elements']")
+    WebElement RollingElements;
+    @FindBy(xpath = "//button [text ()='Analysis']")
+    WebElement Analysis;
+    @FindBy(xpath = "//div[@class='react-modal__header ai-modal__header']")
+    WebElement AfaModal;
     @FindBy(xpath = "//button [text ()='Inner Ring']")
     WebElement InnerRing;
     @FindBy(xpath = "//button[normalize-space()='Bearing Type']")
     WebElement BearingTypeSection;
-
     @FindBy(xpath = "//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader']//span[contains(text(),'PEER / SKF')]")
     WebElement LpSkfOther;
     @FindBy(xpath = "//*[name()='polygon' and @id='Fill-6']")
@@ -37,7 +42,7 @@ public class BasePage {
 
     @FindBy(css = ".live-preview-images-item__media-container")
     List<WebElement> LpImageContainer;
-    @FindBy(className = "react-modal__header upload-modal__header")
+    @FindBy(css = ".react-modal__header.upload-modal__header")
     WebElement ModalDialogForImages;
     @FindBy(css = ".dropzone-inputLabel")
     WebElement FileInput;
@@ -119,5 +124,25 @@ public class BasePage {
                 .withTimeout(Duration.ofSeconds(40))
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class);
+    }
+    public static void clickFailureMode(WebDriver driver) {
+        WebElement failureMode = driver.findElement(By.xpath("//label[@for='failure0']"));
+        failureMode.click();
+    }
+    public static void clickDoneButton(WebDriver driver) {
+        WebElement doneButton = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Done')]"));
+        doneButton.click();
+    }
+    public static boolean isThankYouMessageDisplayed(WebDriver driver) {
+        WebElement thankYouMsg = driver.findElement(By.xpath("//div[@class='react-modal__body update-modal__body' and contains(., 'Thank you for using the Augmented Failure Analysis')]"));
+        return thankYouMsg.isDisplayed();
+    }
+    public static void clickCloseAFAButton(WebDriver driver) {
+        WebElement closeAFA = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Close')]"));
+        closeAFA.click();
+    }
+    public static boolean isLPAFADisplayed(WebDriver driver) {
+        WebElement lpAFA = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
+        return lpAFA.isDisplayed();
     }
 }

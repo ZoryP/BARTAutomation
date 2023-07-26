@@ -12,8 +12,9 @@ import java.time.Duration;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class NAMBasePage extends BasePage{
+public class NAMBasePage extends BasePage {
 
+    FluentWait<WebDriver> wait;
     @FindBy(id = "Tree/tree_root_branch")
     List<WebElement> AccordeonNam;
     @FindBy(css = ".settings-menu__action")
@@ -76,12 +77,16 @@ public class NAMBasePage extends BasePage{
     WebElement ThreeDots;
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Outer Diameter')]")
     WebElement AddOuterDiameter;
+    @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Rolling elements - Row 2')]")
+    WebElement AddRow2;
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Side face - marked side')]")
     WebElement AddMarkedSide;
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Side face - opposite side')]")
     WebElement AddOppositeSide;
     @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[2]")
     WebElement AddObservationsOuterRing;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[7]")
+    WebElement AddObservationsInRow;
     @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[3]")
     WebElement AddObservationsInnerRing;
     @FindBy(xpath = "(//*[@id=\"Vector\"])[4]")
@@ -95,16 +100,37 @@ public class NAMBasePage extends BasePage{
     WebElement SeverityMarked;
     @FindBy(xpath = "(//*[@id=\"Vector\"])[15]")
     WebElement SeverityOpposite;
+    @FindBy(xpath = "(//*[@id=\"Vector\"])[44]")
+    WebElement SeverityRow1;
+    @FindBy(xpath = "(//*[@id=\"Vector\"])[47]")
+    WebElement SeverityRow2;
 
     @FindBy(xpath = "(//div[contains(@class, 'image-selector__overlay')])[7]")
     WebElement InsertFigure;
     @FindBy(xpath = "(//div[contains(@class, 'image-selector__item')])[1]")
     WebElement EditFirstImage;
-    @FindBy(xpath = "//input[@id='image_number']")
+    @FindBy(xpath = "(//span[@class='button__text' and contains(., 'Augmented Failure Analysis')])[1]")
+    WebElement UseAfa;
+    @FindBy(xpath = "//*[@data-id='imageNumber']")
     WebElement FigureNumber;
 
-    @FindBy(className = "severity__header")
+    @FindBy(xpath = "//*[@data-id='imageCaption']")
+    WebElement FigureCaption;
+    @FindBy(css = ".figure-modal__footer-buttons")
+    WebElement SaveOrDeleteButtons;
+    @FindBy(xpath = "//span[@class='button__text' and contains(., 'Save figure')]")
+    WebElement SaveFigure;
+    @FindBy(xpath = "(//*[contains(@class, 'image-selector__button')])[27]")
+    WebElement ImageForAfa;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[18]")
+    WebElement CauseField;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Presence of corrosive liquid']")
+    WebElement LpCause;
+    @FindBy(css = ".severity__header")
     List<WebElement> LpSeverity;
+
+    @FindBy(css = ".live-preview-images__headline live-preview-images__severity")
+    List<WebElement>LpObservations;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='2']")
     WebElement LpInspectionTimeHoursNAM;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='4']")
@@ -147,12 +173,14 @@ public class NAMBasePage extends BasePage{
     WebElement LpMarkedSide;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Moisture corrosion, Forced fracture']")
     WebElement LpOppositeSide;
-    @FindBy(id = "buttonSettings")
+    @FindBy(xpath = "//span[@class='live-preview-images-item__media-figure' and contains(., 'Figure Bearing 1')]")
+    WebElement LpFigureDescription;
+    @FindBy(css = "#buttonSettings")
     WebElement SettingsNAM;
-    @FindBy(id = "buttonSettings")
+    @FindBy(css = "#buttonSettings")
     WebElement SettingsContainerNAM;
 
-    public void setInspectionTimeHoursNAM(WebDriver driver){
+    public void setInspectionTimeHoursNAM(WebDriver driver) {
         BasePage.clickElementWithJS(driver, ReportDetailsSection);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 600)");
@@ -160,18 +188,21 @@ public class NAMBasePage extends BasePage{
         BasePage.sendKeysLetterByLetter(InspectionTimeHoursNAM, "2");
         BasePage.blurElementWithJS(driver, InspectionTimeHoursNAM);
     }
-    public void setTravelTimeHoursNAM(WebDriver driver){
+
+    public void setTravelTimeHoursNAM(WebDriver driver) {
         BasePage.clickElementWithJS(driver, TravelTimeHoursNAM);
         BasePage.sendKeysLetterByLetter(TravelTimeHoursNAM, "4");
         BasePage.blurElementWithJS(driver, TravelTimeHoursNAM);
     }
-    public void setNumberOfBearingsNAM(WebDriver driver){
+
+    public void setNumberOfBearingsNAM(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 300)");
         BasePage.clickElementWithJS(driver, NumberOfBearings);
         BasePage.sendKeysLetterByLetter(NumberOfBearings, "6");
         BasePage.blurElementWithJS(driver, NumberOfBearings);
     }
+
     public void setInspectionDate(WebDriver driver) throws InterruptedException {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 500)");
@@ -181,6 +212,7 @@ public class NAMBasePage extends BasePage{
         TimeUnit.SECONDS.sleep(3);
         actions.sendKeys(InspectionDate, Keys.ENTER).perform();
     }
+
     public void setApprovedBy(WebDriver driver) throws InterruptedException {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         Actions actions = new Actions(driver);
@@ -191,13 +223,15 @@ public class NAMBasePage extends BasePage{
         TimeUnit.SECONDS.sleep(3);
         actions.sendKeys(Keys.ENTER).build().perform();
     }
+
     public void setEndUser(WebDriver driver) throws InterruptedException {
         Actions actions = new Actions(driver);
         actions.sendKeys(EndUserField, "Georgia").perform();
         TimeUnit.SECONDS.sleep(4);
         actions.sendKeys(Keys.ENTER).build().perform();
     }
-    public void assertEndUser(WebDriver driver){
+
+    public void assertEndUser(WebDriver driver) {
         WebElement LpEndUser = driver.findElement(By.xpath("(//div[contains(@class, 'live-preview-key-value')]/div)[24]"));
         String expectedEndUser = "Contact\n" + "Paul Grey, Stacy Taylor, Tim Tolley, Matt Strand\n" + " 434-299-7337\n" + " matthew.strand@gapac.com\n" + " stacy.taylor@gapac.com\n" + " dmvanval@gapac.com\n" + " christopher.ey@gapac.com\n" + " trtolley@gapac.com\n" +
                 " fgbranch@gapac.com";
@@ -207,7 +241,8 @@ public class NAMBasePage extends BasePage{
                 " jim.rebok@motion-ind.com";
         Assert.assertEquals(LpDistributor.getText(), expectedDistributor);
     }
-    public void setVendor(WebDriver driver)throws InterruptedException {
+
+    public void setVendor(WebDriver driver) throws InterruptedException {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 600)");
         BasePage.clickElementWithJS(driver, Vendor);
@@ -217,7 +252,8 @@ public class NAMBasePage extends BasePage{
         actions.sendKeys(Keys.ENTER).build().perform();
         BasePage.blurElementWithJS(driver, Vendor);
     }
-    public void setMachineAsset(WebDriver driver)throws InterruptedException{
+
+    public void setMachineAsset(WebDriver driver) throws InterruptedException {
         BasePage basePage = new BasePage(driver);
         BasePage.clickElementWithJS(driver, basePage.MachineAssetType);
         Actions actions = new Actions(driver);
@@ -226,21 +262,24 @@ public class NAMBasePage extends BasePage{
         actions.sendKeys(Keys.ENTER).build().perform();
         BasePage.blurElementWithJS(driver, basePage.MachineAssetType);
     }
-    public void assertVendor(WebDriver driver){
+
+    public void assertVendor(WebDriver driver) {
         WebElement LpVendor = driver.findElement(By.xpath("(//div[contains(@class, 'live-preview-key-value')]/div)[33]"));
         String expectedVendor = "Contact\n" + "Renee Martin\n" + " 803-293-2140\n" + " suanne.sheppard@valmet.com\n" + " barry.jackson@valmet.com\n" + " cheryll.delmundo@valmet.com\n" + " ricky.boyd@valmet.com\n" +
                 " renee.martin@valmet.com";
         Assert.assertEquals(LpVendor.getText(), expectedVendor);
     }
-    public void assertDistributionList(WebDriver driver)throws InterruptedException{
+
+    public void assertDistributionList(WebDriver driver) throws InterruptedException {
         BasePage.clickElementWithJS(driver, DistributionList);
         Actions actions = new Actions(driver);
         actions.sendKeys(DistributionList, "Keith.E.Meyers@skf.com");
         TimeUnit.SECONDS.sleep(3);
         actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver,DistributionList);
+        BasePage.blurElementWithJS(driver, DistributionList);
     }
-    public void setRandomValue(WebDriver driver) throws InterruptedException{
+
+    public void setRandomValue(WebDriver driver) throws InterruptedException {
         Actions actions = new Actions(driver);
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.DOWN).sendKeys(Keys.DOWN).build().perform();
@@ -249,7 +288,8 @@ public class NAMBasePage extends BasePage{
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 600)");
     }
-    public void setCountry(WebDriver driver) throws InterruptedException{
+
+    public void setCountry(WebDriver driver) throws InterruptedException {
         BasePage.clickElementWithJS(driver, Country);
         Actions actions = new Actions(driver);
         actions.sendKeys(Country, "Bulgaria");
@@ -257,6 +297,7 @@ public class NAMBasePage extends BasePage{
         actions.sendKeys(Keys.ENTER).build().perform();
         BasePage.blurElementWithJS(driver, Country);
     }
+
     public void setLocation(WebDriver driver) throws InterruptedException {
         BasePage.clickElementWithJS(driver, Location);
         Actions actions = new Actions(driver);
@@ -265,7 +306,8 @@ public class NAMBasePage extends BasePage{
         actions.sendKeys(Keys.ENTER).build().perform();
         BasePage.blurElementWithJS(driver, Location);
     }
-    public void setManufacturingDateCode(WebDriver driver) throws InterruptedException{
+
+    public void setManufacturingDateCode(WebDriver driver) throws InterruptedException {
         Actions actions = new Actions(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("arguments[0].click();", ManufacturingDateCode);
@@ -273,7 +315,8 @@ public class NAMBasePage extends BasePage{
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
     }
-    public void setRemanIdAndDateCode(WebDriver driver) throws InterruptedException{
+
+    public void setRemanIdAndDateCode(WebDriver driver) throws InterruptedException {
         BasePage.clickElementWithJS(driver, RemanId);
         Actions actions = new Actions(driver);
         actions.sendKeys(RemanId, "433 33");
@@ -287,7 +330,8 @@ public class NAMBasePage extends BasePage{
         BasePage.blurElementWithJS(driver, DateCode);
         SaveButton.click();
     }
-    public void addMoreSides (WebDriver driver) throws InterruptedException {
+
+    public void addMoreSides(WebDriver driver) throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.Components.click();
         namBasePage.OuterRing.click();
@@ -301,7 +345,17 @@ public class NAMBasePage extends BasePage{
         namBasePage.ThreeDots.click();
         namBasePage.AddOppositeSide.click();
     }
-    public void setObservationsOuterRing(WebDriver driver) throws InterruptedException{
+
+    public void addMoreRows(WebDriver driver) throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.RollingElements.click();
+        TimeUnit.SECONDS.sleep(1);
+        namBasePage.ThreeDots.click();
+        TimeUnit.SECONDS.sleep(1);
+        namBasePage.AddRow2.click();
+    }
+
+    public void setObservationsOuterRing(WebDriver driver) throws InterruptedException {
         BasePage.clickElementWithJS(driver, AddObservationsOuterRing);
         Actions actions = new Actions(driver);
         actions.sendKeys(AddObservationsOuterRing, "Surface");
@@ -333,6 +387,22 @@ public class NAMBasePage extends BasePage{
         actions.sendKeys(Keys.ENTER).build().perform();
         BasePage.blurElementWithJS(driver, AddObservationsOuterRing);
     }
+
+    public void setObservationsRollingElements(WebDriver driver) throws InterruptedException {
+        BasePage.clickElementWithJS(driver, AddObservationsInRow);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(AddObservationsInRow, "Spalling (Surface initiated, sub-surface initiated, flaking, microspalling, fatigue)");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, AddObservationsInRow);
+        BasePage.clickElementWithJS(driver, AddObservationsInRow);
+        actions.sendKeys(AddObservationsInRow, "Mild discoloration");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, AddObservationsInRow);
+
+    }
+
     public void setInnerRing(WebDriver driver) throws InterruptedException {
         BasePage.clickElementWithJS(driver, AddObservationsInnerRing);
         Actions actions = new Actions(driver);
@@ -345,6 +415,7 @@ public class NAMBasePage extends BasePage{
         BasePage.blurElementWithJS(driver, AddObservationsInnerRing);
         SeverityRacewayInnerRing.click();
     }
+
     public void setSeverityOuterRing(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 200)");
@@ -355,6 +426,43 @@ public class NAMBasePage extends BasePage{
         SeverityMarked.click();
         jsExecutor.executeScript("window.scrollTo(0, 800)");
         SeverityOpposite.click();
+    }
+    public void setSeverityInRows(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 200)");
+        SeverityRow1.click();
+        jsExecutor.executeScript("window.scrollTo(0, 400)");
+        SeverityRow2.click();
+    }
+    public void editFirstFigure(WebDriver driver) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(3);
+        BasePage.clickElementWithJS(driver, FigureNumber);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(FigureNumber, "Bearing 1");
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, FigureNumber);
+        BasePage.clickElementWithJS(driver, FigureCaption);
+        actions.sendKeys(FigureCaption, "Test Figure");
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver,FigureCaption);
+    }
+    public void useAFA(WebDriver driver) throws InterruptedException{
+        BasePage.clickFailureMode(driver);
+        BasePage.clickDoneButton(driver);
+        TimeUnit.SECONDS.sleep(3);
+        BasePage.isThankYouMessageDisplayed(driver);
+        BasePage.clickCloseAFAButton(driver);
+        TimeUnit.SECONDS.sleep(3);
+        Assert.assertTrue(BasePage.isLPAFADisplayed(driver));
+    }
+    public void setCauseField(WebDriver driver)throws InterruptedException{
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(CauseField);
+        BasePage.clickElementWithJS(driver, CauseField);
+        actions.sendKeys(CauseField, "Presence of corrosive liquid");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, CauseField);
     }
     public void checkContainerNAM(WebDriver driver) {
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));

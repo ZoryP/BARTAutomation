@@ -60,7 +60,7 @@ public class BearingDamageAnalysis {
 
     @Test(priority = 3)
     public void CheckSettings() {
-        WebElement Settings = driver.findElement(By.id("buttonSettings"));
+        WebElement Settings = driver.findElement(By.cssSelector("#buttonSettings"));
         Settings.click();
         List<WebElement> SettingsSize = driver.findElements(By.cssSelector(".settings-menu__action"));
         Assert.assertEquals(SettingsSize.size(), 6);
@@ -71,13 +71,13 @@ public class BearingDamageAnalysis {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.checkContainerBDA(driver);
         Thread.sleep(3000);
-        WebElement Settings = driver.findElement(By.id("buttonSettings"));
+        WebElement Settings = driver.findElement(By.cssSelector("#buttonSettings"));
         Settings.click();
     }
 
     @Test(priority = 5)
     public void CheckAccodeonBDA() {
-        List<WebElement> Accordeon = driver.findElements(By.id("Tree/tree_root_branch"));
+        List<WebElement> Accordeon = driver.findElements(By.cssSelector("#Tree/tree_root_branch"));
         Assert.assertEquals(Accordeon.size(), 11);
     }
 
@@ -307,11 +307,11 @@ public class BearingDamageAnalysis {
 
     @Test(priority = 24)
     public void DoneAFA() throws Throwable {
-        BDABasePage.clickFailureMode(driver);
-        BDABasePage.clickDoneButton(driver);
+        BasePage.clickFailureMode(driver);
+        BasePage.clickDoneButton(driver);
         Thread.sleep(4000);
-        Assert.assertTrue(BDABasePage.isThankYouMessageDisplayed(driver));
-        BDABasePage.clickCloseAFAButton(driver);
+        Assert.assertTrue(BasePage.isThankYouMessageDisplayed(driver));
+        BasePage.clickCloseAFAButton(driver);
         Thread.sleep(3000);
         Assert.assertTrue(BDABasePage.isLPAFADisplayed(driver));
     }
@@ -342,7 +342,7 @@ public class BearingDamageAnalysis {
         jsExecutor.executeScript("window.scrollTo(0, 0)");
         basePageReports.clickThreeDots(driver);
         Thread.sleep(3000);
-        List<WebElement> AllActions = driver.findElements(By.className("navigation__action"));
+        List<WebElement> AllActions = driver.findElements(By.cssSelector(".navigation__action"));
         Assert.assertEquals(AllActions.size(), 4);
     }
 
@@ -364,7 +364,7 @@ public class BearingDamageAnalysis {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.deleteSecondBearing(driver);
         Assert.assertEquals(basePageReports.lpBearings.size(), 1);
-        WebElement Save = driver.findElement(By.id("buttonReload"));
+        WebElement Save = driver.findElement(By.cssSelector("#buttonReload"));
         Save.click();
     }
 
@@ -392,7 +392,7 @@ public class BearingDamageAnalysis {
     @Test(priority = 33)
     public void CheckIconToolbarSubmit() {
         BDABasePage basePageReports = new BDABasePage(driver);
-        List<WebElement> IconToolbar = driver.findElements(By.className("button-bar__group"));
+        List<WebElement> IconToolbar = driver.findElements(By.cssSelector(".button-bar__group"));
         Assert.assertEquals(IconToolbar.size(), 3);
         Assert.assertTrue(basePageReports.isApproveVisible(driver));
         Assert.assertTrue(basePageReports.isApproveWithEditsVisible(driver));
@@ -425,7 +425,7 @@ public class BearingDamageAnalysis {
 
     @Test(priority = 38)
     public void CloseReport() {
-        WebElement CloseBtn = driver.findElement(By.id("buttonClose"));
+        WebElement CloseBtn = driver.findElement(By.cssSelector("#buttonClose"));
         CloseBtn.click();
         String currentUrl = driver.getCurrentUrl();
         String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/my-reports";

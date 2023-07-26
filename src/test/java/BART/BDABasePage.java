@@ -125,31 +125,6 @@ public class BDABasePage extends BasePage {
         return afaModal.isDisplayed();
     }
 
-    public static void clickFailureMode(WebDriver driver) {
-        WebElement failureMode = driver.findElement(By.xpath("//label[@for='failure0']"));
-        failureMode.click();
-    }
-
-    public static void clickDoneButton(WebDriver driver) {
-        WebElement doneButton = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Done')]"));
-        doneButton.click();
-    }
-
-    public static boolean isThankYouMessageDisplayed(WebDriver driver) {
-        WebElement thankYouMsg = driver.findElement(By.xpath("//div[@class='react-modal__body update-modal__body' and contains(., 'Thank you for using the Augmented Failure Analysis')]"));
-        return thankYouMsg.isDisplayed();
-    }
-
-    public static void clickCloseAFAButton(WebDriver driver) {
-        WebElement closeAFA = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Close')]"));
-        closeAFA.click();
-    }
-
-    public static boolean isLPAFADisplayed(WebDriver driver) {
-        WebElement lpAFA = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Moisture corrosion (5.3.2) based on Augmented Failure Analysis')]"));
-        return lpAFA.isDisplayed();
-    }
-
     public static void clickCauseElement(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollBy(0, 300)");
@@ -165,7 +140,7 @@ public class BDABasePage extends BasePage {
     public void clickAddNewButton(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 0)");
-        WebElement addNewButton = driver.findElement(By.id("addBearingButton"));
+        WebElement addNewButton = driver.findElement(By.cssSelector("#addBearingButton"));
         addNewButton.click();
     }
 
@@ -258,7 +233,7 @@ public class BDABasePage extends BasePage {
         Thread.sleep(3000);
         driver.navigate().refresh();
         Thread.sleep(3000);
-        WebElement Submit = driver.findElement(By.id("buttonSubmit"));
+        WebElement Submit = driver.findElement(By.cssSelector("#buttonSubmit"));
         String script = "var event = document.createEvent('MouseEvent');"
                 + "event.initEvent('mouseover', true, true);"
                 + "arguments[0].dispatchEvent(event);";
@@ -269,23 +244,23 @@ public class BDABasePage extends BasePage {
     }
 
     public boolean isApproveVisible(WebDriver driver) {
-        WebElement elementApprove = driver.findElement(By.id("Icons/icon_approve"));
+        WebElement elementApprove = driver.findElement(By.cssSelector("#Icons/icon_approve"));
         return elementApprove.isDisplayed();
     }
 
     public boolean isApproveWithEditsVisible(WebDriver driver) {
-        WebElement elementApprovewithEdits = driver.findElement(By.id("Icons/icon_approve_edit"));
+        WebElement elementApprovewithEdits = driver.findElement(By.cssSelector("#Icons/icon_approve_edit"));
         return elementApprovewithEdits.isDisplayed();
     }
 
     public boolean isRejectVisible(WebDriver driver) {
-        WebElement elementReject = driver.findElement(By.id("buttonReject"));
+        WebElement elementReject = driver.findElement(By.cssSelector("#buttonReject"));
         return elementReject.isDisplayed();
 
     }
 
     public void approve(WebDriver driver) {
-        WebElement ApproveReport = driver.findElement(By.id("Icons/icon_approve"));
+        WebElement ApproveReport = driver.findElement(By.cssSelector("#Icons/icon_approve"));
         ApproveReport.click();
         WebElement VerifyAfa = driver.findElement(By.xpath("//div[@class='react-modal__body update-modal__body' and contains(., 'Have you verified the Failure Mode results for each bearing?')]"));
         VerifyAfa.isDisplayed();
@@ -301,14 +276,14 @@ public class BDABasePage extends BasePage {
         Thread.sleep(13000);
         WebElement StatusApprove = driver.findElement(By.xpath("//div[@class='live-preview-status-confidential__status' and contains(., 'Approved')]"));
         StatusApprove.isDisplayed();
-        WebElement EditButton = driver.findElement(By.id("Icons/icon_edit"));
+        WebElement EditButton = driver.findElement(By.cssSelector("#Icons/icon_edit"));
         EditButton.isDisplayed();
-        WebElement DistributePDF = driver.findElement(By.id("buttonDistributePdf"));
+        WebElement DistributePDF = driver.findElement(By.cssSelector("#buttonDistributePdf"));
         DistributePDF.isDisplayed();
     }
 
     public void editReport(WebDriver driver) throws Throwable {
-        WebElement EditButton = driver.findElement(By.id("Icons/icon_edit"));
+        WebElement EditButton = driver.findElement(By.cssSelector("#Icons/icon_edit"));
         EditButton.click();
         WebElement ConfirmMessage = driver.findElement(By.xpath("//div[@class='react-modal__text' and contains(., 'Are you sure you want to EDIT this APPROVED report? Make sure you save the original report as a PDF to a folder before editing.')]"));
         ConfirmMessage.isDisplayed();
@@ -321,7 +296,7 @@ public class BDABasePage extends BasePage {
         StatusDraft.isDisplayed();
     }
     public void deleteReport(WebDriver driver) throws Throwable {
-        WebElement Delete = driver.findElement(By.id("buttonDelete"));
+        WebElement Delete = driver.findElement(By.cssSelector("#buttonDelete"));
         Delete.click();
         Thread.sleep(3000);
         WebElement ConfirmMessage = driver.findElement(By.xpath("//div[@class='icon-message__text' and contains(., 'Do you want to delete report')]"));
