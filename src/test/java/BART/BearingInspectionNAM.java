@@ -316,9 +316,21 @@ public class BearingInspectionNAM {
         Assert.assertTrue(BasePage.isLPAFADisplayed(driver));
     }
     @Test(priority = 38)
-    public void CheckCause() throws Throwable {
+    public void CheckCause() throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.setCauseField(driver);
         Assert.assertTrue(namBasePage.LpCause.isDisplayed());
+    }
+    @Test(priority = 39)
+    public void CheckRecommendations() throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.Recommendations.click();
+        namBasePage.setRecommendations(driver);
+        Assert.assertTrue(namBasePage.LpRecommendations.isDisplayed());
+        Assert.assertEquals(namBasePage.LpSummary.size(), 2);
+    }
+    @Test(priority = 40)
+    public void CheckCreateNew() throws InterruptedException{
+        NAMBasePage namBasePage = new NAMBasePage(driver);
     }
 }

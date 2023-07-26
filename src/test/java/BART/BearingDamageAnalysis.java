@@ -439,4 +439,5 @@ public class BearingDamageAnalysis {
         String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/login";
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
+
 }

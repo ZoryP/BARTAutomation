@@ -21,7 +21,10 @@ public class NAMBasePage extends BasePage {
     List<WebElement> SettingsSizeNam;
     @FindBy(xpath = "//button[normalize-space()='Inspection Details']")
     WebElement InspectionDetails;
-
+    @FindBy(xpath = "//button [text ()='Recommendations']")
+    WebElement Recommendations;
+    @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[4]/div/div[2]/div[2]/div/div/div[2]/div[7]/div[2]/div/div/div/div[2]/div/div/div/div[1]")
+    WebElement SelectRecommendations;
     @FindBy(xpath = "//div[contains(text(),'end users')]")
     WebElement EndUserField;
     @FindBy(xpath = "//button[normalize-space()='Report Details']")
@@ -122,8 +125,8 @@ public class NAMBasePage extends BasePage {
     WebElement SaveFigure;
     @FindBy(xpath = "(//*[contains(@class, 'image-selector__button')])[27]")
     WebElement ImageForAfa;
-    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[18]")
-    WebElement CauseField;
+    @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[4]/div/div[2]/div[2]/div/div/div[2]/div[6]/div[2]/div/div[3]/div/div[7]/div/div[2]/div[1]/div/div")
+    WebElement CauseFieldNAM;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Presence of corrosive liquid']")
     WebElement LpCause;
     @FindBy(css = ".severity__header")
@@ -175,6 +178,10 @@ public class NAMBasePage extends BasePage {
     WebElement LpOppositeSide;
     @FindBy(xpath = "//span[@class='live-preview-images-item__media-figure' and contains(., 'Figure Bearing 1')]")
     WebElement LpFigureDescription;
+    @FindBy(css = ".live-preview__recommendations")
+    WebElement LpRecommendations;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__header' and contains(., 'Summary')]")
+    List<WebElement> LpSummary;
     @FindBy(css = "#buttonSettings")
     WebElement SettingsNAM;
     @FindBy(css = "#buttonSettings")
@@ -457,12 +464,20 @@ public class NAMBasePage extends BasePage {
     }
     public void setCauseField(WebDriver driver)throws InterruptedException{
         Actions actions = new Actions(driver);
-        actions.scrollToElement(CauseField);
-        BasePage.clickElementWithJS(driver, CauseField);
-        actions.sendKeys(CauseField, "Presence of corrosive liquid");
+        actions.scrollToElement(CauseFieldNAM);
+        BasePage.clickElementWithJS(driver, CauseFieldNAM);
+        actions.sendKeys(CauseFieldNAM, "Presence of corrosive liquid");
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver, CauseField);
+        BasePage.blurElementWithJS(driver, CauseFieldNAM);
+    }
+    public void setRecommendations(WebDriver driver) throws InterruptedException{
+        Actions actions = new Actions(driver);
+        BasePage.clickElementWithJS(driver, SelectRecommendations);
+        actions.sendKeys(SelectRecommendations, "Potential for remanufacturing");
+        TimeUnit.SECONDS.sleep(2);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, SelectRecommendations);
     }
     public void checkContainerNAM(WebDriver driver) {
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));
