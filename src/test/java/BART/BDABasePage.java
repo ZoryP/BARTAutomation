@@ -154,18 +154,14 @@ public class BDABasePage extends BasePage {
         lpAddNew.click();
     }
 
-    public void clickThreeDots(WebDriver driver) {
-        WebElement ThreeDots = driver.findElement(By.xpath("(//*[@id='icon_ellipsis'])[1]"));
-        ThreeDots.click();
-    }
 
     public List<WebElement> lpBearingsSize2;
 
     public void duplicate(WebDriver driver) throws Throwable {
+        BDABasePage bdaBasePage = new BDABasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         Thread.sleep(3000);
-        WebElement Duplicate = driver.findElement(By.xpath("//a[normalize-space()='Duplicate']"));
-        jsExecutor.executeScript("arguments[0].click();", Duplicate);
+        jsExecutor.executeScript("arguments[0].click();", bdaBasePage.DuplicateButton);
         Thread.sleep(3000);
         WebElement DuplicatedBearing = driver.findElement(By.xpath("//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader' and contains(., 'Bearing 3')]"));
         DuplicatedBearing.isDisplayed();

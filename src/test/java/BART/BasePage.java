@@ -1,18 +1,29 @@
 package BART;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.FluentWait;
-import java.util.List;
+
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
+import java.util.List;
 
 public class BasePage {
     @FindBy(xpath = "//button[normalize-space()='Asset Details']")
     WebElement AssetDetails;
+    @FindBy(css = "#addBearingButton")
+    WebElement AddNewBearingBtn;
+    @FindBy(xpath = "(//*[@id='icon_ellipsis'])[1]")
+    WebElement ThreeDots;
+    @FindBy(css = ".navigation__action")
+    List<WebElement> ThreeDotsContainer;
+
+    @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Duplicate')]")
+    WebElement DuplicateButton;
     @FindBy(xpath = "//button[normalize-space()='Asset type / Functional Area / System'] ")
     WebElement AssetType;
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.machineOrAssetCode']//div[contains(@class,'css-1hwfws3')]")
@@ -21,6 +32,9 @@ public class BasePage {
     WebElement BearingInvestigations;
     @FindBy(xpath = "//button[normalize-space()='Bearing 1']")
     WebElement Bearing1;
+
+    @FindBy(xpath = "//button [text ()='Bearing 2']")
+    WebElement Bearing2;
     @FindBy(xpath = "//button [text ()='Component Parts Investigation']")
     WebElement Components;
     @FindBy(xpath = "//button [text ()='Outer Ring']")

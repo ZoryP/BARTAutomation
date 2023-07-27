@@ -330,7 +330,24 @@ public class BearingInspectionNAM {
         Assert.assertEquals(namBasePage.LpSummary.size(), 2);
     }
     @Test(priority = 40)
-    public void CheckCreateNew() throws InterruptedException{
+    public void CheckCreateNew() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(namBasePage.AddNewBearingBtn);
+        namBasePage.AddNewBearingBtn.click();
+        Assert.assertTrue(namBasePage.Bearing2.isDisplayed());
+    }
+    @Test(priority = 41)
+    public void CheckThreeDotsMenu() throws Throwable {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.ThreeDots.click();
+        Thread.sleep(3000);
+        Assert.assertEquals(namBasePage.ThreeDotsContainer.size(), 4);
+    }
+    @Test(priority = 42)
+    public void CheckDuplication(){
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.DuplicateButton.click();
+        Assert.assertEquals(namBasePage.CompleteDuplication.size(), 4);
     }
 }

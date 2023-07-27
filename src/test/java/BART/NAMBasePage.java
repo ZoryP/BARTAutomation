@@ -52,6 +52,9 @@ public class NAMBasePage extends BasePage {
     WebElement VendorJobNumber;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., '4252 53246')]")
     List<WebElement> SettingsSize;
+
+    @FindBy(xpath = "//span [text ()='PEER / SKF']")
+    List<WebElement> CompleteDuplication;
     @FindBy(xpath = "//div[contains(@class, 'valueWithSpace')]/span")
     List<WebElement> LpInspectionDate;
 
@@ -77,7 +80,7 @@ public class NAMBasePage extends BasePage {
     @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
     WebElement RingRotation;
     @FindBy(xpath = "(//*[@id='icon_ellipsis'])[2]")
-    WebElement ThreeDots;
+    WebElement ThreeDotsOuterRing;
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Outer Diameter')]")
     WebElement AddOuterDiameter;
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Rolling elements - Row 2')]")
@@ -343,13 +346,13 @@ public class NAMBasePage extends BasePage {
         namBasePage.Components.click();
         namBasePage.OuterRing.click();
         TimeUnit.SECONDS.sleep(1);
-        namBasePage.ThreeDots.click();
+        namBasePage.ThreeDotsOuterRing.click();
         namBasePage.AddOuterDiameter.click();
         TimeUnit.SECONDS.sleep(1);
-        namBasePage.ThreeDots.click();
+        namBasePage.ThreeDotsOuterRing.click();
         namBasePage.AddMarkedSide.click();
         TimeUnit.SECONDS.sleep(1);
-        namBasePage.ThreeDots.click();
+        namBasePage.ThreeDotsOuterRing.click();
         namBasePage.AddOppositeSide.click();
     }
 
@@ -357,7 +360,7 @@ public class NAMBasePage extends BasePage {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.RollingElements.click();
         TimeUnit.SECONDS.sleep(1);
-        namBasePage.ThreeDots.click();
+        namBasePage.ThreeDotsOuterRing.click();
         TimeUnit.SECONDS.sleep(1);
         namBasePage.AddRow2.click();
     }

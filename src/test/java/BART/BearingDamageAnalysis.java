@@ -340,10 +340,9 @@ public class BearingDamageAnalysis {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         BDABasePage basePageReports = new BDABasePage(driver);
         jsExecutor.executeScript("window.scrollTo(0, 0)");
-        basePageReports.clickThreeDots(driver);
+        basePageReports.ThreeDots.click();
         Thread.sleep(3000);
-        List<WebElement> AllActions = driver.findElements(By.cssSelector(".navigation__action"));
-        Assert.assertEquals(AllActions.size(), 4);
+        Assert.assertEquals(basePageReports.ThreeDotsContainer.size(), 4);
     }
 
     @Test(priority = 28)
