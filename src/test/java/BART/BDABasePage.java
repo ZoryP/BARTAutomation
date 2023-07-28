@@ -188,7 +188,6 @@ public class BDABasePage extends BasePage {
         WebElement Delete = driver.findElement(By.xpath("//a[normalize-space()='Delete']"));
         jsExecutor.executeScript("arguments[0].click();", Delete);
         Thread.sleep(3000);
-        WebElement YesDelete = driver.findElement(By.xpath("//button[@class='button react-modal__action-button button--background-gray']"));
         YesDelete.click();
     }
 

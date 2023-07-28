@@ -52,12 +52,10 @@ public class NAMBasePage extends BasePage {
     WebElement VendorJobNumber;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., '4252 53246')]")
     List<WebElement> SettingsSize;
-
     @FindBy(xpath = "//span [text ()='PEER / SKF']")
     List<WebElement> CompleteDuplication;
     @FindBy(xpath = "//div[contains(@class, 'valueWithSpace')]/span")
     List<WebElement> LpInspectionDate;
-
     @FindBy(xpath = "(//div[@class=' css-1wa3eu0-placeholder' and contains(., 'Select or free text')])[1]")
     WebElement DistributionList;
     @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
@@ -76,7 +74,6 @@ public class NAMBasePage extends BasePage {
     WebElement PositionOfBearing;
     @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
     WebElement LubricationType;
-
     @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
     WebElement RingRotation;
     @FindBy(xpath = "(//*[@id='icon_ellipsis'])[2]")
@@ -97,7 +94,6 @@ public class NAMBasePage extends BasePage {
     WebElement AddObservationsInnerRing;
     @FindBy(xpath = "(//*[@id=\"Vector\"])[4]")
     WebElement SeverityRacewayOuterRing;
-
     @FindBy(xpath = "(//*[@id=\"Vector\"])[23]")
     WebElement SeverityRacewayInnerRing;
     @FindBy(xpath = "(//*[@id=\"Vector\"])[6]")
@@ -481,6 +477,32 @@ public class NAMBasePage extends BasePage {
         TimeUnit.SECONDS.sleep(2);
         actions.sendKeys(Keys.ENTER).build().perform();
         BasePage.blurElementWithJS(driver, SelectRecommendations);
+    }
+    public void setCompleteDuplication() throws InterruptedException{
+        DuplicateButton.click();
+        TimeUnit.SECONDS.sleep(2);
+    }
+    public void setDeletion() throws InterruptedException{
+        TimeUnit.SECONDS.sleep(2);
+        ThreeDotsSecond.click();
+        TimeUnit.SECONDS.sleep(2);
+        DeleteBearingButton.click();
+        TimeUnit.SECONDS.sleep(2);
+        YesDelete.click();
+        TimeUnit.SECONDS.sleep(2);
+        ThreeDotsSecond.click();
+        TimeUnit.SECONDS.sleep(2);
+        DeleteBearingButton.click();
+        TimeUnit.SECONDS.sleep(2);
+        YesDelete.click();
+    }
+    public void submit(WebDriver driver) throws InterruptedException {
+        Reload.click();
+        TimeUnit.SECONDS.sleep(3);
+        driver.navigate().refresh();
+        TimeUnit.SECONDS.sleep(3);
+        Submit.click();
+        TimeUnit.SECONDS.sleep(2);
     }
     public void checkContainerNAM(WebDriver driver) {
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));

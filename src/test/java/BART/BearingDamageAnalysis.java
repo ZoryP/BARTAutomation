@@ -344,20 +344,17 @@ public class BearingDamageAnalysis {
         Thread.sleep(3000);
         Assert.assertEquals(basePageReports.ThreeDotsContainer.size(), 4);
     }
-
     @Test(priority = 28)
     public void DuplicateBearing() throws Throwable {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.duplicate(driver);
         Assert.assertEquals(basePageReports.lpBearingsSize2.size(), 2);
     }
-
     @Test(priority = 29)
     public void DeleteFirstBearing() throws Throwable {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.deleteFirstBearing(driver);
     }
-
     @Test(priority = 30)
     public void DeleteSecondBearing() throws Throwable {
         BDABasePage basePageReports = new BDABasePage(driver);
@@ -366,28 +363,22 @@ public class BearingDamageAnalysis {
         WebElement Save = driver.findElement(By.cssSelector("#buttonReload"));
         Save.click();
     }
-
     @Test(priority = 31)
     public void CheckConclusionAndRecommendations() throws Throwable {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.conclusionsAndRec(driver);
         basePageReports.lpRecommendations.isDisplayed();
     }
-
     @Test(priority = 32)
     public void Submit() throws Throwable {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.submit(driver);
         Thread.sleep(3000);
-        WebElement ConfirmMassage = driver.findElement(By.xpath("//div[@class='react-modal__text' and contains(., 'Are you sure you want to submit the report?')]"));
-        ConfirmMassage.isDisplayed();
-        WebElement ConfirmBtn = driver.findElement(By.xpath("//span[@class='button__text' and contains(., 'Submit and open Email')]"));
-        ConfirmBtn.click();
+        basePageReports.ConfirmSubmittingMessage.isDisplayed();
+        basePageReports.ConfirmSubmittingBtn.click();
         Thread.sleep(4000);
-        WebElement StatusSubmitted = driver.findElement(By.xpath("//div[@class='live-preview-status-confidential__status' and contains(., 'Submitted')]"));
-        StatusSubmitted.isDisplayed();
+        basePageReports.StatusSubmitted.isDisplayed();
     }
-
     @Test(priority = 33)
     public void CheckIconToolbarSubmit() {
         BDABasePage basePageReports = new BDABasePage(driver);
@@ -397,31 +388,26 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(basePageReports.isApproveWithEditsVisible(driver));
         Assert.assertTrue(basePageReports.isRejectVisible(driver));
     }
-
     @Test(priority = 34)
     public void Approve() {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.approve(driver);
     }
-
     @Test(priority = 35)
     public void ApproveAndEdit() throws Throwable {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.approveAndEdit(driver);
     }
-
     @Test(priority = 36)
     public void EditReport() throws Throwable {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.editReport(driver);
     }
-
     @Test(priority = 37)
     public void DeleteReport() throws Throwable {
         BDABasePage basePageReports = new BDABasePage(driver);
         basePageReports.deleteReport(driver);
     }
-
     @Test(priority = 38)
     public void CloseReport() {
         WebElement CloseBtn = driver.findElement(By.cssSelector("#buttonClose"));
@@ -438,5 +424,4 @@ public class BearingDamageAnalysis {
         String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/login";
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
-
 }

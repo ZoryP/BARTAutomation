@@ -13,17 +13,40 @@ import java.time.Duration;
 import java.util.List;
 
 public class BasePage {
+    @FindBy(css = "#buttonClose")
+    WebElement CloseBtn;
+    @FindBy(xpath = "//*[@class='user-bar__sign-out' and contains(., 'Sign out')]")
+    WebElement SignOutBtn;
+    @FindBy(css = "#buttonSubmit")
+    WebElement Submit;
+    @FindBy(css = "#buttonReload")
+    WebElement Reload;
+    @FindBy(xpath = "//div[@class='react-modal__text' and contains(., 'Are you sure you want to submit the report?')]")
+    WebElement ConfirmSubmittingMessage;
+    @FindBy(xpath = "//span[@class='button__text' and contains(., 'Submit and open Email')]")
+    WebElement ConfirmSubmittingBtn;
+    @FindBy(xpath = "//div[@class='live-preview-status-confidential__status' and contains(., 'Submitted')]")
+    WebElement StatusSubmitted;
     @FindBy(xpath = "//button[normalize-space()='Asset Details']")
     WebElement AssetDetails;
+    @FindBy(xpath = "//button[@class='button react-modal__action-button button--background-gray']")
+    WebElement YesDelete;
     @FindBy(css = "#addBearingButton")
     WebElement AddNewBearingBtn;
     @FindBy(xpath = "(//*[@id='icon_ellipsis'])[1]")
     WebElement ThreeDots;
+    @FindBy(xpath = "(//*[@id='icon_ellipsis'])[2]")
+    WebElement ThreeDotsSecond;
     @FindBy(css = ".navigation__action")
     List<WebElement> ThreeDotsContainer;
+    @FindBy(css = ".case-bearingquicklinks-actions")
+    WebElement QuickLinks;
 
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Duplicate')]")
     WebElement DuplicateButton;
+
+    @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Delete')]")
+    WebElement DeleteBearingButton;
     @FindBy(xpath = "//button[normalize-space()='Asset type / Functional Area / System'] ")
     WebElement AssetType;
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.machineOrAssetCode']//div[contains(@class,'css-1hwfws3')]")
