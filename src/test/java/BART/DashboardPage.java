@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
-public class DashboardPage {
+public class DashboardPage extends BasePage {
     WebDriver driver;
 
     @FindBy(xpath = "//button[@class='navigation__action navigation__action--toggler']")
@@ -75,6 +75,7 @@ public class DashboardPage {
     }
 
     DashboardPage(WebDriver driver) {
+        super(driver);
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }

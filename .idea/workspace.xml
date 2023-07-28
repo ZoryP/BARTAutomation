@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="NEW TEST">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -372,7 +371,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690465691124</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="NEW TEST">
+      <created>1690534060735</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1690534060735</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

@@ -185,6 +185,10 @@ public class NAMBasePage extends BasePage {
     WebElement SettingsNAM;
     @FindBy(css = "#buttonSettings")
     WebElement SettingsContainerNAM;
+    @FindBy(xpath = "(//div[@class='LinesEllipsis LinesEllipsis--clamped ' and contains(., 'Georgia Pacific, Big Island - Job 4252')])[1]")
+    WebElement TargetReport;
+    @FindBy(xpath = "(//span[@class='button__text' and contains(., 'Open Report')])[1]")
+    WebElement OpenTargetReport;
 
     public void setInspectionTimeHoursNAM(WebDriver driver) {
         BasePage.clickElementWithJS(driver, ReportDetailsSection);

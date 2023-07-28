@@ -13,20 +13,56 @@ import java.time.Duration;
 import java.util.List;
 
 public class BasePage {
+    @FindBy(xpath = "(//*[@class='button button--icon-only' and contains(., 'Approve')])[1]")
+    WebElement ApproveBtn;
+    @FindBy(xpath = "//*[@class='button button--icon-only' and contains(., 'Approve With Edits')]")
+    WebElement ApproveWithEditsBtn;
+    @FindBy(xpath = "//*[@class='button button--icon-only' and contains(., 'Reject')]")
+    WebElement RejectBtn;
     @FindBy(css = "#buttonClose")
     WebElement CloseBtn;
+    @FindBy(xpath = "//div[@class='react-modal__body update-modal__body' and contains(., 'Have you verified the Failure Mode results for each bearing?')]")
+    WebElement AfaVerifyMessage;
+    @FindBy(xpath = "//span[@class='button__text' and contains(., 'Yes')]")
+    WebElement VerifyAfa;
+    @FindBy(xpath = "//div[@class='react-modal__text' and contains(., 'Are you sure you want to approve the report?')]")
+    WebElement ConfirmApprovalMessage;
+    @FindBy(xpath = "//span[@class='button__text' and contains(., 'Approve and open Email')]")
+    WebElement ApproveAndOpenEmailBtn;
     @FindBy(xpath = "//*[@class='user-bar__sign-out' and contains(., 'Sign out')]")
     WebElement SignOutBtn;
     @FindBy(css = "#buttonSubmit")
     WebElement Submit;
     @FindBy(css = "#buttonReload")
     WebElement Reload;
+    @FindBy(css = "#buttonEdit")
+    WebElement Edit;
+    @FindBy(css = "#buttonDelete")
+    WebElement Delete;
     @FindBy(xpath = "//div[@class='react-modal__text' and contains(., 'Are you sure you want to submit the report?')]")
     WebElement ConfirmSubmittingMessage;
+    @FindBy(xpath = "//div[@class='icon-message__text' and contains(., 'Do you want to delete report')]")
+    WebElement ConfirmDeletionMessage;
+    @FindBy(xpath = "//span[@class='button__text' and contains(., 'Yes')]")
+    WebElement ConfirmDeletionBtn;
+    @FindBy(xpath = "//div[@class='form-container' and contains(., 'This report is deleted. Please contact a BART administrator to restore deleted report.')]")
+    WebElement DeletionMessage;
     @FindBy(xpath = "//span[@class='button__text' and contains(., 'Submit and open Email')]")
     WebElement ConfirmSubmittingBtn;
+    @FindBy(xpath = "//div[@class='react-modal__text' and contains(., 'Are you sure you want to EDIT this APPROVED report? Make sure you save the original report as a PDF to a folder before editing.')]")
+    WebElement ConfirmEditingMessage;
+    @FindBy(xpath =  "//span[@class='button__text' and contains(., 'Download PDF and continue editing')]")
+    WebElement DownloadPDF;
+    @FindBy(xpath = "//h4[@class='live-preview__report-revision-number' and contains(., '01')]")
+    WebElement RevisionNumber;
     @FindBy(xpath = "//div[@class='live-preview-status-confidential__status' and contains(., 'Submitted')]")
     WebElement StatusSubmitted;
+    @FindBy(xpath = "//div[@class='live-preview-status-confidential__status' and contains(., 'Approved')]")
+    WebElement StatusApproved;
+    @FindBy(xpath = "//div[@class='live-preview-status-confidential__status' and contains(., 'Draft')]")
+    WebElement StatusDraft;
+    @FindBy(xpath = "//div[@class='live-preview-status-confidential__status' and contains(., 'Deleted')]")
+    WebElement StatusDeleted;
     @FindBy(xpath = "//button[normalize-space()='Asset Details']")
     WebElement AssetDetails;
     @FindBy(xpath = "//button[@class='button react-modal__action-button button--background-gray']")
@@ -135,7 +171,7 @@ public class BasePage {
             el.sendKeys(String.valueOf(keys.charAt(i)));
         }
     }
-    public void uploadImages(WebDriver driver) throws InterruptedException, AWTException {
+    public void uploadImages() throws InterruptedException, AWTException {
         String[] filePaths = {
                 "\"C:\\Users\\ZornicaPetkova\\Desktop\\istockphoto-1498223365-1024x1024.jpg\"",
                 "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\R - Copy - Copy.gif\"",
