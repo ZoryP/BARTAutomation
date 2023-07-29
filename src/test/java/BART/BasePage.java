@@ -19,7 +19,7 @@ public class BasePage {
     WebElement ApproveWithEditsBtn;
     @FindBy(xpath = "//*[@class='button button--icon-only' and contains(., 'Reject')]")
     WebElement RejectBtn;
-    @FindBy(css = "#buttonClose")
+    @FindBy(xpath = "//*[@class='button button--icon-only' and contains(., 'Close')]")
     WebElement CloseBtn;
     @FindBy(xpath = "//div[@class='react-modal__body update-modal__body' and contains(., 'Have you verified the Failure Mode results for each bearing?')]")
     WebElement AfaVerifyMessage;

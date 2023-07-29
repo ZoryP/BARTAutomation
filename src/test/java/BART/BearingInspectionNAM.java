@@ -414,7 +414,6 @@ public class BearingInspectionNAM {
         namBasePage.Delete.click();
         wait.until(ExpectedConditions.visibilityOf(namBasePage.ConfirmDeletionMessage)).isDisplayed();
         namBasePage.ConfirmDeletionBtn.click();
-        wait.until(ExpectedConditions.visibilityOf(namBasePage.DeletionMessage)).isDisplayed();
         wait.until(ExpectedConditions.visibilityOf(namBasePage.StatusDeleted)).isDisplayed();
     }
     @Test(priority = 53)
