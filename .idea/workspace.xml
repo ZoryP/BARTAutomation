@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="NEW TESTS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +67,7 @@
       <recent name="Production" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BearingInspectionNAM">
+  <component name="RunManager" selected="TestNG.BearingDamageAnalysis">
     <configuration name="BearingDamageAnalysis" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="BART" />
       <extension name="coverage">
@@ -156,8 +157,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.BearingInspectionNAM" />
         <item itemvalue="TestNG.BearingDamageAnalysis" />
+        <item itemvalue="TestNG.BearingInspectionNAM" />
         <item itemvalue="TestNG.LoginDashboardTests" />
         <item itemvalue="TestNG.BearingDamageAnalysis.CreateBda" />
         <item itemvalue="TestNG.BearingInspectionNAM.CheckInspectionDate" />
@@ -383,7 +384,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690554628078</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="NEW TESTS">
+      <created>1690656259519</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1690656259519</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

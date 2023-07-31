@@ -11,7 +11,16 @@ import java.util.List;
 
 
 public class BDABasePage extends BasePage {
-
+    @FindBy(xpath =  "//div[@class='live-preview-key-value__value' and contains(., 'Air handling unit, Air conditioner (AC)')]")
+    WebElement LpFunctionalArea;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Operations')]")
+    WebElement LpFunctionalAreaWhereAssetIsUsed;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Operation 1')]")
+    WebElement LpSystemName;
+    @FindBy(css = "#buttonSettings")
+    WebElement SettingsBtn;
+    @FindBy(css = ".settings-menu__action")
+    List<WebElement> SettingContainer;
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[6]/div/div[2]/div[2]/div/div/div[2]/div[8]/div[2]/div[3]/div/div[2]/div/div[1]/div/div/div[4]/div/div[2]/div[2]/label")
     WebElement UploadImg;
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.functionalAreaName']//input[@type='text']")
@@ -19,6 +28,9 @@ public class BDABasePage extends BasePage {
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.systemNameWhereAssetIsUsed']//input[@type='text']")
     WebElement SystemName;
 
+    public void checkReportDetails(WebDriver driver){
+
+    }
     public void checkContainerBDA (WebDriver driver){
         WebElement Confidential = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Is the report confidential?')]"));
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));
@@ -239,12 +251,12 @@ public class BDABasePage extends BasePage {
     }
 
     public boolean isApproveVisible(WebDriver driver) {
-        WebElement elementApprove = driver.findElement(By.cssSelector("#Icons/icon_approve"));
+        WebElement elementApprove = driver.findElement(By.xpath("(//*[@class='button button--icon-only' and contains(., 'Approve')])[1]"));
         return elementApprove.isDisplayed();
     }
 
     public boolean isApproveWithEditsVisible(WebDriver driver) {
-        WebElement elementApprovewithEdits = driver.findElement(By.cssSelector("#Icons/icon_approve_edit"));
+        WebElement elementApprovewithEdits = driver.findElement(By.xpath("//*[@class='button button--icon-only' and contains(., 'Approve With Edits')]"));
         return elementApprovewithEdits.isDisplayed();
     }
 
@@ -255,7 +267,7 @@ public class BDABasePage extends BasePage {
     }
 
     public void approve(WebDriver driver) {
-        WebElement ApproveReport = driver.findElement(By.cssSelector("#Icons/icon_approve"));
+        WebElement ApproveReport = driver.findElement(By.xpath("(//*[@class='button button--icon-only' and contains(., 'Approve')])[1]"));
         ApproveReport.click();
         WebElement VerifyAfa = driver.findElement(By.xpath("//div[@class='react-modal__body update-modal__body' and contains(., 'Have you verified the Failure Mode results for each bearing?')]"));
         VerifyAfa.isDisplayed();
@@ -271,14 +283,14 @@ public class BDABasePage extends BasePage {
         Thread.sleep(13000);
         WebElement StatusApprove = driver.findElement(By.xpath("//div[@class='live-preview-status-confidential__status' and contains(., 'Approved')]"));
         StatusApprove.isDisplayed();
-        WebElement EditButton = driver.findElement(By.cssSelector("#Icons/icon_edit"));
+        WebElement EditButton = driver.findElement(By.xpath("//*[@class='button button--icon-only' and contains(., 'Edit')]"));
         EditButton.isDisplayed();
         WebElement DistributePDF = driver.findElement(By.cssSelector("#buttonDistributePdf"));
         DistributePDF.isDisplayed();
     }
 
     public void editReport(WebDriver driver) throws Throwable {
-        WebElement EditButton = driver.findElement(By.cssSelector("#Icons/icon_edit"));
+        WebElement EditButton = driver.findElement(By.xpath("//*[@class='button button--icon-only' and contains(., 'Edit')]"));
         EditButton.click();
         WebElement ConfirmMessage = driver.findElement(By.xpath("//div[@class='react-modal__text' and contains(., 'Are you sure you want to EDIT this APPROVED report? Make sure you save the original report as a PDF to a folder before editing.')]"));
         ConfirmMessage.isDisplayed();

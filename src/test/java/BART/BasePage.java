@@ -45,8 +45,6 @@ public class BasePage {
     WebElement ConfirmDeletionMessage;
     @FindBy(xpath = "//span[@class='button__text' and contains(., 'Yes')]")
     WebElement ConfirmDeletionBtn;
-    @FindBy(xpath = "//div[@class='form-container' and contains(., 'This report is deleted. Please contact a BART administrator to restore deleted report.')]")
-    WebElement DeletionMessage;
     @FindBy(xpath = "//span[@class='button__text' and contains(., 'Submit and open Email')]")
     WebElement ConfirmSubmittingBtn;
     @FindBy(xpath = "//div[@class='react-modal__text' and contains(., 'Are you sure you want to EDIT this APPROVED report? Make sure you save the original report as a PDF to a folder before editing.')]")
