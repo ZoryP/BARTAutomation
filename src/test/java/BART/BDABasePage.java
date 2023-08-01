@@ -11,6 +11,12 @@ import java.util.List;
 
 
 public class BDABasePage extends BasePage {
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='test']")
+    WebElement LpReportDetails;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='1']")
+    WebElement LpTer;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Bearing')]")
+    WebElement LpScope;
     @FindBy(xpath =  "//div[@class='live-preview-key-value__value' and contains(., 'Air handling unit, Air conditioner (AC)')]")
     WebElement LpFunctionalArea;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Operations')]")
@@ -27,9 +33,80 @@ public class BDABasePage extends BasePage {
     WebElement FunctionalAreaNameWhereAssetIsUsed;
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.systemNameWhereAssetIsUsed']//input[@type='text']")
     WebElement SystemName;
+    @FindBy(xpath = "//div[@class='accordion']//div[@class='accordion__content accordion__content--is-open']//div[@class='accordion__content-form']//div[@class='componentContainer']//div//div[@class='se-wrapper-inner se-wrapper-wysiwyg sun-editor-editable']")
+    WebElement SkfCustomerDescr;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'LODI SPA')]")
+    WebElement LpCompany;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'VIA DELLA')]")
+    WebElement LpCompanyAdress;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Italy')]")
+    WebElement LpCompanyCountry;
+    @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'www.lodispa.com')]")
+    WebElement LpCustomerSiteName;
+    @FindBy(xpath = "//button[normalize-space()='Machine / Asset Details']")
+    WebElement MachineAsset;
 
+    public void checkComponentsParts(WebDriver driver) {
+        WebElement ComponentParts = driver.findElement(By.xpath("//button[normalize-space()='Component Parts Investigation']"));
+        ComponentParts.click();
+        WebElement RollingElements = driver.findElement(By.xpath("//button[normalize-space()='Rolling Elements']"));
+        RollingElements.click();
+    }
+    public void checkBearingType (WebDriver driver) throws InterruptedException{
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        jsExecutor.executeScript("arguments[0].click();", SkfCustomerDescr);
+        Actions actions = new Actions(driver);
+        Thread.sleep(2000);
+        actions.sendKeys(SkfCustomerDescr, "TEST").perform();
+        Thread.sleep(2000);
+        BasePage.blurElementWithJS(driver, SkfCustomerDescr);
+    }
+    public void checkAssetType(WebDriver driver)throws InterruptedException {
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        bdaBasePage.AssetType.click();
+        jsExecutor.executeScript("arguments[0].click();", bdaBasePage.MachineAssetType);
+        Actions actions = new Actions(driver);
+        Thread.sleep(2000);
+        actions.sendKeys(bdaBasePage.MachineAssetType, "Air handling unit").perform();
+        Thread.sleep(3000);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, bdaBasePage.MachineAssetType);
+    }
+    public void checkCustomer(WebDriver driver) throws InterruptedException {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        WebElement CustomerDetails = driver.findElement(By.xpath("//button[normalize-space()='Customer Details']"));
+        BasePage.clickElementWithJS(driver, CustomerDetails);
+        WebElement Customer = driver.findElement(By.xpath("(//div[contains(text(),'Type 3 characters')])"));
+        jsExecutor.executeScript("arguments[0].click();", Customer);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(Customer, "LODI SPA").perform();
+        Thread.sleep(3000);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        Thread.sleep(3000);
+    }
+    public void checkCustomerSiteName(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollBy(0, 800)");
+        WebElement CustomerSiteName = driver.findElement(By.xpath("//div[@data-id='customerDetails.site']//input[@type='text']"));
+        jsExecutor.executeScript("arguments[0].click();", CustomerSiteName);
+        Actions actions = new Actions(driver);
+        actions.sendKeys(CustomerSiteName, "www.lodispa.com").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        BasePage.blurElementWithJS(driver, CustomerSiteName);
+    }
     public void checkReportDetails(WebDriver driver){
-
+        WebElement ReportDetails = driver.findElement(By.xpath("//button[normalize-space()='Report Details']"));
+        BasePage.clickElementWithJS(driver, ReportDetails);
+        WebElement ReportTitle = driver.findElement(By.xpath("//div[@data-id='reportDetails.reportTitle']//input[@type='text']"));
+        BasePage.clickElementWithJS(driver, ReportTitle);
+        BasePage.sendKeysLetterByLetter(ReportTitle, "test");
+        BasePage.blurElementWithJS(driver, ReportTitle);
+        WebElement InvestigationDetails = driver.findElement(By.xpath("//button[normalize-space()='Investigation Details']"));
+        BasePage.clickElementWithJS(driver, InvestigationDetails);
+        WebElement LivePreviewEl = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='test']"));
+        LivePreviewEl.isDisplayed();
     }
     public void checkContainerBDA (WebDriver driver){
         WebElement Confidential = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Is the report confidential?')]"));
@@ -66,17 +143,14 @@ public class BDABasePage extends BasePage {
         actions.sendKeys(Keys.ENTER).build().perform();
         Thread.sleep(3000);
     }
-
     public boolean isCompanyVisible(WebDriver driver) {
         WebElement LpCompany = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'SKF ARGENTINA S.A.')]"));
         return BasePage.isElementVisibleWithJS(driver, LpCompany);
     }
-
     public boolean isLocationVisible(WebDriver driver) {
         WebElement LpLocation = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'SKF Solution Factory')]"));
         return BasePage.isElementVisibleWithJS(driver, LpLocation);
     }
-
     public void selectSKFCountry(WebDriver driver) throws InterruptedException {
         WebElement companyInd = driver.findElement(By.xpath("(//div[contains(text(),'Select')])[2]"));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -86,12 +160,10 @@ public class BDABasePage extends BasePage {
         actions.sendKeys(companyInd, "SKF").perform();
         actions.sendKeys(Keys.ENTER).build().perform();
     }
-
     public boolean isCountryVisible(WebDriver driver) {
         WebElement LpCountry = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Argentina')]"));
         return BasePage.isElementVisibleWithJS(driver, LpCountry);
     }
-
     public void selectCountry(WebDriver driver, String country) throws InterruptedException {
         WebElement countryInd = driver.findElement(By.xpath("(//div[contains(text(),'Select')])[2]"));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -101,72 +173,59 @@ public class BDABasePage extends BasePage {
         actions.sendKeys(countryInd, country).perform();
         actions.sendKeys(Keys.ENTER).build().perform();
     }
-
     public void enterSkfTerNumber(WebDriver driver, String terNumber) {
         WebElement skfTerNmr = driver.findElement(By.xpath("//div[@data-id='investigationDetails.terNumber']//input[@type='text']"));
         BasePage.clickElementWithJS(driver, skfTerNmr);
         BasePage.sendKeysLetterByLetter(skfTerNmr, terNumber);
     }
-
     public void enterScopeOfInvestigation(WebDriver driver, String scope) {
         WebElement scopeOfInv = driver.findElement(By.xpath("//div[@data-id='investigationDetails.scopeOfInvestigation']//p"));
         BasePage.clickElementWithJS(driver, scopeOfInv);
         BasePage.sendKeysLetterByLetter(scopeOfInv, scope);
         BasePage.blurElementWithJS(driver, scopeOfInv);
     }
-
     public static void clickAnalysisButton(WebDriver driver) {
         WebElement analysisButton = driver.findElement(By.xpath("//button[normalize-space()='Analysis']"));
         analysisButton.click();
     }
-
     public static void selectForAFA(WebDriver driver) {
         WebElement selectForAFA = driver.findElement(By.xpath("//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[6]/div/div[2]/div[2]/div/div/div[2]/div[10]/div[2]/div/div[3]/div/div[4]/div/div[2]/div[1]/figure[1]"));
         selectForAFA.click();
     }
-
     public static boolean isAFABtnEnabled(WebDriver driver) {
         WebElement afaButton = driver.findElement(By.xpath("(//span[@class='button__text' and contains(., 'Augmented Failure Analysis')])[1]"));
         afaButton.click();
         return afaButton.isEnabled();
     }
-
     public static boolean isAFAModalDisplayed(WebDriver driver) throws Throwable {
         Thread.sleep(7000);
         WebElement afaModal = driver.findElement(By.xpath("//div[@class='react-modal__header ai-modal__header']"));
         return afaModal.isDisplayed();
     }
-
     public static void clickCauseElement(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollBy(0, 300)");
         WebElement cause = driver.findElement(By.xpath("/html[1]/body[1]/div[1]/div[1]/div[2]/div[1]/div[1]/div[1]/div[2]/div[6]/div[1]/div[2]/div[2]/div[1]/div[1]/div[2]/div[10]/div[2]/div[1]/div[3]/div[1]/div[7]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]"));
         jsExecutor.executeScript("arguments[0].click();", cause);
     }
-
     public static boolean isLpCauseDisplayed(WebDriver driver) {
         WebElement lpCause = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Presence of water')]"));
         return lpCause.isDisplayed();
     }
-
     public void clickAddNewButton(WebDriver driver) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 0)");
         WebElement addNewButton = driver.findElement(By.cssSelector("#addBearingButton"));
         addNewButton.click();
     }
-
     public void clickAddNewEditButton(WebDriver driver) {
         WebElement addNewEditButton = driver.findElement(By.xpath("//button[normalize-space()='Bearing 2']"));
         addNewEditButton.click();
     }
-
     public void clickLpAddNew(WebDriver driver) {
         WebElement lpAddNew = driver.findElement(By.xpath("//span[@class='first' and contains(., 'Bearing 2')]"));
         lpAddNew.click();
     }
-
-
     public List<WebElement> lpBearingsSize2;
 
     public void duplicate(WebDriver driver) throws Throwable {

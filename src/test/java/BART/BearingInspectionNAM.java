@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.awt.*;
@@ -29,6 +30,10 @@ public class BearingInspectionNAM {
                 .withTimeout(Duration.ofSeconds(40))
                 .pollingEvery(Duration.ofSeconds(3))
                 .ignoring(NoSuchElementException.class);
+    }
+    @AfterClass
+    public void QuitBrowser() {
+        driver.quit();
     }
     @Test(priority = 1)
     public void ValidLogin() {

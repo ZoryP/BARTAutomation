@@ -1,22 +1,15 @@
 package BART;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
-
 public class BearingDamageAnalysis {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net";
@@ -35,7 +28,7 @@ public class BearingDamageAnalysis {
     }
     @AfterClass
     public void QuitBrowser() {
-    driver.quit();
+        driver.quit();
     }
     @Test(priority = 1)
     public void ValidLogin()  {
@@ -46,7 +39,6 @@ public class BearingDamageAnalysis {
         wait.until(ExpectedConditions.visibilityOf(loginPage.WelcomeMassage));
         loginPage.WelcomeMassage.isDisplayed();
     }
-
     @Test(priority = 2)
     public void CreateBda() {
         BART.DashboardPage dashboard = new BART.DashboardPage(driver);
@@ -56,7 +48,6 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(dashboard.BearingDamageAnalysisReport.isDisplayed());
         Assert.assertTrue(dashboard.IconToolbar.isDisplayed());
     }
-
     @Test(priority = 3)
     public void CheckSettings() {
         BDABasePage bdaBasePage = new BDABasePage(driver);
@@ -64,7 +55,6 @@ public class BearingDamageAnalysis {
         int expectedSize = 6;
         Assert.assertEquals(bdaBasePage.SettingContainer.size(), expectedSize);
     }
-
     @Test(priority = 4)
     public void CheckContainerSettings() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
@@ -77,41 +67,29 @@ public class BearingDamageAnalysis {
         List<WebElement> Accordeon = driver.findElements(By.cssSelector(".accordion__trigger-icon"));
         Assert.assertEquals(Accordeon.size(), 13);
     }
-    WebElement ReportTitle;
     @Test(priority = 6)
     public void CheckReportDetails() {
-        WebElement ReportDetails = driver.findElement(By.xpath("//button[normalize-space()='Report Details']"));
-        BasePage.clickElementWithJS(driver, ReportDetails);
-        ReportTitle = driver.findElement(By.xpath("//div[@data-id='reportDetails.reportTitle']//input[@type='text']"));
-        BasePage.clickElementWithJS(driver, ReportTitle);
-        BasePage.sendKeysLetterByLetter(ReportTitle, "test");
-        BasePage.blurElementWithJS(driver, ReportTitle);
-        WebElement InvestigationDetails = driver.findElement(By.xpath("//button[normalize-space()='Investigation Details']"));
-        BasePage.clickElementWithJS(driver, InvestigationDetails);
-        WebElement LivePreviewEl = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='test']"));
-        LivePreviewEl.isDisplayed();
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.checkReportDetails(driver);
+        Assert.assertTrue(bdaBasePage.LpReportDetails.isDisplayed());
     }
     @Test(priority = 7)
     public void CheckInvestigationDetails() {
-        BDABasePage basePageReports = new BDABasePage(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
         String terNumber = "1";
-        basePageReports.enterSkfTerNumber(driver, terNumber);
+        bdaBasePage.enterSkfTerNumber(driver, terNumber);
         String scope = "Bearing";
-        basePageReports.enterScopeOfInvestigation(driver, scope);
-        basePageReports.clickSKFDetails(driver);
-        WebElement lpTER = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='1']"));
-        WebElement lpScope = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Bearing')]"));
-        lpTER.isDisplayed();
-        lpScope.isDisplayed();
+        bdaBasePage.enterScopeOfInvestigation(driver, scope);
+        bdaBasePage.clickSKFDetails(driver);
+        Assert.assertTrue(bdaBasePage.LpTer.isDisplayed());
+        Assert.assertTrue(bdaBasePage.LpScope.isDisplayed());
     }
-
     @Test(priority = 8)
     public void CheckSKFDetailsCountry() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
         String country = "Argentina";
         bdaBasePage.selectCountry(driver, country);
     }
-
     @Test(priority = 9)
     public void CheckSKFDetailsCompany() throws Throwable {
         BDABasePage bdaBasePage= new BDABasePage(driver);
@@ -119,7 +97,6 @@ public class BearingDamageAnalysis {
         boolean isElementVisible = bdaBasePage.isCountryVisible(driver);
         Assert.assertTrue(isElementVisible);
     }
-
     @Test(priority = 10)
     public void CheckSKFCompanyLocation() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
@@ -137,77 +114,44 @@ public class BearingDamageAnalysis {
     }
     @Test(priority = 12)
     public void CheckCustomer() throws Throwable {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        WebElement CustomerDetails = driver.findElement(By.xpath("//button[normalize-space()='Customer Details']"));
-        BasePage.clickElementWithJS(driver, CustomerDetails);
-        WebElement Customer = driver.findElement(By.xpath("(//div[contains(text(),'Type 3 characters')])"));
-        jsExecutor.executeScript("arguments[0].click();", Customer);
-        Actions actions = new Actions(driver);
-        actions.sendKeys(Customer, "LODI SPA").perform();
-        Thread.sleep(3000);
-        actions.sendKeys(Keys.ENTER).build().perform();
-        Thread.sleep(3000);
-        WebElement LpCompany = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'LODI SPA')]"));
-        LpCompany.isDisplayed();
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.checkCustomer(driver);
+        Assert.assertTrue(bdaBasePage.LpCompany.isDisplayed());
+        Assert.assertTrue(bdaBasePage.LpCompanyAdress.isDisplayed());
+        Assert.assertTrue(bdaBasePage.LpCompanyCountry.isDisplayed());
     }
-    @Test(priority = 13)
-    public void CheckCustomerDetails() {
-        WebElement LpCompanyAdr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'VIA DELLA')]"));
-        WebElement LpCompanyCntr = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'Italy')]"));
-        LpCompanyAdr.isDisplayed();
-        LpCompanyCntr.isDisplayed();
-    }
-
     @Test(priority = 14)
-    public void CheckCustomerSiteName() {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollBy(0, 800)");
-        WebElement CustomerSiteName = driver.findElement(By.xpath("//div[@data-id='customerDetails.site']//input[@type='text']"));
-        jsExecutor.executeScript("arguments[0].click();", CustomerSiteName);
-        Actions actions = new Actions(driver);
-        actions.sendKeys(CustomerSiteName, "www.lodispa.com").perform();
-        actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver, CustomerSiteName);
-        WebElement LpCustomerSiteName = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and contains(., 'www.lodispa.com')]"));
-        LpCustomerSiteName.isDisplayed();
+    public void CheckCustomerSiteName() throws InterruptedException {
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.checkCustomerSiteName(driver);
+        Assert.assertTrue(bdaBasePage.LpCustomerSiteName.isDisplayed());
     }
-
     @Test(priority = 15)
     public void CheckAssetDetailsSection() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        WebElement AssetDetails = driver.findElement(By.xpath("//button[normalize-space()='Asset Details']"));
-        jsExecutor.executeScript("arguments[0].click();", AssetDetails);
-        WebElement AssetType = driver.findElement(By.xpath("//button[normalize-space()='Asset type / Functional Area / System'] "));
-        WebElement Machine = driver.findElement(By.xpath(" //button[normalize-space()='Machine / Asset Details']"));
-        AssetType.isDisplayed();
-        Machine.isDisplayed();
+        jsExecutor.executeScript("arguments[0].click();", namBasePage.AssetDetails);
+        Assert.assertTrue(namBasePage.AssetType.isDisplayed());
+        Assert.assertTrue(bdaBasePage.MachineAsset.isDisplayed());
     }
     @Test(priority = 16)
     public void CheckAssetType() throws Throwable {
-        BasePage basePage = new BasePage(driver);
-        BDABasePage basePageReports = new BDABasePage(driver);
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        basePage.AssetType.click();
-        jsExecutor.executeScript("arguments[0].click();", basePage.MachineAssetType);
-        Actions actions = new Actions(driver);
-        Thread.sleep(2000);
-        actions.sendKeys(basePage.MachineAssetType, "Air handling unit").perform();
-        Thread.sleep(3000);
-        actions.sendKeys(Keys.ENTER).build().perform();
-        BasePage.blurElementWithJS(driver, basePage.MachineAssetType);
-        Assert.assertTrue(basePageReports.LpFunctionalArea.isDisplayed());
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.checkAssetType(driver);
+        Assert.assertTrue(bdaBasePage.LpFunctionalArea.isDisplayed());
     }
     @Test(priority = 17)
     public void CheckAssetDetails() {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.FunctionalAreaNameWhereAssetIsUsed.click();
-        basePageReports.FunctionalAreaNameWhereAssetIsUsed.sendKeys("Operations");
-        BasePage.blurElementWithJS(driver, basePageReports.FunctionalAreaNameWhereAssetIsUsed);
-        basePageReports.SystemName.click();
-        basePageReports.SystemName.sendKeys("Operation 1");
-        BasePage.blurElementWithJS(driver, basePageReports.SystemName);
-        Assert.assertTrue(basePageReports.LpFunctionalAreaWhereAssetIsUsed.isDisplayed());
-        Assert.assertTrue(basePageReports.LpSystemName.isDisplayed());
+        BDABasePage bdaBasePages = new BDABasePage(driver);
+        bdaBasePages.FunctionalAreaNameWhereAssetIsUsed.click();
+        bdaBasePages.FunctionalAreaNameWhereAssetIsUsed.sendKeys("Operations");
+        BasePage.blurElementWithJS(driver, bdaBasePages.FunctionalAreaNameWhereAssetIsUsed);
+        bdaBasePages.SystemName.click();
+        bdaBasePages.SystemName.sendKeys("Operation 1");
+        BasePage.blurElementWithJS(driver, bdaBasePages.SystemName);
+        Assert.assertTrue(bdaBasePages.LpFunctionalAreaWhereAssetIsUsed.isDisplayed());
+        Assert.assertTrue(bdaBasePages.LpSystemName.isDisplayed());
     }
 
     @Test(priority = 18)
@@ -223,66 +167,34 @@ public class BearingDamageAnalysis {
         basePage.enterSKFSerialNumberValue(driver, "PEER");
         Assert.assertTrue(basePage.LpSkfOther.isDisplayed());
     }
-
     @Test(priority = 19)
     public void CheckBearingType() throws Throwable {
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 0)");
-        WebElement SKFCustomerDescription = driver.findElement(By.xpath("//div[@class='accordion']//div[@class='accordion__content accordion__content--is-open']//div[@class='accordion__content-form']//div[@class='componentContainer']//div//div[@class='se-wrapper-inner se-wrapper-wysiwyg sun-editor-editable']"));
-        jsExecutor.executeScript("arguments[0].click();", SKFCustomerDescription);
-        Actions actions = new Actions(driver);
-        Thread.sleep(2000);
-        actions.sendKeys(SKFCustomerDescription, "TEST").perform();
-        Thread.sleep(2000);
-        BasePage.blurElementWithJS(driver, SKFCustomerDescription);
-
+        BDABasePage bdaBasePages = new BDABasePage(driver);
+        bdaBasePages.checkBearingType(driver);
     }
-
     @Test(priority = 20)
     public void CheckComponentParts() {
-        WebElement ComponentParts = driver.findElement(By.xpath("//button[normalize-space()='Component Parts Investigation']"));
-        ComponentParts.click();
-        WebElement RollingElements = driver.findElement(By.xpath("//button[normalize-space()='Rolling Elements']"));
-        RollingElements.click();
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.checkComponentsParts(driver);
         List<WebElement> ComponentSize = driver.findElements(By.cssSelector(".accordion-menu-container"));
         Assert.assertEquals(ComponentSize.size(), 9);
     }
-
     @Test(priority = 21)
     public void CheckUploadImages() throws Throwable {
-        BDABasePage basePage = new BDABasePage(driver);
-        basePage.UploadImg.click();
-        Assert.assertTrue(basePage.ModalDialogForImages.isDisplayed());
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.UploadImg.click();
+        Assert.assertTrue(bdaBasePage.ModalDialogForImages.isDisplayed());
         Thread.sleep(4000);
-        basePage.FileInput.click();
-        String[] filePaths = {
-                "\"C:\\Users\\ZornicaPetkova\\Desktop\\istockphoto-1498223365-1024x1024.jpg\"",
-                "\"C:\\Users\\ZornicaPetkova\\Desktop\\New folder\\R - Copy - Copy.gif\"",
-                "\"C:\\Users\\ZornicaPetkova\\Desktop\\3 - Copy.jpg\""
-        };
-        Thread.sleep(4000);
-        Robot robot = new Robot();
-        for (String filePath : filePaths) {
-            StringSelection stringSelection = new StringSelection(filePath);
-            Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, null);
-            robot.keyPress(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_V);
-            robot.keyRelease(KeyEvent.VK_CONTROL);
-            robot.keyPress(KeyEvent.VK_ENTER);
-            robot.keyRelease(KeyEvent.VK_ENTER);
-            Thread.sleep(6000);
-        }
+        bdaBasePage.FileInput.click();
+        bdaBasePage.uploadImages();
     }
-
     @Test(priority = 22)
     public void AssertImages() {
-        BDABasePage basePage = new BDABasePage(driver);
-        wait.until(ExpectedConditions.elementToBeClickable(basePage.Upload)).click();
-        wait.until(ExpectedConditions.elementToBeClickable(basePage.Close)).click();
-        Assert.assertEquals(basePage.LpImageContainer.size(), 2);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        wait.until(ExpectedConditions.elementToBeClickable(bdaBasePage.Upload)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(bdaBasePage.Close)).click();
+        Assert.assertEquals(bdaBasePage.LpImageContainer.size(), 2);
     }
-
     @Test(priority = 23)
     public void CheckAnalysis() throws Throwable {
         BDABasePage.clickAnalysisButton(driver);
@@ -291,7 +203,6 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(BDABasePage.isAFABtnEnabled(driver));
         Assert.assertTrue(BDABasePage.isAFAModalDisplayed(driver));
     }
-
     @Test(priority = 24)
     public void DoneAFA() throws Throwable {
         BasePage.clickFailureMode(driver);
@@ -302,98 +213,95 @@ public class BearingDamageAnalysis {
         Thread.sleep(3000);
         Assert.assertTrue(BDABasePage.isLPAFADisplayed(driver));
     }
-
     @Test(priority = 25)
     public void CheckCause() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollBy(0, 300)");
         BDABasePage.clickCauseElement(driver);
         Thread.sleep(2000);
-        basePageReports.cause(driver);
+        bdaBasePage.cause(driver);
         Assert.assertTrue(BDABasePage.isLpCauseDisplayed(driver));
     }
-
     @Test(priority = 26)
     public void CreateNewBearing() {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.clickAddNewButton(driver);
-        basePageReports.clickAddNewEditButton(driver);
-        basePageReports.clickLpAddNew(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.clickAddNewButton(driver);
+        bdaBasePage.clickAddNewEditButton(driver);
+        bdaBasePage.clickLpAddNew(driver);
     }
-
     @Test(priority = 27)
     public void CheckThreeDotsMenu() throws Throwable {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        BDABasePage basePageReports = new BDABasePage(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
         jsExecutor.executeScript("window.scrollTo(0, 0)");
-        basePageReports.ThreeDots.click();
+        bdaBasePage.ThreeDots.click();
         Thread.sleep(3000);
-        Assert.assertEquals(basePageReports.ThreeDotsContainer.size(), 4);
+        Assert.assertEquals(bdaBasePage.ThreeDotsContainer.size(), 4);
     }
     @Test(priority = 28)
     public void DuplicateBearing() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.duplicate(driver);
-        Assert.assertEquals(basePageReports.lpBearingsSize2.size(), 2);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.duplicate(driver);
+        Assert.assertEquals(bdaBasePage.lpBearingsSize2.size(), 2);
     }
     @Test(priority = 29)
     public void DeleteFirstBearing() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.deleteFirstBearing(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.deleteFirstBearing(driver);
     }
     @Test(priority = 30)
     public void DeleteSecondBearing() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.deleteSecondBearing(driver);
-        Assert.assertEquals(basePageReports.lpBearings.size(), 1);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.deleteSecondBearing(driver);
+        Assert.assertEquals(bdaBasePage.lpBearings.size(), 1);
         WebElement SaveBtn = driver.findElement(By.cssSelector("#buttonReload"));
         SaveBtn.click();
     }
     @Test(priority = 31)
     public void CheckConclusionAndRecommendations() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.conclusionsAndRec(driver);
-        basePageReports.lpRecommendations.isDisplayed();
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.conclusionsAndRec(driver);
+        bdaBasePage.lpRecommendations.isDisplayed();
     }
     @Test(priority = 32)
     public void Submit() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.submit(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.submit(driver);
         Thread.sleep(3000);
-        basePageReports.ConfirmSubmittingMessage.isDisplayed();
-        basePageReports.ConfirmSubmittingBtn.click();
+        bdaBasePage.ConfirmSubmittingMessage.isDisplayed();
+        bdaBasePage.ConfirmSubmittingBtn.click();
         Thread.sleep(4000);
-        basePageReports.StatusSubmitted.isDisplayed();
+        bdaBasePage.StatusSubmitted.isDisplayed();
     }
     @Test(priority = 33)
     public void CheckIconToolbarSubmit() {
-        BDABasePage basePageReports = new BDABasePage(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
         List<WebElement> IconToolbar = driver.findElements(By.cssSelector(".button-bar__group"));
         Assert.assertEquals(IconToolbar.size(), 3);
-        Assert.assertTrue(basePageReports.isApproveVisible(driver));
-        Assert.assertTrue(basePageReports.isApproveWithEditsVisible(driver));
-        Assert.assertTrue(basePageReports.isRejectVisible(driver));
+        Assert.assertTrue(bdaBasePage.isApproveVisible(driver));
+        Assert.assertTrue(bdaBasePage.isApproveWithEditsVisible(driver));
+        Assert.assertTrue(bdaBasePage.isRejectVisible(driver));
     }
     @Test(priority = 34)
     public void Approve() {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.approve(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.approve(driver);
     }
     @Test(priority = 35)
     public void ApproveAndEdit() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.approveAndEdit(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.approveAndEdit(driver);
     }
     @Test(priority = 36)
     public void EditReport() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.editReport(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.editReport(driver);
     }
     @Test(priority = 37)
     public void DeleteReport() throws Throwable {
-        BDABasePage basePageReports = new BDABasePage(driver);
-        basePageReports.deleteReport(driver);
+        BDABasePage bdaBasePage = new BDABasePage(driver);
+        bdaBasePage.deleteReport(driver);
     }
     @Test(priority = 38)
     public void CloseReport() {

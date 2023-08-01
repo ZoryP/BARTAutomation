@@ -75,10 +75,8 @@ public class BasePage {
     List<WebElement> ThreeDotsContainer;
     @FindBy(css = ".case-bearingquicklinks-actions")
     WebElement QuickLinks;
-
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Duplicate')]")
     WebElement DuplicateButton;
-
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Delete')]")
     WebElement DeleteBearingButton;
     @FindBy(xpath = "//button[normalize-space()='Asset type / Functional Area / System'] ")
@@ -89,7 +87,6 @@ public class BasePage {
     WebElement BearingInvestigations;
     @FindBy(xpath = "//button[normalize-space()='Bearing 1']")
     WebElement Bearing1;
-
     @FindBy(xpath = "//button [text ()='Bearing 2']")
     WebElement Bearing2;
     @FindBy(xpath = "//button [text ()='Component Parts Investigation']")
@@ -110,7 +107,6 @@ public class BasePage {
     WebElement LpSkfOther;
     @FindBy(xpath = "//*[name()='polygon' and @id='Fill-6']")
     WebElement SaveButton;
-
     @FindBy(css = ".live-preview-images-item__media-container")
     List<WebElement> LpImageContainer;
     @FindBy(css = ".react-modal__header.upload-modal__header")
