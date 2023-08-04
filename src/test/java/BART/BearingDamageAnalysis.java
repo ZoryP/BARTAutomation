@@ -1,4 +1,5 @@
 package BART;
+
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -8,8 +9,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.time.Duration;
 import java.util.List;
+
 public class BearingDamageAnalysis {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net";
@@ -184,9 +187,24 @@ public class BearingDamageAnalysis {
         BDABasePage bdaBasePage = new BDABasePage(driver);
         bdaBasePage.UploadImg.click();
         Assert.assertTrue(bdaBasePage.ModalDialogForImages.isDisplayed());
+        String firstTabHandle = driver.getWindowHandle();
         Thread.sleep(4000);
         bdaBasePage.FileInput.click();
         bdaBasePage.uploadImages();
+//        driver.switchTo().newWindow(WindowType.TAB);
+//        ((JavascriptExecutor) driver).executeScript("window.open();");
+//        Set<String> windowHandles = driver.getWindowHandles();
+//        String secondTabHandle = windowHandles.stream().filter(handle -> !handle.equals(firstTabHandle)).findFirst().orElse(null);
+//        driver.switchTo().window(secondTabHandle);
+//        driver.get("https://s3-eu-west-1.amazonaws.com/bart-dev-images/8586/076INCNppUkCKXDj1YrG2IglKAejy4uRWhoberOwRf4g9tTMUM81T32GRxpLAz6i.jpeg");
+//        WebElement Picture = driver.findElement(By.xpath("//body//img"));
+//        driver.switchTo().window(firstTabHandle);
+//        WebElement targetElement = driver.findElement(By.cssSelector(".dropzone-inputLabel"));
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(Picture).perform();
+//        actions.clickAndHold().perform();
+//        actions.moveToElement(targetElement).perform();
+//        actions.release().perform();
     }
     @Test(priority = 22)
     public void AssertImages() {

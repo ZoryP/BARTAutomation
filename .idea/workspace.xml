@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="NEW TESTS">
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="01.08">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +66,7 @@
       <recent name="Production" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BearingDamageAnalysis">
+  <component name="RunManager" selected="TestNG.BearingInspectionNAM">
     <configuration name="BearingDamageAnalysis" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="BART" />
       <extension name="coverage">
@@ -157,8 +156,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.BearingDamageAnalysis" />
         <item itemvalue="TestNG.BearingInspectionNAM" />
+        <item itemvalue="TestNG.BearingDamageAnalysis" />
         <item itemvalue="TestNG.LoginDashboardTests" />
         <item itemvalue="TestNG.BearingDamageAnalysis.CreateBda" />
         <item itemvalue="TestNG.BearingInspectionNAM.CheckInspectionDate" />
@@ -398,7 +397,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690809711486</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="01.08">
+      <created>1690892927546</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1690892927546</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -432,7 +438,8 @@
     <MESSAGE value="importantadd4" />
     <MESSAGE value="NEW TEST" />
     <MESSAGE value="NEW TESTS" />
-    <option name="LAST_COMMIT_MESSAGE" value="NEW TESTS" />
+    <MESSAGE value="01.08" />
+    <option name="LAST_COMMIT_MESSAGE" value="01.08" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BART$BearingInspectionNAM.ic" NAME="BearingInspectionNAM Coverage Results" MODIFIED="1689232953654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

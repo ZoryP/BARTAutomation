@@ -140,8 +140,8 @@ public class LoginDashboardTests{
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", targetElement);
         Thread.sleep(3000);
-        dashboardPage.BearingDamageAnalysisReport.isDisplayed();              /*Live Preview of the report is displayed*/
-        dashboardPage.IconToolbar.isDisplayed();      /*Icon Toolbar and Edit box is displayed*/
+        dashboardPage.BearingDamageAnalysisReport.isDisplayed();
+        dashboardPage.IconToolbar.isDisplayed();
         dashboardPage.Close.click();
     }
 
