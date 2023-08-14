@@ -11,6 +11,7 @@ import java.util.List;
 
 
 public class BDABasePage extends BasePage {
+    private static WebElement source;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='test']")
     WebElement LpReportDetails;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='1']")

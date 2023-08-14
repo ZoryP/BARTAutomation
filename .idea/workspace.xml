@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="01.08">
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="04.08">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/istockphoto.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +59,9 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;last_directory_selection&quot;: &quot;C:/BART/src/test/java&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/BART/src/main/resources&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
@@ -64,6 +70,13 @@
       <recent name="BART" />
       <recent name="ProductionEnvironment" />
       <recent name="Production" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\BART\src\main\resources" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\BART\src\test" />
+      <recent name="C:\BART\src\main\resources" />
     </key>
   </component>
   <component name="RunManager" selected="TestNG.BearingInspectionNAM">
@@ -404,7 +417,14 @@
       <option name="project" value="LOCAL" />
       <updated>1690892927546</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="04.08">
+      <created>1691138508130</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1691138508130</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -439,7 +459,8 @@
     <MESSAGE value="NEW TEST" />
     <MESSAGE value="NEW TESTS" />
     <MESSAGE value="01.08" />
-    <option name="LAST_COMMIT_MESSAGE" value="01.08" />
+    <MESSAGE value="04.08" />
+    <option name="LAST_COMMIT_MESSAGE" value="04.08" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BART$BearingInspectionNAM.ic" NAME="BearingInspectionNAM Coverage Results" MODIFIED="1689232953654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
