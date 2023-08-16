@@ -43,6 +43,9 @@ public class DashboardPage extends BasePage {
 
     @FindBy(xpath = "//h3[@class='live-preview__header' and contains(., 'Bearing Inspection - NAM')]")
     WebElement BearingInspectionNAMReport;
+
+    @FindBy(xpath = "//h3[@class='live-preview__header' and contains(., 'Global Bearing Investigation')]")
+    WebElement GBIReport;
     @FindBy(css = "#buttonClose")
     WebElement Close;
 
@@ -51,6 +54,8 @@ public class DashboardPage extends BasePage {
 
     @FindBy(css = "#create__nam__button")
     WebElement NamReport;
+    @FindBy(css = "#create__gbi__button")
+    WebElement GlobalReport;
 
     @FindBy(xpath = "//a[@class='welcome-information__help-link'][normalize-space()='Open user guide']")
     WebElement UserGuide;

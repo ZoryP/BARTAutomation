@@ -11,7 +11,6 @@ import java.util.List;
 
 
 public class BDABasePage extends BasePage {
-    private static WebElement source;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='test']")
     WebElement LpReportDetails;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='1']")
@@ -26,8 +25,6 @@ public class BDABasePage extends BasePage {
     WebElement LpSystemName;
     @FindBy(css = "#buttonSettings")
     WebElement SettingsBtn;
-    @FindBy(css = ".settings-menu__action")
-    List<WebElement> SettingContainer;
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[6]/div/div[2]/div[2]/div/div/div[2]/div[8]/div[2]/div[3]/div/div[2]/div/div[1]/div/div/div[4]/div/div[2]/div[2]/label")
     WebElement UploadImg;
     @FindBy(xpath = "//div[@data-id='assetDetails.assetTypeOrFunctionalAreaOrSystem.functionalAreaName']//input[@type='text']")
@@ -109,7 +106,7 @@ public class BDABasePage extends BasePage {
         WebElement LivePreviewEl = driver.findElement(By.xpath("//div[@class='live-preview-key-value__value' and text()='test']"));
         LivePreviewEl.isDisplayed();
     }
-    public void checkContainerBDA (WebDriver driver){
+    public void checkContainer (WebDriver driver){
         WebElement Confidential = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Is the report confidential?')]"));
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));
         WebElement Appendix = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Exclude ISO appendix from the report?')]"));

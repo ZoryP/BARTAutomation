@@ -56,7 +56,7 @@ public class BearingInspectionNAM {
     @Test(priority = 3)
     public void Settings() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
-        namBasePage.SettingsContainerNAM.click();
+        namBasePage.SettingsContainerReports.click();
         int expectedSize = 4;
         Assert.assertEquals(namBasePage.SettingsSizeNam.size(), expectedSize);
     }
@@ -65,7 +65,7 @@ public class BearingInspectionNAM {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.checkContainerNAM(driver);
         TimeUnit.SECONDS.sleep(3);
-        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.SettingsNAM)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.SettingsReports)).click();
     }
     @Test(priority = 5)
     public void CheckEditTreeNAM() {

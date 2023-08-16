@@ -70,7 +70,7 @@ public class BearingDamageAnalysis {
     @Test(priority = 4)
     public void CheckContainerSettings() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
-        bdaBasePage.checkContainerBDA(driver);
+        bdaBasePage.checkContainer(driver);
         Thread.sleep(3000);
         bdaBasePage.SettingsBtn.click();
     }

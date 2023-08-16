@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="04.08">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/resources/istockphoto.jpg" afterDir="false" />
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="14.08">
+      <change afterPath="$PROJECT_DIR$/src/test/istockphoto-1498223365-1024x1024.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBasePage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBearingInvestigation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +82,7 @@
       <recent name="C:\BART\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BearingInspectionNAM">
+  <component name="RunManager" selected="TestNG.GlobalBearingInvestigation">
     <configuration name="BearingDamageAnalysis" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="BART" />
       <extension name="coverage">
@@ -91,24 +94,6 @@
       <option name="PACKAGE_NAME" value="BART" />
       <option name="MAIN_CLASS_NAME" value="BART.BearingDamageAnalysis" />
       <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BearingDamageAnalysis.CreateBda" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="BART" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="BART.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="BART" />
-      <option name="MAIN_CLASS_NAME" value="BART.BearingDamageAnalysis" />
-      <option name="METHOD_NAME" value="CreateBda" />
-      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -132,7 +117,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BearingInspectionNAM.CheckInspectionDate" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="GlobalBearingInspection" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="BART" />
       <extension name="coverage">
         <pattern>
@@ -141,9 +126,25 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="BART" />
-      <option name="MAIN_CLASS_NAME" value="BART.BearingInspectionNAM" />
-      <option name="METHOD_NAME" value="CheckInspectionDate" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="MAIN_CLASS_NAME" value="BART.GlobalBearingInspection" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GlobalBearingInvestigation" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="BART" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="BART.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="BART" />
+      <option name="MAIN_CLASS_NAME" value="BART.GlobalBearingInvestigation" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -169,11 +170,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.GlobalBearingInvestigation" />
+        <item itemvalue="TestNG.GlobalBearingInspection" />
         <item itemvalue="TestNG.BearingInspectionNAM" />
         <item itemvalue="TestNG.BearingDamageAnalysis" />
         <item itemvalue="TestNG.LoginDashboardTests" />
-        <item itemvalue="TestNG.BearingDamageAnalysis.CreateBda" />
-        <item itemvalue="TestNG.BearingInspectionNAM.CheckInspectionDate" />
       </list>
     </recent_temporary>
   </component>
@@ -424,7 +425,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691138508130</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="14.08">
+      <created>1692026611177</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1692026611177</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -460,7 +468,8 @@
     <MESSAGE value="NEW TESTS" />
     <MESSAGE value="01.08" />
     <MESSAGE value="04.08" />
-    <option name="LAST_COMMIT_MESSAGE" value="04.08" />
+    <MESSAGE value="14.08" />
+    <option name="LAST_COMMIT_MESSAGE" value="14.08" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BART$BearingInspectionNAM.ic" NAME="BearingInspectionNAM Coverage Results" MODIFIED="1689232953654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -117,7 +117,27 @@ public class BasePage {
     WebElement Upload;
     @FindBy(xpath = "//span[@class='button__text' and contains(., 'Close')]")
     WebElement Close;
+    @FindBy(css = "#buttonSettings")
+    WebElement SettingsReports;
+    @FindBy(css = "#buttonSettings")
+    WebElement SettingsContainerReports;
+    @FindBy(css = ".settings-menu__action")
+    List<WebElement> SettingContainer;
 
+    public void checkContainer (WebDriver driver){
+        WebElement Confidential = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Is the report confidential?')]"));
+        WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));
+        WebElement Appendix = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Exclude ISO appendix from the report?')]"));
+        WebElement PageBreak = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Insert page break for each bearing in the report?')]"));
+        WebElement AutoScroll = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Disable autoscroll?')]"));
+        WebElement ConcAndRecommendations = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Show CONCLUSIONS AND RECOMMENDATIONS at beginning and end of report?')]"));
+        Confidential.isEnabled();
+        FigureNumbering.isEnabled();
+        Appendix.isEnabled();
+        PageBreak.isEnabled();
+        AutoScroll.isEnabled();
+        ConcAndRecommendations.isEnabled();
+    }
 
     public static void clickElementWithJS(WebDriver driver, WebElement element) {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
