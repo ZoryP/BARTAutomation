@@ -95,7 +95,7 @@ public class BearingDamageAnalysis {
         bdaBasePage.enterSkfTerNumber(driver, terNumber);
         String scope = "Bearing";
         bdaBasePage.enterScopeOfInvestigation(driver, scope);
-        bdaBasePage.clickSKFDetails(driver);
+        bdaBasePage.SKFDetails.click();
         Assert.assertTrue(bdaBasePage.LpTer.isDisplayed());
         Assert.assertTrue(bdaBasePage.LpScope.isDisplayed());
     }

@@ -5,15 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="14.08">
-      <change afterPath="$PROJECT_DIR$/src/test/istockphoto-1498223365-1024x1024.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBasePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBearingInvestigation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BDABasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingDamageAnalysis.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BearingInspectionNAM.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/GlobalBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBasePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/GlobalBearingInvestigation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBearingInvestigation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -171,9 +168,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.GlobalBearingInvestigation" />
-        <item itemvalue="TestNG.GlobalBearingInspection" />
         <item itemvalue="TestNG.BearingInspectionNAM" />
         <item itemvalue="TestNG.BearingDamageAnalysis" />
+        <item itemvalue="TestNG.GlobalBearingInspection" />
         <item itemvalue="TestNG.LoginDashboardTests" />
       </list>
     </recent_temporary>
@@ -432,7 +429,14 @@
       <option name="project" value="LOCAL" />
       <updated>1692026611177</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="14.08">
+      <created>1692170534985</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1692170534985</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

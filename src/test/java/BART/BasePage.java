@@ -91,6 +91,8 @@ public class BasePage {
     WebElement Bearing2;
     @FindBy(xpath = "//button [text ()='Component Parts Investigation']")
     WebElement Components;
+    @FindBy(xpath = "//button [text ()='SKF Details']")
+    WebElement SKFDetails;
     @FindBy(xpath = "//button [text ()='Outer Ring']")
     WebElement OuterRing;
     @FindBy(xpath = "//button [text ()='Rolling Elements']")
@@ -123,6 +125,8 @@ public class BasePage {
     WebElement SettingsContainerReports;
     @FindBy(css = ".settings-menu__action")
     List<WebElement> SettingContainer;
+    @FindBy(id = "Tree/tree_root_branch")
+    List<WebElement> AccordeonReports;
 
     public void checkContainer (WebDriver driver){
         WebElement Confidential = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Is the report confidential?')]"));
@@ -151,11 +155,6 @@ public class BasePage {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         return (boolean) jsExecutor.executeScript("return arguments[0].offsetWidth > 0 && arguments[0].offsetHeight > 0;", element);
     }
-    public void clickSKFDetails(WebDriver driver) {
-        WebElement SKFDetails = driver.findElement(By.xpath("//button[normalize-space()='SKF Details']"));
-        BasePage.clickElementWithJS(driver, SKFDetails);
-    }
-
     public void clickSKFOther(WebDriver driver) {
         WebElement skfOther = driver.findElement(By.xpath("//div[@class='accordion']//div[@class='accordion__content accordion__content--is-open']//div[@class='accordion__content-form']//div[@class='componentContainer']//div//div[@class='componentContainer']//div//div[contains(@class,'css-1hwfws3')]"));
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;

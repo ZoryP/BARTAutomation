@@ -70,7 +70,7 @@ public class BearingInspectionNAM {
     @Test(priority = 5)
     public void CheckEditTreeNAM() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
-        Assert.assertEquals(namBasePage.AccordeonNam.size(), 7);
+        Assert.assertEquals(namBasePage.AccordeonReports.size(), 7);
     }
     @Test(priority = 6)
     public void CheckReportInspectionTime() {

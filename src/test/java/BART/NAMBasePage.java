@@ -15,8 +15,7 @@ import java.util.concurrent.TimeUnit;
 public class NAMBasePage extends BasePage {
 
     FluentWait<WebDriver> wait;
-    @FindBy(id = "Tree/tree_root_branch")
-    List<WebElement> AccordeonNam;
+
     @FindBy(css = ".settings-menu__action")
     List<WebElement> SettingsSizeNam;
     @FindBy(xpath = "//button[normalize-space()='Inspection Details']")
