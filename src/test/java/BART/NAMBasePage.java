@@ -41,10 +41,8 @@ public class NAMBasePage extends BasePage {
     WebElement NumberOfBearings;
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[1]/div[2]/div/div[5]/div/div[2]/div/div[1]/div/input")
     WebElement InspectionDate;
-
     @FindBy(css = "div[data-validation-id='reportDetails.reportApprovedBy.name'] div[class=' css-1hwfws3']")
     WebElement ApprovedByBtn;
-
     @FindBy(xpath = "//div[@data-validation-id='skfDetails.endUser.vendor']//div[contains(@class,'css-1hwfws3')]")
     WebElement Vendor;
     @FindBy(xpath = "//div[@data-id='skfDetails.vendorJobNumber']//input[@type='text']")
@@ -67,13 +65,13 @@ public class NAMBasePage extends BasePage {
     WebElement ManufacturingDateCode;
     @FindBy(xpath = "//*[@data-id='bearingInvestigations.bearingInvestigation[0].manufacturing.remanId1']")
     WebElement RemanId;
-    @FindBy(xpath = "//*[@data-id='bearingInvestigations.bearingInvestigation[0].manufacturing.dateCode1']")
-    WebElement DateCode;
     @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[2]")
+    WebElement DateCode;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[4]")
     WebElement PositionOfBearing;
-    @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
+    @FindBy(xpath = "(//div[contains(text(),'Select')])[5]")
     WebElement LubricationType;
-    @FindBy(xpath = "(//div[contains(text(),'Select')])[3]")
+    @FindBy(xpath = "(//div[contains(text(),'Select')])[5]")
     WebElement RingRotation;
     @FindBy(xpath = "(//*[@id='icon_ellipsis'])[2]")
     WebElement ThreeDotsOuterRing;
@@ -85,11 +83,11 @@ public class NAMBasePage extends BasePage {
     WebElement AddMarkedSide;
     @FindBy(xpath = "//a[@class='navigation__action' and contains(., 'Side face - opposite side')]")
     WebElement AddOppositeSide;
-    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[2]")
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[4]")
     WebElement AddObservationsOuterRing;
-    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[7]")
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[9]")
     WebElement AddObservationsInRow;
-    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[3]")
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[5]")
     WebElement AddObservationsInnerRing;
     @FindBy(xpath = "(//*[@id=\"Vector\"])[4]")
     WebElement SeverityRacewayOuterRing;
@@ -217,7 +215,6 @@ public class NAMBasePage extends BasePage {
         TimeUnit.SECONDS.sleep(3);
         actions.sendKeys(InspectionDate, Keys.ENTER).perform();
     }
-
     public void setApprovedBy(WebDriver driver) throws InterruptedException {
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         Actions actions = new Actions(driver);
@@ -358,6 +355,7 @@ public class NAMBasePage extends BasePage {
         namBasePage.ThreeDotsOuterRing.click();
         TimeUnit.SECONDS.sleep(1);
         namBasePage.AddRow2.click();
+
     }
 
     public void setObservationsOuterRing(WebDriver driver) throws InterruptedException {

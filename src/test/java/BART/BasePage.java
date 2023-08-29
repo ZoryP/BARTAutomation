@@ -85,6 +85,8 @@ public class BasePage {
     WebElement MachineAssetType;
     @FindBy(xpath = "//button[normalize-space()='Bearing Investigations']")
     WebElement BearingInvestigations;
+    @FindBy(xpath = "//button[normalize-space()='Background Information']")
+    WebElement BackgroundInformation;
     @FindBy(xpath = "//button[normalize-space()='Bearing 1']")
     WebElement Bearing1;
     @FindBy(xpath = "//button [text ()='Bearing 2']")

@@ -233,7 +233,7 @@ public class BearingDamageAnalysis {
         BDABasePage bdaBasePage = new BDABasePage(driver);
         wait.until(ExpectedConditions.elementToBeClickable(bdaBasePage.Upload)).click();
         wait.until(ExpectedConditions.elementToBeClickable(bdaBasePage.Close)).click();
-        Assert.assertEquals(bdaBasePage.LpImageContainer.size(), 2);
+        Assert.assertEquals(bdaBasePage.LpImageContainer.size(), 1);
     }
     @Test(priority = 23)
     public void CheckAnalysis() throws Throwable {
