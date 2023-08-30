@@ -24,7 +24,7 @@ public class GlobalBasePage extends BasePage {
     WebElement TerResult;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'SAIC')]")
     WebElement TerCustomer;
-    @FindBy(xpath = "(//div[contains(text(),'Select')])[1]")
+    @FindBy(xpath = "(//div[contains(text(),'Select')])[4]")
     WebElement GBICountryFields;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='Bulgaria']")
     WebElement LpCountry;
@@ -34,15 +34,15 @@ public class GlobalBasePage extends BasePage {
     WebElement LpLocation;
     @FindBy(xpath = "//label[@for='skfDetails.reportNeedsApproval.needsApproval.yes']")
     WebElement Approver;
-    @FindBy(xpath = "(//div[contains(text(),'Select')])[5]")
+    @FindBy(xpath = "(//div[contains(text(),'Select')])[11]")
     WebElement ApproverName;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and contains(., 'Yavor Gledachev')]")
     WebElement LpApprover;
-    @FindBy(xpath = "//div[@class=' css-1wa3eu0-placeholder' and contains(., 'Select or free text')][1]")
+    @FindBy(xpath = "(//div[@class=' css-1wa3eu0-placeholder' and contains(., 'Select or free text')])[4]")
     WebElement DistributionDelegation;
     @FindBy(css = ".css-12jo7m5")
     List<WebElement> EditTreeDelegation;
-    @FindBy(xpath = "(//div[contains(text(),'Select ...')])[5]")
+    @FindBy(xpath = "(//div[contains(text(),'Select ...')])[8]")
     WebElement BearingTypeSectionFields;
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[5]/div/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div/div[3]/div/div[2]/div/div[1]/div/input")
     WebElement DateOfReciept;
