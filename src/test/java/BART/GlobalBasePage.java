@@ -43,7 +43,15 @@ public class GlobalBasePage extends BasePage {
     @FindBy(css = ".css-12jo7m5")
     List<WebElement> EditTreeDelegation;
     @FindBy(xpath = "(//div[contains(text(),'Select ...')])[8]")
-    WebElement BearingTypeSectionFields;
+    WebElement BearingTypeSelectSectionFields;
+
+    @FindBy(xpath = "(//div[contains(text(),'Select ...')])[12]")
+    WebElement GreasingMethod;
+    @FindBy(xpath = "(//div[contains(text(),'Select ...')])[13]")
+    WebElement CountryOfManufacture;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[4]")
+    WebElement BearingTypeFreeSectionFields;
+
     @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[5]/div/div[2]/div[2]/div/div/div[2]/div[1]/div[2]/div/div[3]/div/div[2]/div/div[1]/div/input")
     WebElement DateOfReciept;
 
@@ -90,19 +98,57 @@ public class GlobalBasePage extends BasePage {
         actions.sendKeys("Marcus").perform();
         actions.sendKeys(Keys.ENTER).build().perform();
     }
-    public void setGBICountryFields(WebDriver driver){
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+    public void setBearingTypeSelectSectionFields(WebDriver driver){
+        BearingInvestigations.click();
+        Bearing1.click();
+        BackgroundInformation.click();
+        BearingTypeSelectSectionFields.click();
         Actions actions = new Actions(driver);
-        jsExecutor.executeScript("arguments[0].click();", BearingTypeSectionFields);
-        actions.sendKeys(BearingTypeSectionFields, "Bulgaria").perform();
+        actions.sendKeys(BearingTypeSelectSectionFields, "roller bearing").perform();
         actions.sendKeys(Keys.ENTER).build().perform();
-        jsExecutor.executeScript("arguments[0].click();",BearingTypeSectionFields);
-        actions.sendKeys(BearingTypeSectionFields, "SKF BULGARIA").perform();
-        actions.sendKeys(Keys.ENTER).build().perform();
-        jsExecutor.executeScript("arguments[0].click();",BearingTypeSectionFields);
-        actions.sendKeys(BearingTypeSectionFields, "Sofia").perform();
+        actions.sendKeys(BearingTypeSelectSectionFields, "OTHER").perform();
         actions.sendKeys(Keys.ENTER).build().perform();
     }
+    public void setDateOfReciept(WebDriver driver) throws InterruptedException{
+        Actions actions = new Actions(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 600)");
+        TimeUnit.SECONDS.sleep(3);
+        actions.sendKeys(DateOfReciept, Keys.DOWN);
+        TimeUnit.SECONDS.sleep(3);
+        actions.sendKeys(DateOfReciept, Keys.ENTER).perform();
+    }
+    public void setBearingTypeFreeSectionFields(WebDriver driver){
+        Actions actions = new Actions(driver);
+        actions.sendKeys(BearingTypeFreeSectionFields, "Baldor").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.scrollToElement(BearingTypeFreeSectionFields);
+        actions.sendKeys(BearingTypeFreeSectionFields, "excessive noise").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.scrollToElement(BearingTypeFreeSectionFields);
+        actions.sendKeys(BearingTypeFreeSectionFields, "assel mill").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.scrollToElement(BearingTypeFreeSectionFields);
+        actions.sendKeys(BearingTypeFreeSectionFields, "bearing 3").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+    }
+    public void setGreasingMethod(WebDriver driver) {
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(GreasingMethod);
+        actions.sendKeys(GreasingMethod, "Grease").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.sendKeys(GreasingMethod, "Multi-point").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+    }
+    public void setCountryOfManufacture(WebDriver driver){
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(CountryOfManufacture);
+        actions.sendKeys(CountryOfManufacture, "Belgium").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        actions.sendKeys(CountryOfManufacture, "SKF").perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
+    }
+
     GlobalBasePage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);

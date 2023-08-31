@@ -91,6 +91,8 @@ public class BasePage {
     WebElement Bearing1;
     @FindBy(xpath = "//button [text ()='Bearing 2']")
     WebElement Bearing2;
+    @FindBy(xpath = "//button [text ()='Investigation Details']")
+    WebElement InvestigationDetails;
     @FindBy(xpath = "//button [text ()='Component Parts Investigation']")
     WebElement Components;
     @FindBy(xpath = "//button [text ()='SKF Details']")

@@ -34,10 +34,6 @@ public class GlobalBearingInvestigation {
                 .ignoring(NoSuchElementException.class);
     }
 
-    //@AfterClass
-    //public void QuitBrowser() {
-    //  driver.quit();
-    // }
     @Test(priority = 1)
     public void ValidLogin() {
         BART.LoginPage loginPage = new BART.LoginPage(driver);
@@ -102,7 +98,6 @@ public class GlobalBearingInvestigation {
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.TerResult)).isDisplayed();
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.TerCustomer)).isDisplayed();
     }
-
     @Test(priority = 8)
     public void CheckOtherNumber() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -113,7 +108,6 @@ public class GlobalBearingInvestigation {
         actions.sendKeys(Keys.ENTER).build().perform();
         wait.until(ExpectedConditions.invisibilityOf(globalBasePage.TerResult));
     }
-
     @Test(priority = 9)
     public void CheckSKFDetails() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -122,7 +116,6 @@ public class GlobalBearingInvestigation {
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.LpCompany)).isDisplayed();
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.LpLocation)).isDisplayed();
     }
-
     @Test(priority = 10)
     public void CheckApprover() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -130,7 +123,6 @@ public class GlobalBearingInvestigation {
         globalBasePage.setApprover(driver);
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.LpApprover)).isDisplayed();
     }
-
     @Test(priority = 11)
     public void CheckDistributionAndDelegation() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -138,34 +130,42 @@ public class GlobalBearingInvestigation {
         TimeUnit.SECONDS.sleep(2);
         Assert.assertEquals(globalBasePage.EditTreeDelegation.size(), 4);
     }
-
     @Test(priority = 12)
-    public void CheckBearingInvestigation() {
+    public void CheckBearingInvestigationSelectFields() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
-        globalBasePage.BearingInvestigations.click();
-        globalBasePage.Bearing1.click();
-        globalBasePage.BackgroundInformation.click();
-        globalBasePage.BearingTypeSectionFields.click();
-        Actions actions = new Actions(driver);
-        actions.sendKeys(globalBasePage.BearingTypeSectionFields, "roller bearing").perform();
-        actions.sendKeys(Keys.ENTER).build().perform();
+        globalBasePage.setBearingTypeSelectSectionFields(driver);
+        //ASSERT
     }
-
     @Test(priority = 13)
     public void CheckDateOfReciept() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
-        Actions actions = new Actions(driver);
+        globalBasePage.setDateOfReciept(driver);
+        //ASSERT
+    }
+    @Test(priority = 14)
+    public void CheckBearingInvestigationFreeTextFields() {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.setBearingTypeFreeSectionFields(driver);
+        //ASSERT
+    }
+    @Test(priority = 15)
+    public void CheckGreasingMethod(){
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.setGreasingMethod(driver);
+        //ASSERT
+    }
+    @Test(priority = 16)
+    public void CheckCountryOfManufacture(){
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.setCountryOfManufacture(driver);
+        //ASSERT
+    }
+    @Test(priority = 17)
+    public void CheckInvestigationDetails(){
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 600)");
-        TimeUnit.SECONDS.sleep(3);
-        actions.sendKeys(globalBasePage.DateOfReciept, Keys.DOWN);
-        TimeUnit.SECONDS.sleep(3);
-        actions.sendKeys(globalBasePage.DateOfReciept, Keys.ENTER).perform();
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        globalBasePage.InvestigationDetails.click();
     }
 }
-//    @Test(priority = 13)
-//    public void CheckCountry() {
-//        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
-//        globalBasePage.setGBICountryFields(driver);
-
 
