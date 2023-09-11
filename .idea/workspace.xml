@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="30.08">
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="31.08">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/BasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/GlobalBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/BART/GlobalBearingInvestigation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBearingInvestigation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,8 +166,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.GlobalBearingInvestigation" />
-        <item itemvalue="TestNG.BearingDamageAnalysis" />
         <item itemvalue="TestNG.BearingInspectionNAM" />
+        <item itemvalue="TestNG.BearingDamageAnalysis" />
         <item itemvalue="TestNG.GlobalBearingInspection" />
         <item itemvalue="TestNG.LoginDashboardTests" />
       </list>
@@ -454,7 +455,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693385939120</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="31.08">
+      <created>1693479690630</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1693479690630</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -493,7 +501,8 @@
     <MESSAGE value="14.08" />
     <MESSAGE value="29.08" />
     <MESSAGE value="30.08" />
-    <option name="LAST_COMMIT_MESSAGE" value="30.08" />
+    <MESSAGE value="31.08" />
+    <option name="LAST_COMMIT_MESSAGE" value="31.08" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BART$BearingInspectionNAM.ic" NAME="BearingInspectionNAM Coverage Results" MODIFIED="1689232953654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -11,6 +11,7 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class BasePage {
     @FindBy(xpath = "(//*[@class='button button--icon-only' and contains(., 'Approve')])[1]")
@@ -107,6 +108,8 @@ public class BasePage {
     WebElement AfaModal;
     @FindBy(xpath = "//button [text ()='Inner Ring']")
     WebElement InnerRing;
+    @FindBy(xpath = "//button [text ()='Cage']")
+    WebElement Cage;
     @FindBy(xpath = "//button[normalize-space()='Bearing Type']")
     WebElement BearingTypeSection;
     @FindBy(xpath = "//div[@class='live-preview-key-value__header live-preview-key-value__bearingheader']//span[contains(text(),'PEER / SKF')]")
@@ -132,6 +135,20 @@ public class BasePage {
     @FindBy(id = "Tree/tree_root_branch")
     List<WebElement> AccordeonReports;
 
+    public void addMoreSides(WebDriver driver) throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.Components.click();
+        namBasePage.OuterRing.click();
+        TimeUnit.SECONDS.sleep(1);
+        namBasePage.ThreeDotsOuterRing.click();
+        namBasePage.AddOuterDiameter.click();
+        TimeUnit.SECONDS.sleep(1);
+        namBasePage.ThreeDotsOuterRing.click();
+        namBasePage.AddMarkedSide.click();
+        TimeUnit.SECONDS.sleep(1);
+        namBasePage.ThreeDotsOuterRing.click();
+        namBasePage.AddOppositeSide.click();
+    }
     public void checkContainer (WebDriver driver){
         WebElement Confidential = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Is the report confidential?')]"));
         WebElement FigureNumbering = driver.findElement(By.xpath("//span[@class='checkbox__label-span' and contains(., 'Enable automatic figure numbering?')]"));

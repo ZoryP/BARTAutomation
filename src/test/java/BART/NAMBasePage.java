@@ -333,20 +333,19 @@ public class NAMBasePage extends BasePage {
         SaveButton.click();
     }
 
-    public void addMoreSides(WebDriver driver) throws InterruptedException {
-        NAMBasePage namBasePage = new NAMBasePage(driver);
-        namBasePage.Components.click();
-        namBasePage.OuterRing.click();
-        TimeUnit.SECONDS.sleep(1);
-        namBasePage.ThreeDotsOuterRing.click();
-        namBasePage.AddOuterDiameter.click();
-        TimeUnit.SECONDS.sleep(1);
-        namBasePage.ThreeDotsOuterRing.click();
-        namBasePage.AddMarkedSide.click();
-        TimeUnit.SECONDS.sleep(1);
-        namBasePage.ThreeDotsOuterRing.click();
-        namBasePage.AddOppositeSide.click();
-    }
+//    public void addMoreSides(WebDriver driver) throws InterruptedException {
+//        NAMBasePage namBasePage = new NAMBasePage(driver);
+//        namBasePage.Components.click();
+//        namBasePage.OuterRing.click();
+//        TimeUnit.SECONDS.sleep(1);
+//        namBasePage.ThreeDotsOuterRing.click();
+//        namBasePage.AddOuterDiameter.click();
+//        TimeUnit.SECONDS.sleep(1);
+//        namBasePage.ThreeDotsOuterRing.click();
+//        namBasePage.AddMarkedSide.click();
+//        TimeUnit.SECONDS.sleep(1);
+//        namBasePage.ThreeDotsOuterRing.click();
+//        namBasePage.AddOppositeSide.click();
 
     public void addMoreRows(WebDriver driver) throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -355,7 +354,6 @@ public class NAMBasePage extends BasePage {
         namBasePage.ThreeDotsOuterRing.click();
         TimeUnit.SECONDS.sleep(1);
         namBasePage.AddRow2.click();
-
     }
 
     public void setObservationsOuterRing(WebDriver driver) throws InterruptedException {

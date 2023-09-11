@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
-
 public class GlobalBearingInvestigation {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net";
@@ -98,6 +97,7 @@ public class GlobalBearingInvestigation {
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.TerResult)).isDisplayed();
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.TerCustomer)).isDisplayed();
     }
+
     @Test(priority = 8)
     public void CheckOtherNumber() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -108,6 +108,7 @@ public class GlobalBearingInvestigation {
         actions.sendKeys(Keys.ENTER).build().perform();
         wait.until(ExpectedConditions.invisibilityOf(globalBasePage.TerResult));
     }
+
     @Test(priority = 9)
     public void CheckSKFDetails() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -116,6 +117,7 @@ public class GlobalBearingInvestigation {
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.LpCompany)).isDisplayed();
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.LpLocation)).isDisplayed();
     }
+
     @Test(priority = 10)
     public void CheckApprover() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -123,6 +125,7 @@ public class GlobalBearingInvestigation {
         globalBasePage.setApprover(driver);
         wait.until(ExpectedConditions.visibilityOf(globalBasePage.LpApprover)).isDisplayed();
     }
+
     @Test(priority = 11)
     public void CheckDistributionAndDelegation() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -130,42 +133,132 @@ public class GlobalBearingInvestigation {
         TimeUnit.SECONDS.sleep(2);
         Assert.assertEquals(globalBasePage.EditTreeDelegation.size(), 4);
     }
+
     @Test(priority = 12)
     public void CheckBearingInvestigationSelectFields() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         globalBasePage.setBearingTypeSelectSectionFields(driver);
         //ASSERT
     }
+
     @Test(priority = 13)
     public void CheckDateOfReciept() throws Throwable {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         globalBasePage.setDateOfReciept(driver);
         //ASSERT
     }
+
     @Test(priority = 14)
     public void CheckBearingInvestigationFreeTextFields() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         globalBasePage.setBearingTypeFreeSectionFields(driver);
         //ASSERT
     }
+
     @Test(priority = 15)
-    public void CheckGreasingMethod(){
+    public void CheckGreasingMethod() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         globalBasePage.setGreasingMethod(driver);
         //ASSERT
     }
+
     @Test(priority = 16)
-    public void CheckCountryOfManufacture(){
+    public void CheckCountryOfManufacture() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         globalBasePage.setCountryOfManufacture(driver);
         //ASSERT
     }
+
     @Test(priority = 17)
-    public void CheckInvestigationDetails(){
+    public void CheckInvestigationDetails() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
         jsExecutor.executeScript("window.scrollTo(0, 0)");
         globalBasePage.InvestigationDetails.click();
+        globalBasePage.setPurposeAndScope(driver);
+        //ASSERT
+    }
+
+    @Test(priority = 18)
+    public void CheckCompanyName() throws InterruptedException {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.CompanyName.click();
+        Actions actions = new Actions(driver);
+        actions.sendKeys(globalBasePage.CompanyName, "COLORADO").perform();
+        TimeUnit.SECONDS.sleep(4);
+        actions.sendKeys(Keys.ENTER).build().perform();
+        //ASSERT
+    }
+
+    @Test(priority = 19)
+    public void CheckBearingInvestigation() throws InterruptedException {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.BearingInvestigations.click();
+        TimeUnit.SECONDS.sleep(2);
+        globalBasePage.addMoreSides(driver);
+        //ASSERT
+    }
+
+    @Test(priority = 20)
+    public void CheckAddObservationsInOuterRing() {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.RacewayObservations.click();
+        globalBasePage.RacewayObservations.sendKeys("1.Surface in good condition.");
+        globalBasePage.RacewayObservations.sendKeys(Keys.ENTER);
+        globalBasePage.RacewayObservations.sendKeys("2.Scratch.");
+        globalBasePage.DiameterObservations.click();
+        globalBasePage.DiameterObservations.sendKeys("1.Abrasive wear (frosting, smoothing, glazing).");
+        globalBasePage.DiameterObservations.sendKeys(Keys.ENTER);
+        globalBasePage.DiameterObservations.sendKeys("2.Chatter marks");
+        //ASSERT
+    }
+
+    @Test(priority = 21)
+    public void CheckAddObservationsInCages() {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.Cage.click();
+        globalBasePage.CageObservations.click();
+        globalBasePage.CageObservations.sendKeys("Moisture corrosion spots.");
+        //ASSERT
+    }
+
+    @Test(priority = 22)
+    public void CheckAddObservationsInOtherComponents() {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 100)");
+        globalBasePage.InnerRing.click();
+        globalBasePage.InnerRingObservations.click();
+        globalBasePage.InnerRingObservations.sendKeys("1.Moisture corrosion spots.\n" + "2.Heavy surface wear in contact zone.\n" + "3.Loading zone heavy shifted to one side.\n" + "4.Internal surfaces polished.");
+        //ASSERT
+    }
+    @Test(priority = 23)
+    public void CheckTestEquipment() throws InterruptedException  {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        globalBasePage.BackgroundInformation.click();
+        jsExecutor.executeScript("window.scrollTo(0, 1000)");
+        TimeUnit.SECONDS.sleep(2);
+        globalBasePage.ConfigureTestEquipment.click();
+        TimeUnit.SECONDS.sleep(2);
+        globalBasePage.AddRow.click();
+        globalBasePage.TestEquipment.click();
+        globalBasePage.TestEquipment.sendKeys("TEST 1");
+        globalBasePage.TestMethod.click();
+        TimeUnit.SECONDS.sleep(2);
+        globalBasePage.TestMethod.sendKeys("TEST 2");
+        globalBasePage.Operator.click();
+        TimeUnit.SECONDS.sleep(2);
+        globalBasePage.Operator.sendKeys("TEST 3");
+        globalBasePage.Instrument.click();
+        TimeUnit.SECONDS.sleep(2);
+        globalBasePage.Instrument.sendKeys("TEST 4");
+        globalBasePage.DateEquipment.click();
+        TimeUnit.SECONDS.sleep(2);
+        globalBasePage.DateEquipment.sendKeys("10/12/2023");
+        TimeUnit.SECONDS.sleep(2);
+        globalBasePage.SaveEquipment.click();
     }
 }
 
