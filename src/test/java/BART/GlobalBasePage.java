@@ -66,17 +66,67 @@ public class GlobalBasePage extends BasePage {
     WebElement AddRow;
     @FindBy(xpath = "/html/body/div[12]/div/div/div[2]/table/thead/tr[2]/td[1]/div/div/div[2]/div/input")
     WebElement TestEquipment;
-    @FindBy(xpath = "//*[@data-id='testMethod']")
+    @FindBy(xpath = "/html/body/div[12]/div/div/div[2]/table/thead/tr[2]/td[2]/div/div/div[2]/div/input")
     WebElement TestMethod;
-    @FindBy(xpath = "//*[@data-id='instrument']")
+    @FindBy(xpath = "/html/body/div[12]/div/div/div[2]/table/thead/tr[2]/td[4]/div/div/div[2]/div/textarea")
     WebElement Instrument;
-    @FindBy(xpath = "//*[@data-id='operator']")
+    @FindBy(xpath = "/html/body/div[12]/div/div/div[2]/table/thead/tr[2]/td[3]/div/div/div[2]/div/input")
     WebElement Operator;
-    @FindBy(xpath = "//*[@data-id='date']")
+    @FindBy(xpath = "/html/body/div[12]/div/div/div[2]/table/thead/tr[2]/td[5]/div/div/div[2]/div/input")
     WebElement DateEquipment;
     @FindBy(xpath = "//span[contains(text(),'Save')]")
     WebElement SaveEquipment;
+    @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[5]/div/div[2]/div[2]/div/div/div[2]/div[3]/div[2]/div/div[1]/div/div[2]/div/div/div/div[3]/div[1]")
+    WebElement Findings;
+    @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[5]/div/div[2]/div[2]/div/div/div[2]/div[3]/div[2]/div/div[2]/div/div[3]/div/div[2]/div/div/div/div[3]/div[1]")
+    WebElement PrimaryObservations;
+    @FindBy(xpath = "(//*[contains(@class, 'image-selector__button')])[28]")
+    WebElement ImageForAnalysis;
+    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[3]")
+    WebElement CauseGlobal;
+    @FindBy(xpath = "(//div[contains(text(),'Select ...')])[15]")
+    WebElement Disposition;
+    @FindBy(xpath = "//span [text ()='Baldor-Dodge / ABB Baldor-Dodge']")
+    List <WebElement> CompleteDuplicationGBI;
 
+    public void setTestEquipment(WebDriver driver)throws InterruptedException{
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        BackgroundInformation.click();
+        jsExecutor.executeScript("window.scrollTo(0, 1000)");
+        TimeUnit.SECONDS.sleep(2);
+        ConfigureTestEquipment.click();
+        TimeUnit.SECONDS.sleep(2);
+        AddRow.click();
+        TestEquipment.click();
+        TestEquipment.sendKeys("TEST 1");
+        TestMethod.click();
+        TestMethod.sendKeys("TEST 2");
+        Operator.click();
+        Operator.sendKeys("TEST 3");
+        Instrument.click();
+        Instrument.sendKeys("TEST 4");
+        DateEquipment.click();
+        DateEquipment.sendKeys("10/12/2023");
+        SaveEquipment.click();
+    }
+    public void setComponentsParts(WebDriver driver) {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 100)");
+        InnerRing.click();
+        InnerRingObservations.click();
+        InnerRingObservations.sendKeys("1.Moisture corrosion spots.\n" + "2.Heavy surface wear in contact zone.\n" + "3.Loading zone heavy shifted to one side.\n" + "4.Internal surfaces polished.");
+    }
+    public void setObservationsOuterRing(WebDriver driver) {
+        RacewayObservations.click();
+        RacewayObservations.sendKeys("1.Surface in good condition.");
+        RacewayObservations.sendKeys(Keys.ENTER);
+        RacewayObservations.sendKeys("2.Scratch.");
+        DiameterObservations.click();
+        DiameterObservations.sendKeys("1.Abrasive wear (frosting, smoothing, glazing).");
+        DiameterObservations.sendKeys(Keys.ENTER);
+        DiameterObservations.sendKeys("2.Chatter marks");
+    }
     public void setLocation(WebDriver driver) throws InterruptedException {
         SKFDetails.click();
         BasePage.clickElementWithJS(driver, GBICountryFields);

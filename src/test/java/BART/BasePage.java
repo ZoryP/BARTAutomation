@@ -134,6 +134,8 @@ public class BasePage {
     List<WebElement> SettingContainer;
     @FindBy(id = "Tree/tree_root_branch")
     List<WebElement> AccordeonReports;
+    @FindBy(xpath = "//button[normalize-space()='Conclusions and recommendations']")
+    WebElement ConclusionsAndRecommendations;
 
     public void addMoreSides(WebDriver driver) throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);

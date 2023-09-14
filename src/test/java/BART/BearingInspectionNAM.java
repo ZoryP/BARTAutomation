@@ -430,7 +430,7 @@ public class BearingInspectionNAM {
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
     @Test(priority = 54)
-    public void FinalSignOut(){
+    public void FinalSignOut() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
         namBasePage.SignOutBtn.click();
         String currentUrl = driver.getCurrentUrl();

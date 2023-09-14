@@ -13,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 public class GlobalBearingInvestigation {
@@ -202,18 +203,27 @@ public class GlobalBearingInvestigation {
     @Test(priority = 20)
     public void CheckAddObservationsInOuterRing() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
-        globalBasePage.RacewayObservations.click();
-        globalBasePage.RacewayObservations.sendKeys("1.Surface in good condition.");
-        globalBasePage.RacewayObservations.sendKeys(Keys.ENTER);
-        globalBasePage.RacewayObservations.sendKeys("2.Scratch.");
-        globalBasePage.DiameterObservations.click();
-        globalBasePage.DiameterObservations.sendKeys("1.Abrasive wear (frosting, smoothing, glazing).");
-        globalBasePage.DiameterObservations.sendKeys(Keys.ENTER);
-        globalBasePage.DiameterObservations.sendKeys("2.Chatter marks");
+        globalBasePage.setObservationsOuterRing(driver);
         //ASSERT
     }
-
     @Test(priority = 21)
+    public void CheckInsertImagesModal() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 500)");
+        namBasePage.InsertFigure.click();
+//        wait.until(ExpectedConditions.visibilityOf(namBasePage.ModalDialogForImages)).isDisplayed();
+    }
+    @Test(priority = 22)
+    public void CheckInsertFigureFunction() throws InterruptedException, AWTException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.FileInput.click();
+        namBasePage.uploadImages();
+        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.Upload)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(namBasePage.Close)).click();
+//        Assert.assertEquals(namBasePage.LpImageContainer.size(), 2);
+    }
+    @Test(priority = 23)
     public void CheckAddObservationsInCages() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         globalBasePage.Cage.click();
@@ -221,44 +231,143 @@ public class GlobalBearingInvestigation {
         globalBasePage.CageObservations.sendKeys("Moisture corrosion spots.");
         //ASSERT
     }
-
-    @Test(priority = 22)
+    @Test(priority = 24)
     public void CheckAddObservationsInOtherComponents() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
-        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 100)");
-        globalBasePage.InnerRing.click();
-        globalBasePage.InnerRingObservations.click();
-        globalBasePage.InnerRingObservations.sendKeys("1.Moisture corrosion spots.\n" + "2.Heavy surface wear in contact zone.\n" + "3.Loading zone heavy shifted to one side.\n" + "4.Internal surfaces polished.");
+        globalBasePage.setComponentsParts(driver);
         //ASSERT
     }
-    @Test(priority = 23)
-    public void CheckTestEquipment() throws InterruptedException  {
+    @Test(priority = 25)
+    public void CheckTestEquipment() throws InterruptedException {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.setTestEquipment(driver);
+        //ASSERT
+    }
+    @Test(priority = 26)
+    public void CheckAnalysis() {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.Analysis.click();
+        globalBasePage.Findings.click();
+        globalBasePage.Findings.sendKeys("Global Bearing Inspection");
+        //ASSERT
+    }
+    @Test(priority = 27)
+    public void CheckObservations() {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.PrimaryObservations.click();
+        globalBasePage.PrimaryObservations.sendKeys("Global Bearing Inspection");
+        //ASSERT
+    }
+    @Test(priority = 28)
+    public void CheckAfaAnalysis() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
-        jsExecutor.executeScript("window.scrollTo(0, 0)");
-        globalBasePage.BackgroundInformation.click();
-        jsExecutor.executeScript("window.scrollTo(0, 1000)");
+        jsExecutor.executeScript("window.scrollTo(0, 700)");
+        globalBasePage.ImageForAnalysis.click();
+        namBasePage.UseAfa.click();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.AfaModal)).isDisplayed();
+    }
+    @Test(priority = 29)
+    public void CheckAFA() throws Throwable {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.useAFA(driver);
+        Assert.assertTrue(BasePage.isLPAFADisplayed(driver));
+    }
+    @Test(priority = 30)
+    public void CheckCause() throws InterruptedException {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(globalBasePage.CauseGlobal);
+        actions.click(globalBasePage.CauseGlobal);
+        actions.sendKeys(globalBasePage.CauseGlobal, "Presence of corrosive liquid");
         TimeUnit.SECONDS.sleep(2);
-        globalBasePage.ConfigureTestEquipment.click();
+        actions.sendKeys(Keys.ENTER).build().perform();
+        //ASSERT
+    }
+    @Test(priority = 31)
+    public void CheckConclusions() throws InterruptedException {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.ConclusionsAndRecommendations.click();
+        globalBasePage.Disposition.click();
+        Actions actions = new Actions(driver);
+        actions.sendKeys(globalBasePage.Disposition,"The parts will be sent");
         TimeUnit.SECONDS.sleep(2);
-        globalBasePage.AddRow.click();
-        globalBasePage.TestEquipment.click();
-        globalBasePage.TestEquipment.sendKeys("TEST 1");
-        globalBasePage.TestMethod.click();
+        actions.sendKeys(Keys.ENTER).build().perform();
+    }
+    @Test(priority = 32)
+    public void CheckCreateNew() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 200)");
+        namBasePage.AddNewBearingBtn.click();
+        namBasePage.BearingInvestigations.click();
+        Assert.assertTrue(namBasePage.Bearing2.isDisplayed());
+    }
+    @Test(priority = 33)
+    public void CheckThreeDotsMenu() throws Throwable {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 200)");
+        namBasePage.ThreeDots.click();
+        Thread.sleep(3000);
+        Assert.assertEquals(namBasePage.ThreeDotsContainer.size(), 4);
+    }
+    @Test(priority = 34)
+    public void CheckDuplication() throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        namBasePage.setCompleteDuplication();
+        Assert.assertEquals(globalBasePage.CompleteDuplicationGBI.size(), 4);
+        Assert.assertTrue(namBasePage.QuickLinks.isDisplayed());
+    }
+    @Test(priority = 35)
+    public void CheckDeletion() throws InterruptedException {
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.setDeletion();
+        Assert.assertEquals(globalBasePage.CompleteDuplicationGBI.size(), 2);
+    }
+    @Test(priority = 36)
+    public void Submit() throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.submit(driver);
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.ConfirmSubmittingMessage)).isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.ConfirmSubmittingBtn)).click();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.StatusSubmitted)).isDisplayed();
+    }
+    @Test(priority = 37)
+    public void Close() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.CloseBtn.click();
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/my-reports";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
+    }
+    @Test(priority = 38)
+    public void SignOut() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.SignOutBtn.click();
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/login";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
+    }
+    @Test(priority = 39)
+    public void LoginWithApprover() {
+        LoginPage loginPage = new BART.LoginPage(driver);
+        loginPage.clearFields();
+        loginPage.login("yavor.gledachev@skf.com", "123456789");
+        loginPage.enterBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(loginPage.WelcomeMassage)).isDisplayed();
+    }
+    @Test(priority = 40)
+    public void AllReports() throws Throwable {
+        DashboardPage dashboardPage = new DashboardPage(driver);
+        dashboardPage.AllReports.click();
         TimeUnit.SECONDS.sleep(2);
-        globalBasePage.TestMethod.sendKeys("TEST 2");
-        globalBasePage.Operator.click();
-        TimeUnit.SECONDS.sleep(2);
-        globalBasePage.Operator.sendKeys("TEST 3");
-        globalBasePage.Instrument.click();
-        TimeUnit.SECONDS.sleep(2);
-        globalBasePage.Instrument.sendKeys("TEST 4");
-        globalBasePage.DateEquipment.click();
-        TimeUnit.SECONDS.sleep(2);
-        globalBasePage.DateEquipment.sendKeys("10/12/2023");
-        TimeUnit.SECONDS.sleep(2);
-        globalBasePage.SaveEquipment.click();
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/all-reports";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
 }
 
