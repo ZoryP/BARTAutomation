@@ -10,6 +10,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -32,6 +33,10 @@ public class GlobalBearingInvestigation {
                 .withTimeout(Duration.ofSeconds(40))
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class);
+    }
+    @AfterClass
+    public void QuitBrowser() {
+        driver.quit();
     }
 
     @Test(priority = 1)
@@ -369,5 +374,58 @@ public class GlobalBearingInvestigation {
         String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/all-reports";
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
+    @Test(priority = 41)
+    public void OpenSubmittedReport() throws InterruptedException {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        GlobalBasePage globalBasePage = new GlobalBasePage(driver);
+        globalBasePage.TargetReportGBI.click();
+        namBasePage.OpenTargetReport.click();
+        TimeUnit.SECONDS.sleep(3);
+        Assert.assertTrue(namBasePage.ApproveBtn.isDisplayed());
+        Assert.assertTrue(namBasePage.ApproveWithEditsBtn.isDisplayed());
+        Assert.assertTrue(namBasePage.RejectBtn.isDisplayed());
+    }
+    @Test(priority = 42)
+    public void ApproveReport(){
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.ApproveBtn.click();
+        Assert.assertTrue(namBasePage.AfaVerifyMessage.isDisplayed());
+        namBasePage.VerifyAfa.click();
+        Assert.assertTrue(namBasePage.ConfirmApprovalMessage.isDisplayed());
+        namBasePage.ApproveAndOpenEmailBtn.click();
+    }
+    @Test(priority = 43)
+    public void EditReport(){
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.StatusApproved)).isDisplayed();
+        namBasePage.Edit.click();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.ConfirmEditingMessage)).isDisplayed();
+        namBasePage.DownloadPDF.click();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.RevisionNumber)).isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.StatusDraft)).isDisplayed();
+    }
+    @Test(priority = 44)
+    public void DeleteReport(){
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.Delete.click();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.ConfirmDeletionMessage)).isDisplayed();
+        namBasePage.ConfirmDeletionBtn.click();
+        wait.until(ExpectedConditions.visibilityOf(namBasePage.StatusDeleted)).isDisplayed();
+    }
+    @Test(priority = 45)
+    public void CloseReport(){
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.CloseBtn.click();
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/my-reports";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
+    }
+    @Test(priority = 46)
+    public void FinalSignOut() {
+        NAMBasePage namBasePage = new NAMBasePage(driver);
+        namBasePage.SignOutBtn.click();
+        String currentUrl = driver.getCurrentUrl();
+        String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/login";
+        Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
+    }
 }
-

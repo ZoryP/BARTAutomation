@@ -82,12 +82,14 @@ public class GlobalBasePage extends BasePage {
     WebElement PrimaryObservations;
     @FindBy(xpath = "(//*[contains(@class, 'image-selector__button')])[28]")
     WebElement ImageForAnalysis;
-    @FindBy(xpath = "(//div[contains(text(),'Select or free text')])[3]")
+    @FindBy(xpath = "//*[@id=\"app\"]/div[2]/div/div/div[1]/div[2]/div[5]/div/div[2]/div[2]/div[1]/div/div[2]/div[3]/div[2]/div/div[2]/div/div[7]/div/div[2]/div[1]/div/div/div[1]/div[1]")
     WebElement CauseGlobal;
     @FindBy(xpath = "(//div[contains(text(),'Select ...')])[15]")
     WebElement Disposition;
     @FindBy(xpath = "//span [text ()='Baldor-Dodge / ABB Baldor-Dodge']")
     List <WebElement> CompleteDuplicationGBI;
+    @FindBy(xpath = "(//div[@class='table-cell-status table-cell-status--yellow'])[1]")
+    WebElement TargetReportGBI;
 
     public void setTestEquipment(WebDriver driver)throws InterruptedException{
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
