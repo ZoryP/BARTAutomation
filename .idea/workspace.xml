@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="14.09">
+    <list default="true" id="5e85a81a-cf25-44b5-8f49-f69d7eb6a8eb" name="Changes" comment="15.09">
+      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-09-18T09_01_06.480495800.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-09-18T09_03_18.771407800.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-09-18T09_04_34.861534100.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Screenshots/OpenReport2023-09-18T09_22_23.342188900.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/GlobalBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/BART/GlobalBearingInvestigation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/GlobalBearingInvestigation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/DashboardPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/LoginDashboardTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/BART/NAMBasePage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +80,7 @@
       <recent name="C:\BART\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.GlobalBearingInvestigation">
+  <component name="RunManager" selected="TestNG.LoginDashboardTests">
     <configuration name="BearingDamageAnalysis" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="BART" />
       <extension name="coverage">
@@ -163,11 +168,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.LoginDashboardTests" />
         <item itemvalue="TestNG.GlobalBearingInvestigation" />
         <item itemvalue="TestNG.BearingInspectionNAM" />
         <item itemvalue="TestNG.BearingDamageAnalysis" />
         <item itemvalue="TestNG.GlobalBearingInspection" />
-        <item itemvalue="TestNG.LoginDashboardTests" />
       </list>
     </recent_temporary>
   </component>
@@ -474,7 +479,14 @@
       <option name="project" value="LOCAL" />
       <updated>1694683749459</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="15.09">
+      <created>1694778708979</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1694778708979</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -490,7 +502,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="add refactor" />
     <MESSAGE value="add refactor2" />
     <MESSAGE value="add refactor3" />
     <MESSAGE value="add refactor4" />
@@ -515,7 +526,8 @@
     <MESSAGE value="31.08" />
     <MESSAGE value="11.09" />
     <MESSAGE value="14.09" />
-    <option name="LAST_COMMIT_MESSAGE" value="14.09" />
+    <MESSAGE value="15.09" />
+    <option name="LAST_COMMIT_MESSAGE" value="15.09" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/BART$BearingInspectionNAM.ic" NAME="BearingInspectionNAM Coverage Results" MODIFIED="1689232953654" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

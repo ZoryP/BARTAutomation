@@ -128,8 +128,6 @@ public class NAMBasePage extends BasePage {
     @FindBy(css = ".severity__header")
     List<WebElement> LpSeverity;
 
-    @FindBy(css = ".live-preview-images__headline live-preview-images__severity")
-    List<WebElement>LpObservations;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='2']")
     WebElement LpInspectionTimeHoursNAM;
     @FindBy(xpath = "//div[@class='live-preview-key-value__value' and text()='4']")
@@ -332,20 +330,6 @@ public class NAMBasePage extends BasePage {
         BasePage.blurElementWithJS(driver, DateCode);
         SaveButton.click();
     }
-
-//    public void addMoreSides(WebDriver driver) throws InterruptedException {
-//        NAMBasePage namBasePage = new NAMBasePage(driver);
-//        namBasePage.Components.click();
-//        namBasePage.OuterRing.click();
-//        TimeUnit.SECONDS.sleep(1);
-//        namBasePage.ThreeDotsOuterRing.click();
-//        namBasePage.AddOuterDiameter.click();
-//        TimeUnit.SECONDS.sleep(1);
-//        namBasePage.ThreeDotsOuterRing.click();
-//        namBasePage.AddMarkedSide.click();
-//        TimeUnit.SECONDS.sleep(1);
-//        namBasePage.ThreeDotsOuterRing.click();
-//        namBasePage.AddOppositeSide.click();
 
     public void addMoreRows(WebDriver driver) throws InterruptedException {
         NAMBasePage namBasePage = new NAMBasePage(driver);

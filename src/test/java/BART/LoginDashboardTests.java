@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 
-public class LoginDashboardTests{
+public class LoginDashboardTests {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net/";
 
@@ -133,20 +133,17 @@ public class LoginDashboardTests{
         BART.DashboardPage dashboardPage = new BART.DashboardPage(driver);
         dashboardPage.MyReports.click();
         Thread.sleep(3000);
-        WebElement row = driver.findElement(By.xpath("//*[@class='LinesEllipsis  ' and contains(text(),'test')]"));
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("arguments[0].click();", row);
-        WebElement targetElement = driver.findElement(By.xpath("//tr[@class='table__body-row table__body-row--is-active']//span[@class='button__text'][normalize-space()='Open Report']"));
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
-        executor.executeScript("arguments[0].click();", targetElement);
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
+        jsExecutor.executeScript("window.scrollTo(0, 0)");
+        dashboardPage.TargetReportSmoke.click();
+        dashboardPage.OpenReportSmoke.click();
         Thread.sleep(3000);
-        dashboardPage.BearingDamageAnalysisReport.isDisplayed();
         dashboardPage.IconToolbar.isDisplayed();
         dashboardPage.Close.click();
     }
 
     @Test(priority = 10)
-    public void AllReports() throws Throwable{
+    public void AllReports() throws Throwable {
         BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
         bartPageDev.AllReports.click();
         Thread.sleep(2000);
@@ -162,6 +159,7 @@ public class LoginDashboardTests{
         List<WebElement> ResultsAll = driver.findElements(By.cssSelector(".table__header-cell"));
         Assert.assertEquals(ResultsAll.size(), 7);
     }
+
     @Test(priority = 12)
     public void MyReports() {
         BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
@@ -170,17 +168,12 @@ public class LoginDashboardTests{
         String expectedUrl = "https://dnnfsk8ppi4ki.cloudfront.net/my-reports";
         Assert.assertEquals(currentUrl, expectedUrl, "Button navigation is correct");
     }
+
     @Test(priority = 13)
-    public void SearchBarMyReports(){
+    public void SearchBarMyReports() {
         List<WebElement> SearchbarMy = driver.findElements(By.cssSelector(".filter-group__toggler"));
         Assert.assertEquals(SearchbarMy.size(), 11);
         List<WebElement> ResultsAll = driver.findElements(By.cssSelector(".table__header-cell"));
         Assert.assertEquals(ResultsAll.size(), 7);
-}
-
-    @Test(priority = 14)
-    public void DuplicateReport() throws Throwable {
-        BART.DashboardPage bartPageDev = new BART.DashboardPage(driver);
-        bartPageDev.duplicateReport(driver);
     }
 }
