@@ -13,10 +13,10 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.awt.*;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
+
 public class GlobalBearingInvestigation {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net";
@@ -38,7 +38,6 @@ public class GlobalBearingInvestigation {
     public void QuitBrowser() {
         driver.quit();
     }
-
     @Test(priority = 1)
     public void ValidLogin() {
         BART.LoginPage loginPage = new BART.LoginPage(driver);
@@ -48,7 +47,6 @@ public class GlobalBearingInvestigation {
         wait.until(ExpectedConditions.visibilityOf(loginPage.WelcomeMassage));
         loginPage.WelcomeMassage.isDisplayed();
     }
-
     @Test(priority = 2)
     public void CreateGBI() {
         BART.DashboardPage dashboard = new BART.DashboardPage(driver);
@@ -58,7 +56,6 @@ public class GlobalBearingInvestigation {
         Assert.assertTrue(dashboard.GBIReport.isDisplayed());
         Assert.assertTrue(dashboard.IconToolbar.isDisplayed());
     }
-
     @Test(priority = 3)
     public void Settings() {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);
@@ -66,7 +63,6 @@ public class GlobalBearingInvestigation {
         int expectedSize = 6;
         Assert.assertEquals(globalBasePage.SettingContainer.size(), expectedSize);
     }
-
     @Test(priority = 4)
     public void CheckContainerSettings() throws InterruptedException {
         GlobalBasePage globalBasePage = new GlobalBasePage(driver);

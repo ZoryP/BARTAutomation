@@ -15,12 +15,15 @@ import java.awt.*;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
+
+
 public class BearingInspectionNAM {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net/";
     FluentWait<WebDriver> wait;
     @BeforeClass
     public void SetUp() {
+
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);

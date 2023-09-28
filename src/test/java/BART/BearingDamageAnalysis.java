@@ -1,5 +1,4 @@
 package BART;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -9,13 +8,11 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.time.Duration;
 import java.util.List;
-
 public class BearingDamageAnalysis {
     WebDriver driver;
     String url = "https://dnnfsk8ppi4ki.cloudfront.net";
@@ -33,12 +30,10 @@ public class BearingDamageAnalysis {
                 .pollingEvery(Duration.ofSeconds(5))
                 .ignoring(NoSuchElementException.class);
     }
-
     @AfterClass
     public void QuitBrowser() {
         driver.quit();
     }
-
     @Test(priority = 1)
     public void ValidLogin() {
         BART.LoginPage loginPage = new BART.LoginPage(driver);
@@ -48,7 +43,6 @@ public class BearingDamageAnalysis {
         wait.until(ExpectedConditions.visibilityOf(loginPage.WelcomeMassage));
         loginPage.WelcomeMassage.isDisplayed();
     }
-
     @Test(priority = 2)
     public void CreateBda() {
         BART.DashboardPage dashboard = new BART.DashboardPage(driver);
@@ -80,14 +74,12 @@ public class BearingDamageAnalysis {
         List<WebElement> Accordeon = driver.findElements(By.cssSelector(".accordion__trigger-icon"));
         Assert.assertEquals(Accordeon.size(), 13);
     }
-
     @Test(priority = 6)
     public void CheckReportDetails() {
         BDABasePage bdaBasePage = new BDABasePage(driver);
         bdaBasePage.checkReportDetails(driver);
         Assert.assertTrue(bdaBasePage.LpReportDetails.isDisplayed());
     }
-
     @Test(priority = 7)
     public void CheckInvestigationDetails() {
         BDABasePage bdaBasePage = new BDABasePage(driver);
@@ -99,14 +91,12 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(bdaBasePage.LpTer.isDisplayed());
         Assert.assertTrue(bdaBasePage.LpScope.isDisplayed());
     }
-
     @Test(priority = 8)
     public void CheckSKFDetailsCountry() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
         String country = "Argentina";
         bdaBasePage.selectCountry(driver, country);
     }
-
     @Test(priority = 9)
     public void CheckSKFDetailsCompany() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
@@ -114,7 +104,6 @@ public class BearingDamageAnalysis {
         boolean isElementVisible = bdaBasePage.isCountryVisible(driver);
         Assert.assertTrue(isElementVisible);
     }
-
     @Test(priority = 10)
     public void CheckSKFCompanyLocation() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
@@ -131,7 +120,6 @@ public class BearingDamageAnalysis {
         boolean isElementVisible = bdaBasePage.approvalButton(driver);
         Assert.assertTrue(isElementVisible);
     }
-
     @Test(priority = 12)
     public void CheckCustomer() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
@@ -140,14 +128,12 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(bdaBasePage.LpCompanyAdress.isDisplayed());
         Assert.assertTrue(bdaBasePage.LpCompanyCountry.isDisplayed());
     }
-
     @Test(priority = 14)
     public void CheckCustomerSiteName() throws InterruptedException {
         BDABasePage bdaBasePage = new BDABasePage(driver);
         bdaBasePage.checkCustomerSiteName(driver);
         Assert.assertTrue(bdaBasePage.LpCustomerSiteName.isDisplayed());
     }
-
     @Test(priority = 15)
     public void CheckAssetDetailsSection() {
         NAMBasePage namBasePage = new NAMBasePage(driver);
@@ -157,14 +143,12 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(namBasePage.AssetType.isDisplayed());
         Assert.assertTrue(bdaBasePage.MachineAsset.isDisplayed());
     }
-
     @Test(priority = 16)
     public void CheckAssetType() throws Throwable {
         BDABasePage bdaBasePage = new BDABasePage(driver);
         bdaBasePage.checkAssetType(driver);
         Assert.assertTrue(bdaBasePage.LpFunctionalArea.isDisplayed());
     }
-
     @Test(priority = 17)
     public void CheckAssetDetails() {
         BDABasePage bdaBasePages = new BDABasePage(driver);
@@ -177,7 +161,6 @@ public class BearingDamageAnalysis {
         Assert.assertTrue(bdaBasePages.LpFunctionalAreaWhereAssetIsUsed.isDisplayed());
         Assert.assertTrue(bdaBasePages.LpSystemName.isDisplayed());
     }
-
     @Test(priority = 18)
     public void CheckFirstBearing() {
         BasePage basePage = new BasePage(driver);
@@ -191,13 +174,11 @@ public class BearingDamageAnalysis {
         basePage.enterSKFSerialNumberValue(driver, "PEER");
         Assert.assertTrue(basePage.LpSkfOther.isDisplayed());
     }
-
     @Test(priority = 19)
     public void CheckBearingType() throws Throwable {
         BDABasePage bdaBasePages = new BDABasePage(driver);
         bdaBasePages.checkBearingType(driver);
     }
-
     @Test(priority = 20)
     public void CheckComponentParts() {
         BDABasePage bdaBasePage = new BDABasePage(driver);
@@ -211,10 +192,7 @@ public class BearingDamageAnalysis {
         bdaBasePage.UploadImg.click();
         Assert.assertTrue(bdaBasePage.ModalDialogForImages.isDisplayed());
         Thread.sleep(4000);
-//        bdaBasePage.FileInput.click();
-//        bdaBasePage.uploadImages();
-          WebElement FileInput = driver.findElement(By.cssSelector(".dropzone-inputLabel"));
-
+        WebElement FileInput = driver.findElement(By.cssSelector(".dropzone-inputLabel"));
         FileInput.click();
         Thread.sleep(5000);
         Robot robot = new Robot();
