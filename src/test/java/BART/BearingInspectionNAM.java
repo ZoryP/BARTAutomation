@@ -1,4 +1,6 @@
 package BART;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -11,6 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
 import java.awt.*;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
@@ -23,7 +26,7 @@ public class BearingInspectionNAM {
     FluentWait<WebDriver> wait;
     @BeforeClass
     public void SetUp() {
-
+        WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
         driver = new ChromeDriver(options);
